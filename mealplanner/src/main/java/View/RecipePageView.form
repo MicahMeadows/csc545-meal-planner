@@ -49,8 +49,8 @@
               <Component id="txtIngredientSearch" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
               <Component id="lblRecipes" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="lstRecipes" min="-2" pref="250" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="lstRecipes" min="-2" pref="244" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -61,17 +61,11 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Search for item here..."/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNameSearchActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtCategorySearch">
       <Properties>
         <Property name="text" type="java.lang.String" value="Category..."/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCategorySearchActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtIngredientSearch">
       <Properties>

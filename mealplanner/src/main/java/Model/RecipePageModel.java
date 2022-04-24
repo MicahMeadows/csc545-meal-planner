@@ -6,38 +6,19 @@ import java.util.ArrayList;
 
 
 public class RecipePageModel {
-	private String nameText;
-	private String categoryText;
-	private String ingredientText;
-	private ArrayList<Recipe> recipes = new ArrayList<Recipe>();
+
+	private ArrayList<RecipeModel> recipes = new ArrayList<RecipeModel>();
 
 
-	public void setNameText(String nameText){
-		this.nameText = nameText;
-	}
-
-	public void setCategoryText(String categoryText){
-		this.categoryText = categoryText;
-	}
-
-	public void setIngredientText(String ingredientText){
-		this.ingredientText = ingredientText;
-	}
-
-	public String getNameText() {
-		return this.nameText;
-	}
-
-	public String getCategoryText(){
-		return this.categoryText;
-	}
-
-	public String getIngredientText(){
-		return this.ingredientText;
-	}
-
-	public ArrayList<Recipe> getRecipes(){
+	public ArrayList<RecipeModel> getRecipes(){
 		return this.recipes;
+	}
+
+	public void updateRecipes(String nameFilter, String categoryFilter, String ingredientsFilter){
+		recipes = new ArrayList<RecipeModel>();
+		recipes.add(new RecipeModel(1, "Burger", "Make burger", "American"));
+		recipes.add(new RecipeModel(2, "Sandwhich", "Make sandwhich", "American"));
+		recipes.add(new RecipeModel(3, "Pizza", "Make pizaz", "Italian"));
 	}
 	
 }

@@ -27,22 +27,11 @@ public class MealPlannerNavigationView extends javax.swing.JFrame {
         private void initComponents() {
 
                 jTabbedPane1 = new javax.swing.JTabbedPane();
-                recipePage = new View.RecipePageView();
+                recipePageView = new View.RecipePageView();
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-                javax.swing.GroupLayout recipePageLayout = new javax.swing.GroupLayout(recipePage);
-                recipePage.setLayout(recipePageLayout);
-                recipePageLayout.setHorizontalGroup(
-                        recipePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 731, Short.MAX_VALUE)
-                );
-                recipePageLayout.setVerticalGroup(
-                        recipePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 435, Short.MAX_VALUE)
-                );
-
-                jTabbedPane1.addTab("Recipes", recipePage);
+                jTabbedPane1.addTab("Recipes", recipePageView);
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                 getContentPane().setLayout(layout);
@@ -99,8 +88,12 @@ public class MealPlannerNavigationView extends javax.swing.JFrame {
 		});
 	}
 
+	public RecipePageView getRecipePageView(){
+		return this.recipePageView;
+	}
+
         // Variables declaration - do not modify//GEN-BEGIN:variables
         private javax.swing.JTabbedPane jTabbedPane1;
-        private View.RecipePageView recipePage;
+        private View.RecipePageView recipePageView;
         // End of variables declaration//GEN-END:variables
 }

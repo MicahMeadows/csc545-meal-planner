@@ -2,13 +2,13 @@
 package Model;
 
 
-public class Recipe {
+public class RecipeModel {
 	private int ID;
 	private String name;
 	private String instructions;
 	private String category;
 
-	public Recipe(int ID, String name, String instructions, String category){
+	public RecipeModel(int ID, String name, String instructions, String category){
 		this.ID = ID;
 		this.name = name;
 		this.instructions = instructions;
