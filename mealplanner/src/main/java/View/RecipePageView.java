@@ -5,14 +5,7 @@
 package View;
 
 import Model.RecipeModel;
-import java.awt.List;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
-import javax.swing.event.CaretListener;
-import javax.swing.event.DocumentEvent;
+import java.util.List;
 import javax.swing.event.DocumentListener;
 
 /**
@@ -37,21 +30,22 @@ public class RecipePageView extends javax.swing.JPanel {
         // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
         private void initComponents() {
 
+                jProgressBar1 = new javax.swing.JProgressBar();
                 txtNameSearch = new javax.swing.JTextField();
                 txtCategorySearch = new javax.swing.JTextField();
                 txtIngredientSearch = new javax.swing.JTextField();
-                lblFilters = new javax.swing.JLabel();
                 lstRecipes = new javax.swing.JScrollPane();
                 jList1 = new javax.swing.JList<>();
                 lblRecipes = new javax.swing.JLabel();
+                lblName = new javax.swing.JLabel();
+                lblCategory = new javax.swing.JLabel();
+                lblIngredients = new javax.swing.JLabel();
 
-                txtNameSearch.setText("Search for item here...");
+                txtNameSearch.setToolTipText("ex: Burger");
 
-                txtCategorySearch.setText("Category...");
+                txtCategorySearch.setToolTipText("ex: Dinner, Brunch");
 
-                txtIngredientSearch.setText("Ingredients (ex: spinach, tomatoes, rice, ...)");
-
-                lblFilters.setText("Filters");
+                txtIngredientSearch.setToolTipText("ex: spinach, tomatoe, rice...");
 
                 jList1.setModel(new javax.swing.AbstractListModel<String>() {
                         String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -62,6 +56,12 @@ public class RecipePageView extends javax.swing.JPanel {
 
                 lblRecipes.setText("Recipes");
 
+                lblName.setText("Name");
+
+                lblCategory.setText("Category");
+
+                lblIngredients.setText("Ingredients");
+
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
                 this.setLayout(layout);
                 layout.setHorizontalGroup(
@@ -69,32 +69,42 @@ public class RecipePageView extends javax.swing.JPanel {
                         .addGroup(layout.createSequentialGroup()
                                 .addGap(14, 14, 14)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblRecipes)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(lblFilters)
-                                                .addComponent(txtIngredientSearch)
-                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                        .addComponent(txtNameSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(txtCategorySearch, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addComponent(lstRecipes)))
-                                .addContainerGap(22, Short.MAX_VALUE))
+                                        .addComponent(lstRecipes)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(lblRecipes)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(txtNameSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(lblName))
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(txtCategorySearch, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(lblCategory))
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(lblIngredients)
+                                                                        .addComponent(txtIngredientSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addContainerGap())
                 );
                 layout.setVerticalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(lblFilters)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(lblName)
+                                        .addComponent(lblCategory)
+                                        .addComponent(lblIngredients))
                                 .addGap(3, 3, 3)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(txtNameSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtCategorySearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtIngredientSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtCategorySearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtIngredientSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblRecipes)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lstRecipes, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+                                .addComponent(lstRecipes, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
                                 .addContainerGap())
                 );
         }// </editor-fold>//GEN-END:initComponents
@@ -131,7 +141,7 @@ public class RecipePageView extends javax.swing.JPanel {
 		this.txtIngredientSearch.setText(text);
 	}
 
-	public void setRecipeList(ArrayList<RecipeModel> recipes){
+	public void setRecipeList(List<RecipeModel> recipes){
 		String[] labels = recipes.stream().map(recipe -> recipe.getName()).toArray(String[]::new);
 
 		jList1.setListData(labels);
@@ -140,7 +150,10 @@ public class RecipePageView extends javax.swing.JPanel {
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
         private javax.swing.JList<String> jList1;
-        private javax.swing.JLabel lblFilters;
+        private javax.swing.JProgressBar jProgressBar1;
+        private javax.swing.JLabel lblCategory;
+        private javax.swing.JLabel lblIngredients;
+        private javax.swing.JLabel lblName;
         private javax.swing.JLabel lblRecipes;
         private javax.swing.JScrollPane lstRecipes;
         private javax.swing.JTextField txtCategorySearch;

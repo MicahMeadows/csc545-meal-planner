@@ -1,38 +1,26 @@
 
 package Model;
 
+import java.util.List;
 
 public class RecipeModel {
-	private int ID;
-	private String name;
-	private String instructions;
-	private String category;
+	final private int ID;
+	final private String name;
+	final private String instructions;
+	final private String category;
+	final private List<ItemModel> ingredients;
 
-	public RecipeModel(int ID, String name, String instructions, String category){
+	public RecipeModel(int ID, String name, String instructions, String category, List<ItemModel> ingredients){
 		this.ID = ID;
 		this.name = name;
 		this.instructions = instructions;
 		this.category = category;
-	}
-
-	public void setID(int ID){
-		this.ID = ID;
-	}
-
-	public void setName(String name){
-		this.name = name;
-	}
-
-	public void setInstructions(String instructions){
-		this.instructions = instructions;
-	}
-
-	public void setCategory(String category){
-		this.category = category;
+		this.ingredients = ingredients;
 	}
 
 	public int getID(){ return ID; }
 	public String getName(){ return name; }
 	public String getInstructions(){ return instructions; }
 	public String getCategory(){ return category; }
+	public List<ItemModel> getIngredients(){ return this.ingredients; }
 }

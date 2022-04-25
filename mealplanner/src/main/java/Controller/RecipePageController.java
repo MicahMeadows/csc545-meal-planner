@@ -2,8 +2,6 @@ package Controller;
 
 import Model.RecipePageModel;
 import View.RecipePageView;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -18,7 +16,7 @@ public class RecipePageController {
 		this.view = view;
 
 		view.setFilterListeners(new FilterUpdateListener());
-		updateRecipeList();
+		view.setRecipeList(model.getAllRecipes());
 	}
 
 
@@ -44,8 +42,7 @@ public class RecipePageController {
 		String categoryFilter = view.getCategoryText();
 		String ingredientFilter = view.getIngredientText();
 
-		model.updateRecipes(nameFilter, categoryFilter, ingredientFilter);
-		view.setRecipeList(model.getRecipes());
+		view.setRecipeList(model.getFilteredRecipes(nameFilter, categoryFilter, ingredientFilter));
 	}
 
 
