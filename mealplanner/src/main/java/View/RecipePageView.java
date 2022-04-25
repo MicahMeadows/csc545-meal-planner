@@ -5,10 +5,14 @@
 package View;
 
 import Model.RecipeModel;
+import java.awt.List;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.event.CaretListener;
+import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 /**
@@ -87,23 +91,21 @@ public class RecipePageView extends javax.swing.JPanel {
                                         .addComponent(txtCategorySearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtIngredientSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblRecipes)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lstRecipes, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lstRecipes, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
                                 .addContainerGap())
                 );
         }// </editor-fold>//GEN-END:initComponents
 
-	public void setRecipeList(ArrayList<RecipeModel> recipes){
-		DefaultListModel model = new DefaultListModel();
 
-		for (RecipeModel recipe : recipes){
-			model.addElement(recipe.getName());
-		}
-
-		this.jList1 = new JList(model);
+	public void setFilterListeners(DocumentListener listener){
+		txtCategorySearch.getDocument().addDocumentListener(listener);
+		txtIngredientSearch.getDocument().addDocumentListener(listener);
+		txtNameSearch.getDocument().addDocumentListener(listener);
 	}
+
 
 	public String getCategoryText(){
 		return this.txtCategorySearch.getText();
@@ -129,14 +131,10 @@ public class RecipePageView extends javax.swing.JPanel {
 		this.txtIngredientSearch.setText(text);
 	}
 
-	public void addCategorySearchListener(DocumentListener listener){
-		this.txtCategorySearch.getDocument().addDocumentListener(listener);
-	}
-	public void addNameSearchListener(DocumentListener listener){
-		this.txtNameSearch.getDocument().addDocumentListener(listener);
-	}
-	public void addIngredientSearchListener(DocumentListener listener){
-		this.txtIngredientSearch.getDocument().addDocumentListener(listener);
+	public void setRecipeList(ArrayList<RecipeModel> recipes){
+		String[] labels = recipes.stream().map(recipe -> recipe.getName()).toArray(String[]::new);
+
+		jList1.setListData(labels);
 	}
 
 

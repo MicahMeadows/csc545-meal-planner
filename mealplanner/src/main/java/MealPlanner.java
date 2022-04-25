@@ -15,13 +15,19 @@ import View.RecipePageView;
  */
 public class MealPlanner {
 	public static void main(String[] args){
-		MealPlannerNavigationView navigation = new MealPlannerNavigationView();
-		RecipePageView recipePageView = navigation.getRecipePageView();
+		// Models
 		RecipePageModel recipePageModel = new RecipePageModel();
 
-		RecipePageController recipePageController = new RecipePageController(recipePageModel, recipePageView);
+		// Views
+		MealPlannerNavigationView navigation = new MealPlannerNavigationView();
+		RecipePageView recipePage = new RecipePageView();
 
-		navigation.main(args);
+		// Controllers
+		RecipePageController recipePageController = new RecipePageController(recipePageModel, recipePage);
+
+		navigation.setRecipePageView(recipePage);
+		navigation.setVisible(true);
+
 	}
 	
 }

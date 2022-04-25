@@ -19,6 +19,7 @@ public class RecipePageModel {
 		recipes.add(new RecipeModel(1, "Burger", "Make burger", "American"));
 		recipes.add(new RecipeModel(2, "Sandwhich", "Make sandwhich", "American"));
 		recipes.add(new RecipeModel(3, "Pizza", "Make pizaz", "Italian"));
+		System.out.println(this.recipes);
 	}
 	
 }

@@ -8,6 +8,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 
+
 public class RecipePageController {
 	final private RecipePageModel model;
 	final private RecipePageView view;
@@ -16,23 +17,12 @@ public class RecipePageController {
 		this.model = model;
 		this.view = view;
 
-		this.view.addNameSearchListener(new FilterDocumentListener());
-		this.view.addCategorySearchListener(new FilterDocumentListener());
-		this.view.addIngredientSearchListener(new FilterDocumentListener());
-	}
-
-	void updateRecipeList(){
-		String nameFilter = view.getNameText();
-		String categoryFilter = view.getCategoryText();
-		String ingredientFilter = view.getIngredientText();
-		model.updateRecipes(nameFilter, categoryFilter, ingredientFilter);
-		view.setRecipeList(model.getRecipes());
-		view.repaint();
+		view.setFilterListeners(new FilterUpdateListener());
+		updateRecipeList();
 	}
 
 
-	class FilterDocumentListener implements DocumentListener {
-
+	class FilterUpdateListener implements DocumentListener {
 		@Override
 		public void insertUpdate(DocumentEvent de) {
 			updateRecipeList();
@@ -47,6 +37,17 @@ public class RecipePageController {
 		public void changedUpdate(DocumentEvent de) {
 			updateRecipeList();
 		}
-
 	}
+
+	private void updateRecipeList(){
+		String nameFilter = view.getNameText();
+		String categoryFilter = view.getCategoryText();
+		String ingredientFilter = view.getIngredientText();
+
+		model.updateRecipes(nameFilter, categoryFilter, ingredientFilter);
+		view.setRecipeList(model.getRecipes());
+	}
+
+
+
 }

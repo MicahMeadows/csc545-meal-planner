@@ -26,12 +26,9 @@ public class MealPlannerNavigationView extends javax.swing.JFrame {
         // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
         private void initComponents() {
 
-                jTabbedPane1 = new javax.swing.JTabbedPane();
-                recipePageView = new View.RecipePageView();
+                tabPanel = new javax.swing.JTabbedPane();
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-                jTabbedPane1.addTab("Recipes", recipePageView);
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                 getContentPane().setLayout(layout);
@@ -39,14 +36,14 @@ public class MealPlannerNavigationView extends javax.swing.JFrame {
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jTabbedPane1)
+                                .addComponent(tabPanel)
                                 .addContainerGap())
                 );
                 layout.setVerticalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jTabbedPane1)
+                                .addComponent(tabPanel)
                                 .addContainerGap())
                 );
 
@@ -88,12 +85,12 @@ public class MealPlannerNavigationView extends javax.swing.JFrame {
 		});
 	}
 
-	public RecipePageView getRecipePageView(){
-		return this.recipePageView;
+	public void setRecipePageView(RecipePageView recipePage){
+		this.tabPanel.addTab("Recipes", recipePage);
 	}
 
+
         // Variables declaration - do not modify//GEN-BEGIN:variables
-        private javax.swing.JTabbedPane jTabbedPane1;
-        private View.RecipePageView recipePageView;
+        private javax.swing.JTabbedPane tabPanel;
         // End of variables declaration//GEN-END:variables
 }
