@@ -1,6 +1,8 @@
 
 import Controller.RecipePageController;
 import Model.RecipePageModel;
+import Repository.Recipe.IRecipeRepository;
+import Repository.Recipe.TestRecipeRepository;
 import View.MealPlannerNavigationView;
 import View.RecipePageView;
 
@@ -14,9 +16,11 @@ import View.RecipePageView;
  * @author micah
  */
 public class MealPlanner {
+	final private static IRecipeRepository recipeRepository = new TestRecipeRepository();
+
 	public static void main(String[] args){
 		// Models
-		RecipePageModel recipePageModel = new RecipePageModel();
+		RecipePageModel recipePageModel = new RecipePageModel(recipeRepository);
 
 		// Views
 		MealPlannerNavigationView navigation = new MealPlannerNavigationView();

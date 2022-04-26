@@ -1,43 +1,33 @@
 
 package Model;
 
+import Repository.Recipe.IRecipeRepository;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.stream.Collectors;
+
 
 
 public class RecipePageModel {
+	final private IRecipeRepository recipeRepository;
 
-	public RecipePageModel(){
+	public RecipePageModel(IRecipeRepository recipeRepository){
+		this.recipeRepository = recipeRepository;
 		this.updateRecipes();
 	}
 
 	private List<RecipeModel> recipes = new ArrayList<RecipeModel>();
 
 	public RecipeModel getRecipeWithID(int ID){
-		return recipes.stream().filter(recipe -> recipe.getID() == ID).findFirst().orElse(null);
+		return recipeRepository.getRecipeWithID(ID);
 	}
 
 	public List<RecipeModel> getAllRecipes(){
-		return this.recipes;
+//		return this.recipes;
+		return recipeRepository.getAllRecipes();
 	}
 
 	public List<RecipeModel> getFilteredRecipes(String nameFilter, String categoryFilter, String ingredientsFilter){
-		return recipes.stream().filter(recipe -> {
-			boolean nameMatch = recipe.getName().toLowerCase().contains(nameFilter.toLowerCase());
-
-			boolean categoryMatch = recipe.getCategory().toLowerCase().contains(categoryFilter.toLowerCase());
-
-			String[] splitIngredients = ingredientsFilter.replace(" ", "").split(",");
-			List<String> filterIngredients = new ArrayList<>(Arrays.asList(splitIngredients));
-			List<String> recipeIngredients = recipe.getIngredients().stream().map(ingredient -> ingredient.getName()).collect(Collectors.toList());
-			
-
-			boolean ingredientMatch = recipeMatchesIngredients(recipeIngredients, filterIngredients) || ingredientsFilter.isEmpty();
-
-			return nameMatch && categoryMatch && ingredientMatch;
-		}).collect(Collectors.toList());
+		return recipeRepository.getFilteredRecipes(nameFilter, categoryFilter, ingredientsFilter);
 	}
 
 	private boolean recipeMatchesIngredients(List<String> recipeIngredients, List<String> filterIngredients){
