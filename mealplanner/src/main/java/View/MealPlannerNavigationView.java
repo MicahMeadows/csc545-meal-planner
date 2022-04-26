@@ -90,6 +90,10 @@ public class MealPlannerNavigationView extends javax.swing.JFrame {
 		this.tabPanel.addTab("Recipes", recipePage);
 	}
 
+	public void setFridgePageView(FridgePageView fridgePage){
+		this.tabPanel.addTab("Fridge", fridgePage);
+	}
+
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
         private javax.swing.JTabbedPane tabPanel;

@@ -54,17 +54,6 @@ public class RecipePageController {
 
 	}
 
-//	class CloseDetailDialogListener implements ActionListener {
-//		@Override
-//		public void actionPerformed(ActionEvent ae) {
-////			JFrame dialog = (JFrame)ae.getSource();
-//			JDialog dialog = (JDialog)SwingUtilities.getRoot((JButton)ae.getSource());
-//			dialog.dispose();
-//			dialog.setVisible(false);
-//			
-//			view.clearSelectedIngredient();
-//		}
-//	}
 
 	class RecipeSelectedListener implements ListSelectionListener {
 		@Override

@@ -4,12 +4,12 @@
  */
 package Repository.Item;
 
+import Model.FridgeItemModel;
 import Model.ItemModel;
 import Model.RecipeItemModel;
 import Repository.Nutrition.INutritionRepository;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**
@@ -20,6 +20,7 @@ public class TestItemRepository implements IItemRepository {
 	final private INutritionRepository nutritionRepo;
 	List<ItemModel> items = new ArrayList<>();
 	List<RecipeItemModel> recipeItems = new ArrayList<>();
+	List<FridgeItemModel> fridgeItems = new ArrayList<>();
 
 	public TestItemRepository(INutritionRepository nutritionRepo){
 		this.nutritionRepo = nutritionRepo;
@@ -40,6 +41,13 @@ public class TestItemRepository implements IItemRepository {
 		recipeItems.add(new RecipeItemModel(3, 4));
 		recipeItems.add(new RecipeItemModel(2, 3));
 		recipeItems.add(new RecipeItemModel(2, 5));
+
+		fridgeItems.add(new FridgeItemModel(0, 1));
+		fridgeItems.add(new FridgeItemModel(0, 2));
+		fridgeItems.add(new FridgeItemModel(0, 3));
+		fridgeItems.add(new FridgeItemModel(0, 4));
+		fridgeItems.add(new FridgeItemModel(1, 2));
+		fridgeItems.add(new FridgeItemModel(1, 2));
 	}
 
 	@Override
@@ -64,6 +72,47 @@ public class TestItemRepository implements IItemRepository {
 			}
 		}
 		return recipeIngredients;
+	}
+
+	@Override
+	public List<ItemModel> getFridgeItems(int fridgeID) {
+		List<FridgeItemModel> fridgeItemsForFridge = this.fridgeItems.stream()
+			.filter(i -> i.getFridgeID() == fridgeID)
+			.collect(Collectors.toList());
+
+		List<Integer> fridgeItemIds = fridgeItemsForFridge.stream()
+			.map(FridgeItemModel::getItemID)
+			.collect(Collectors.toList());
+
+		List<ItemModel> itemsInFridge = new ArrayList<>();
+		for (int id :fridgeItemIds){
+			ItemModel itemWithId = items.stream()
+				.filter(i -> i.getID() == id)
+				.findFirst()
+				.orElse(null);
+					
+			if(itemWithId != null){
+				itemsInFridge.add(itemWithId);
+			}
+		}
+		return itemsInFridge;
+	}
+
+	@Override
+	public void deleteFridgeItem(int fridgeID, int itemID) {
+		FridgeItemModel item = this.fridgeItems.stream()
+			.filter(i -> i.getFridgeID() == fridgeID && i.getItemID() == itemID)
+			.findFirst()
+			.orElse(null);
+
+		if(item == null) return;
+
+		fridgeItems.remove(item);
+	}
+
+	@Override
+	public void addFridgeItem(int fridgeID, int itemID) {
+		throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
 	}
 	
 }
