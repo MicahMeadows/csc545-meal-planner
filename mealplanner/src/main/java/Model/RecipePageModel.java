@@ -15,6 +15,9 @@ public class RecipePageModel {
 
 	private List<RecipeModel> recipes = new ArrayList<RecipeModel>();
 
+	public RecipeModel getRecipeWithID(int ID){
+		return recipes.stream().filter(recipe -> recipe.getID() == ID).findFirst().orElse(null);
+	}
 
 	public List<RecipeModel> getAllRecipes(){
 		return this.recipes;

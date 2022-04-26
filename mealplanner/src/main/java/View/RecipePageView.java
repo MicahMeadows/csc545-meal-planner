@@ -4,9 +4,14 @@
  */
 package View;
 
+import Model.ItemModel;
 import Model.RecipeModel;
 import java.util.List;
+import java.util.Vector;
+import javax.swing.DefaultListModel;
+import javax.swing.ListModel;
 import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -34,19 +39,22 @@ public class RecipePageView extends javax.swing.JPanel {
                 txtNameSearch = new javax.swing.JTextField();
                 txtCategorySearch = new javax.swing.JTextField();
                 txtIngredientSearch = new javax.swing.JTextField();
-                lstRecipes = new javax.swing.JScrollPane();
-                jList1 = new javax.swing.JList<>();
+                paneRecipeList = new javax.swing.JScrollPane();
+                lstRecipes = new javax.swing.JList<>();
                 lblRecipes = new javax.swing.JLabel();
-                lblName = new javax.swing.JLabel();
-                lblCategory = new javax.swing.JLabel();
-                lblIngredients = new javax.swing.JLabel();
+                lblNameFilter = new javax.swing.JLabel();
+                lblCategoryFilter = new javax.swing.JLabel();
+                lblIngredientsFilter = new javax.swing.JLabel();
                 recipeViewPanel = new javax.swing.JPanel();
-                jLabel1 = new javax.swing.JLabel();
-                jLabel2 = new javax.swing.JLabel();
-                jScrollPane1 = new javax.swing.JScrollPane();
-                jTextArea1 = new javax.swing.JTextArea();
+                lblRecipeName = new javax.swing.JLabel();
+                lblCategoryName = new javax.swing.JLabel();
+                paneInstructions = new javax.swing.JScrollPane();
+                taInstructions = new javax.swing.JTextArea();
                 jSeparator1 = new javax.swing.JSeparator();
-                jLabel3 = new javax.swing.JLabel();
+                lblInstructions = new javax.swing.JLabel();
+                lblIngredientsList = new javax.swing.JLabel();
+                paneIngredientsList = new javax.swing.JScrollPane();
+                lstIngredients = new javax.swing.JList<>();
                 jSeparator2 = new javax.swing.JSeparator();
 
                 txtNameSearch.setToolTipText("ex: Burger");
@@ -55,34 +63,39 @@ public class RecipePageView extends javax.swing.JPanel {
 
                 txtIngredientSearch.setToolTipText("ex: spinach, tomatoe, rice...");
 
-                jList1.setModel(new javax.swing.AbstractListModel<String>() {
+                lstRecipes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+                paneRecipeList.setViewportView(lstRecipes);
+
+                lblRecipes.setText("Recipes");
+
+                lblNameFilter.setText("Name");
+
+                lblCategoryFilter.setText("Category");
+
+                lblIngredientsFilter.setText("Ingredients");
+
+                lblRecipeName.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+                lblRecipeName.setText("Sample Recipe Name");
+
+                lblCategoryName.setFont(new java.awt.Font("Chandas", 2, 18)); // NOI18N
+                lblCategoryName.setText("Sample Category");
+
+                taInstructions.setEditable(false);
+                taInstructions.setColumns(20);
+                taInstructions.setRows(5);
+                taInstructions.setText("1. do something to food\n2. do something else to food\n3. do something more else to food");
+                paneInstructions.setViewportView(taInstructions);
+
+                lblInstructions.setText("Instructions");
+
+                lblIngredientsList.setText("Ingredients");
+
+                lstIngredients.setModel(new javax.swing.AbstractListModel<String>() {
                         String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
                         public int getSize() { return strings.length; }
                         public String getElementAt(int i) { return strings[i]; }
                 });
-                lstRecipes.setViewportView(jList1);
-
-                lblRecipes.setText("Recipes");
-
-                lblName.setText("Name");
-
-                lblCategory.setText("Category");
-
-                lblIngredients.setText("Ingredients");
-
-                jLabel1.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-                jLabel1.setText("Sample Recipe Name");
-
-                jLabel2.setFont(new java.awt.Font("Chandas", 2, 18)); // NOI18N
-                jLabel2.setText("Sample Category");
-
-                jTextArea1.setEditable(false);
-                jTextArea1.setColumns(20);
-                jTextArea1.setRows(5);
-                jTextArea1.setText("1. do something to food\n2. do something else to food\n3. do something more else to food");
-                jScrollPane1.setViewportView(jTextArea1);
-
-                jLabel3.setText("Instructions");
+                paneIngredientsList.setViewportView(lstIngredients);
 
                 javax.swing.GroupLayout recipeViewPanelLayout = new javax.swing.GroupLayout(recipeViewPanel);
                 recipeViewPanel.setLayout(recipeViewPanelLayout);
@@ -91,31 +104,38 @@ public class RecipePageView extends javax.swing.JPanel {
                         .addGroup(recipeViewPanelLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(recipeViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblRecipeName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(recipeViewPanelLayout.createSequentialGroup()
                                                 .addGroup(recipeViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(jScrollPane1)
                                                         .addComponent(jSeparator1)
-                                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                        .addComponent(lblCategoryName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                                 .addContainerGap())
+                                        .addComponent(paneInstructions)
                                         .addGroup(recipeViewPanelLayout.createSequentialGroup()
-                                                .addComponent(jLabel3)
-                                                .addGap(0, 0, Short.MAX_VALUE))))
+                                                .addComponent(lblInstructions)
+                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGroup(recipeViewPanelLayout.createSequentialGroup()
+                                                .addComponent(lblIngredientsList)
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                        .addComponent(paneIngredientsList)))
                 );
                 recipeViewPanelLayout.setVerticalGroup(
                         recipeViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(recipeViewPanelLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jLabel1)
+                                .addComponent(lblRecipeName)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblCategoryName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel3)
+                                .addComponent(lblIngredientsList)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(paneIngredientsList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                                .addComponent(lblInstructions)
                                 .addGap(1, 1, 1)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(244, Short.MAX_VALUE))
+                                .addComponent(paneInstructions, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
                 );
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -124,27 +144,31 @@ public class RecipePageView extends javax.swing.JPanel {
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addGap(13, 13, 13)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addComponent(txtNameSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(lblName))
+                                                        .addComponent(lblNameFilter))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addComponent(txtCategorySearch, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(lblCategory))
+                                                        .addComponent(lblCategoryFilter))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(lblIngredients)
-                                                        .addComponent(txtIngredientSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(lblIngredientsFilter)
+                                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(txtIngredientSearch)
+                                                                .addContainerGap())))
                                         .addGroup(layout.createSequentialGroup()
                                                 .addGap(1, 1, 1)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(lstRecipes, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(paneRecipeList, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(lblRecipes))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(recipeViewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addContainerGap(124, Short.MAX_VALUE))
+                                                .addComponent(recipeViewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addContainerGap())))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jSeparator2))
@@ -154,22 +178,22 @@ public class RecipePageView extends javax.swing.JPanel {
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(lblName)
-                                        .addComponent(lblCategory)
-                                        .addComponent(lblIngredients))
+                                        .addComponent(lblNameFilter)
+                                        .addComponent(lblCategoryFilter)
+                                        .addComponent(lblIngredientsFilter))
                                 .addGap(3, 3, 3)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(txtNameSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(txtCategorySearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(txtIngredientSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(lblRecipes)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(recipeViewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lstRecipes))
+                                        .addComponent(paneRecipeList))
                                 .addContainerGap())
                 );
         }// </editor-fold>//GEN-END:initComponents
@@ -181,54 +205,65 @@ public class RecipePageView extends javax.swing.JPanel {
 		txtNameSearch.getDocument().addDocumentListener(listener);
 	}
 
+	public void setRecipeListListener(ListSelectionListener listener){
+		lstRecipes.addListSelectionListener(listener);
+	}
+
 
 	public String getCategoryText(){
 		return this.txtCategorySearch.getText();
 	}
 
-	public void setCategoryText(String text){
-		this.txtCategorySearch.setText(text);
-	}
 
 	public String getNameText(){
 		return this.txtNameSearch.getText();
-	}
-
-	public void setNameText(String text){
-		this.txtNameSearch.setText(text);
 	}
 
 	public String getIngredientText(){
 		return this.txtIngredientSearch.getText();
 	}
 
-	public void setIngredientText(String text){
-		this.txtIngredientSearch.setText(text);
-	}
-
 	public void setRecipeList(List<RecipeModel> recipes){
-		String[] labels = recipes.stream().map(recipe -> recipe.getName()).toArray(String[]::new);
-
-		jList1.setListData(labels);
+		DefaultListModel<RecipeModel> listModel = new DefaultListModel<>();
+		for (RecipeModel recipe : recipes){
+			listModel.addElement(recipe);
+		}
+		lstRecipes.setModel(listModel);
 	}
+
+
+	public void setSelectedRecipe(RecipeModel recipe){
+		lblRecipeName.setText(recipe.getName());
+		lblCategoryName.setText(recipe.getCategory());
+		taInstructions.setText(recipe.getInstructions());
+
+		ItemModel[] items = recipe.getIngredients().stream().toArray(ItemModel[]::new);
+		
+		String[] ingredientLabels = recipe.getIngredients().stream().map(ingredient -> ingredient.getName()).toArray(String[]::new);
+	}
+
+
 
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
-        private javax.swing.JLabel jLabel1;
-        private javax.swing.JLabel jLabel2;
-        private javax.swing.JLabel jLabel3;
-        private javax.swing.JList<String> jList1;
         private javax.swing.JProgressBar jProgressBar1;
-        private javax.swing.JScrollPane jScrollPane1;
         private javax.swing.JSeparator jSeparator1;
         private javax.swing.JSeparator jSeparator2;
-        private javax.swing.JTextArea jTextArea1;
-        private javax.swing.JLabel lblCategory;
-        private javax.swing.JLabel lblIngredients;
-        private javax.swing.JLabel lblName;
+        private javax.swing.JLabel lblCategoryFilter;
+        private javax.swing.JLabel lblCategoryName;
+        private javax.swing.JLabel lblIngredientsFilter;
+        private javax.swing.JLabel lblIngredientsList;
+        private javax.swing.JLabel lblInstructions;
+        private javax.swing.JLabel lblNameFilter;
+        private javax.swing.JLabel lblRecipeName;
         private javax.swing.JLabel lblRecipes;
-        private javax.swing.JScrollPane lstRecipes;
+        private javax.swing.JList<String> lstIngredients;
+        private javax.swing.JList<RecipeModel> lstRecipes;
+        private javax.swing.JScrollPane paneIngredientsList;
+        private javax.swing.JScrollPane paneInstructions;
+        private javax.swing.JScrollPane paneRecipeList;
         private javax.swing.JPanel recipeViewPanel;
+        private javax.swing.JTextArea taInstructions;
         private javax.swing.JTextField txtCategorySearch;
         private javax.swing.JTextField txtIngredientSearch;
         private javax.swing.JTextField txtNameSearch;

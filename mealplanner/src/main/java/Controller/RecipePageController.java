@@ -1,9 +1,13 @@
 package Controller;
 
+import Model.RecipeModel;
 import Model.RecipePageModel;
 import View.RecipePageView;
+import javax.swing.JList;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 
 
@@ -17,6 +21,16 @@ public class RecipePageController {
 
 		view.setFilterListeners(new FilterUpdateListener());
 		view.setRecipeList(model.getAllRecipes());
+		view.setRecipeListListener(new RecipeSelectedListener());
+	}
+
+	class RecipeSelectedListener implements ListSelectionListener {
+		@Override
+		public void valueChanged(ListSelectionEvent lse) {
+			JList source = (JList)lse.getSource();
+			RecipeModel recipe = (RecipeModel)source.getSelectedValue();
+			view.setSelectedRecipe(recipe);
+		}
 	}
 
 

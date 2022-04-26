@@ -23,4 +23,9 @@ public class RecipeModel {
 	public String getInstructions(){ return instructions; }
 	public String getCategory(){ return category; }
 	public List<ItemModel> getIngredients(){ return this.ingredients; }
+
+	@Override
+	public String toString() {
+		return this.name;
+	}
 }
