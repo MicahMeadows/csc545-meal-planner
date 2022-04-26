@@ -9,7 +9,7 @@ package Model;
  * @author micah
  */
 public class NutritionModel {
-	final private int ID;
+	final private int itemID;
 	final private int calories;
 	final private int sugar;
 	final private int protein;
@@ -17,7 +17,7 @@ public class NutritionModel {
 	final private int sodium;
 
 	NutritionModel(Builder builder){
-		this.ID = builder.ID;
+		this.itemID = builder.ID;
 		this.calories = builder.calories;
 		this.sugar = builder.sugar;
 		this.protein = builder.protein;
@@ -25,7 +25,7 @@ public class NutritionModel {
 		this.sodium = builder.sodium;
 	}
 
-	public int getID(){return ID;}
+	public int getID(){return itemID;}
 	public int getCalories(){return calories;}
 	public int getSugar(){return sugar;}
 	public int getProtein(){return protein;}

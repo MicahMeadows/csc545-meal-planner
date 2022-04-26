@@ -1,6 +1,10 @@
 
 import Controller.RecipePageController;
 import Model.RecipePageModel;
+import Repository.Item.IItemRepository;
+import Repository.Item.TestItemRepository;
+import Repository.Nutrition.INutritionRepository;
+import Repository.Nutrition.TestNutritionRepository;
 import Repository.Recipe.IRecipeRepository;
 import Repository.Recipe.TestRecipeRepository;
 import View.MealPlannerNavigationView;
@@ -16,9 +20,12 @@ import View.RecipePageView;
  * @author micah
  */
 public class MealPlanner {
-	final private static IRecipeRepository recipeRepository = new TestRecipeRepository();
 
 	public static void main(String[] args){
+		final INutritionRepository nutritionRepository = new TestNutritionRepository();
+		final IItemRepository itemRepository = new TestItemRepository(nutritionRepository);
+		final IRecipeRepository recipeRepository = new TestRecipeRepository(itemRepository);
+		
 		// Models
 		RecipePageModel recipePageModel = new RecipePageModel(recipeRepository);
 

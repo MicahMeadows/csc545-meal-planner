@@ -3,6 +3,7 @@ package Repository.Recipe;
 import Model.ItemModel;
 import Model.NutritionModel;
 import Model.RecipeModel;
+import Repository.Item.IItemRepository;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,27 +19,18 @@ import java.util.stream.Collectors;
  * @author micah
  */
 public class TestRecipeRepository implements IRecipeRepository {
+	final private IItemRepository itemRepository;
 	List<RecipeModel> recipes = new ArrayList<>();
 
-	public TestRecipeRepository(){
+	public TestRecipeRepository(IItemRepository itemRepository){
+		this.itemRepository = itemRepository;
 		setupTestData();
 	}
 
 	void setupTestData(){
-		NutritionModel nutrition = new NutritionModel.Builder(1).calories(2).fat(5).sodium(9).sugar(23).build();
-
-		ItemModel bun = new ItemModel(0, "Bread", "Bun2", nutrition);
-		ItemModel tomatoe = new ItemModel(1, "Veggie", "Tomatoe", nutrition);
-		ItemModel hamburger = new ItemModel(2, "Meat", "Hamburger", nutrition);
-
-		List<ItemModel> burgerIngredients = new ArrayList<>();
-		burgerIngredients.add(bun);
-		burgerIngredients.add(tomatoe);
-		burgerIngredients.add(hamburger);
-
-		recipes.add(new RecipeModel(1, "Burger", "Make burger", "American", burgerIngredients));
-		recipes.add(new RecipeModel(2, "Sandwhich", "Make sandwhich", "American", new ArrayList<>()));
-		recipes.add(new RecipeModel(3, "Pizza", "Make pizaz", "Italian", new ArrayList<>()));
+		recipes.add(new RecipeModel(1, "Burger", "Make burger", "American", itemRepository.getItemsForRecipeID(1)));
+		recipes.add(new RecipeModel(2, "Sandwhich", "Make sandwhich", "American", itemRepository.getItemsForRecipeID(2)));
+		recipes.add(new RecipeModel(0, "Pizza", "Make pizaz", "Italian", itemRepository.getItemsForRecipeID(3)));
 	}
 
 	@Override
@@ -85,8 +77,4 @@ public class TestRecipeRepository implements IRecipeRepository {
 		}
 		return false;
 	}
-
-	
-
-	
 }
