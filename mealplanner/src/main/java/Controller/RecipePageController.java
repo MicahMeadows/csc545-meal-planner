@@ -22,6 +22,16 @@ public class RecipePageController {
 		view.setFilterListeners(new FilterUpdateListener());
 		view.setRecipeList(model.getAllRecipes());
 		view.setRecipeListListener(new RecipeSelectedListener());
+		view.setSelectedRecipe(null);
+	}
+
+	class IngredientSelectedListener implements ListSelectionListener{
+
+		@Override
+		public void valueChanged(ListSelectionEvent lse) {
+			throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+		}
+
 	}
 
 	class RecipeSelectedListener implements ListSelectionListener {

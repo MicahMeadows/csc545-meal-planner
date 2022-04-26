@@ -6,6 +6,7 @@ package View;
 
 import Model.ItemModel;
 import Model.RecipeModel;
+import java.awt.FlowLayout;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.DefaultListModel;
@@ -232,7 +233,31 @@ public class RecipePageView extends javax.swing.JPanel {
 	}
 
 
+	private void setupVisiblityForSelectedRecipe(boolean recipeIsSelected){
+		lblIngredientsList.setVisible(recipeIsSelected);
+		lstIngredients.setVisible(recipeIsSelected);
+		lblInstructions.setVisible(recipeIsSelected);
+		taInstructions.setVisible(recipeIsSelected);
+	}
+
+	private void setupForNoSelectedRecipe(){
+		setupVisiblityForSelectedRecipe(false);
+	}
+
+	private void setupForSelectedRecipe(){
+		setupVisiblityForSelectedRecipe(true);
+	}
+
 	public void setSelectedRecipe(RecipeModel recipe){
+		if(recipe == null) {
+			setupForNoSelectedRecipe();
+			lblRecipeName.setText("No recipe selected...");
+			lblCategoryName.setText("Select a recipe from the list to view its information");
+			return;
+		}
+		setupForSelectedRecipe();
+
+
 		lblRecipeName.setText(recipe.getName());
 		lblCategoryName.setText(recipe.getCategory());
 		taInstructions.setText(recipe.getInstructions());
