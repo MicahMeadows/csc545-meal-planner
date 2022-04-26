@@ -88,6 +88,7 @@ public class RecipePageView extends javax.swing.JPanel {
 
                 lblIngredientsList.setText("Ingredients");
 
+                lstIngredients.setBackground(new java.awt.Color(241, 241, 241));
                 lstIngredients.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
                 paneIngredientsList.setViewportView(lstIngredients);
 
@@ -98,20 +99,22 @@ public class RecipePageView extends javax.swing.JPanel {
                         .addGroup(recipeViewPanelLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(recipeViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblRecipeName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblRecipeName, javax.swing.GroupLayout.DEFAULT_SIZE, 701, Short.MAX_VALUE)
                                         .addGroup(recipeViewPanelLayout.createSequentialGroup()
                                                 .addGroup(recipeViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addComponent(jSeparator1)
-                                                        .addComponent(lblCategoryName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                                .addContainerGap())
-                                        .addComponent(paneInstructions)
-                                        .addGroup(recipeViewPanelLayout.createSequentialGroup()
-                                                .addComponent(lblInstructions)
-                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGroup(recipeViewPanelLayout.createSequentialGroup()
-                                                .addComponent(lblIngredientsList)
-                                                .addGap(0, 0, Short.MAX_VALUE))
-                                        .addComponent(paneIngredientsList)))
+                                                        .addComponent(lblCategoryName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addGroup(recipeViewPanelLayout.createSequentialGroup()
+                                                                .addGap(6, 6, 6)
+                                                                .addComponent(lblInstructions)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addComponent(lblIngredientsList)
+                                                                .addGap(8, 8, 8))
+                                                        .addGroup(recipeViewPanelLayout.createSequentialGroup()
+                                                                .addComponent(paneInstructions)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                .addComponent(paneIngredientsList, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addContainerGap())))
                 );
                 recipeViewPanelLayout.setVerticalGroup(
                         recipeViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,14 +125,16 @@ public class RecipePageView extends javax.swing.JPanel {
                                 .addComponent(lblCategoryName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblIngredientsList)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(paneIngredientsList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                                .addComponent(lblInstructions)
-                                .addGap(1, 1, 1)
-                                .addComponent(paneInstructions, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(recipeViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(lblIngredientsList)
+                                        .addComponent(lblInstructions))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(recipeViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(paneInstructions)
+                                        .addGroup(recipeViewPanelLayout.createSequentialGroup()
+                                                .addComponent(paneIngredientsList, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
+                                                .addContainerGap())))
                 );
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -151,7 +156,7 @@ public class RecipePageView extends javax.swing.JPanel {
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addGroup(layout.createSequentialGroup()
                                                                 .addComponent(lblIngredientsFilter)
-                                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                                .addGap(437, 500, Short.MAX_VALUE))
                                                         .addGroup(layout.createSequentialGroup()
                                                                 .addComponent(txtIngredientSearch)
                                                                 .addContainerGap())))
@@ -180,7 +185,7 @@ public class RecipePageView extends javax.swing.JPanel {
                                         .addComponent(txtNameSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(txtCategorySearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(txtIngredientSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(lblRecipes)
@@ -255,6 +260,10 @@ public class RecipePageView extends javax.swing.JPanel {
 
 	public void showItemDetailsDialog(ItemModel item){
 		System.out.println("item details");
+	}
+
+	public void clearSelectedIngredient(){
+		lstIngredients.clearSelection();
 	}
 
 	public void setSelectedRecipe(RecipeModel recipe){

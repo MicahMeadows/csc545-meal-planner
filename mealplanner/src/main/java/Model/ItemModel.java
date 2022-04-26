@@ -1,5 +1,9 @@
 package Model;
 
+/**
+ *
+ * @author micah
+ */
 public class ItemModel {
 	final private int ID;
 	final private String group;

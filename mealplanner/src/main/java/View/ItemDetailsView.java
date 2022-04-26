@@ -21,17 +21,21 @@ public class ItemDetailsView extends javax.swing.JDialog {
 	public ItemDetailsView(ItemModel item, java.awt.Frame parent, boolean modal) {
 		super(parent, modal);
 		initComponents();
-		btnClose.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ae) {
-				dispose();
-				setVisible(false);
-			}
-		});
+//		btnClose.addActionListener(new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent ae) {
+//				dispose();
+//				setVisible(false);
+//			}
+//		});
 		setupDialog(item);
 	}
 
-	void setupDialog(ItemModel item) {
+	public void setCloseDetailDialogListener(ActionListener listener){
+		btnClose.addActionListener(listener);
+	}
+
+	private void setupDialog(ItemModel item) {
 		int calories = item.getNutrition().getCalories();
 		int fat = item.getNutrition().getFat();
 		int sugar = item.getNutrition().getSugar();

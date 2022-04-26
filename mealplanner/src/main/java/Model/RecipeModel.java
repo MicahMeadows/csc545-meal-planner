@@ -3,6 +3,10 @@ package Model;
 
 import java.util.List;
 
+/**
+ *
+ * @author micah
+ */
 public class RecipeModel {
 	final private int ID;
 	final private String name;
