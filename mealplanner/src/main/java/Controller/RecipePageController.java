@@ -47,27 +47,24 @@ public class RecipePageController {
 			if (item == null) return;
 
 			JFrame frame = (JFrame)SwingUtilities.getRoot(view);
-			ItemDetailsView itemDetailDialog = new ItemDetailsView(item, frame, true);
-			itemDetailDialog.setCloseDetailDialogListener(new CloseDetailDialogListener());
-			itemDetailDialog.setLocationRelativeTo(frame);
-			itemDetailDialog.setVisible(true);
-
-			
+			new ItemDetailController(frame, item, () -> {
+				view.clearSelectedIngredient();
+			}).show();
 		}
 
 	}
 
-	class CloseDetailDialogListener implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent ae) {
-//			JFrame dialog = (JFrame)ae.getSource();
-			JDialog dialog = (JDialog)SwingUtilities.getRoot((JButton)ae.getSource());
-			dialog.dispose();
-			dialog.setVisible(false);
-			
-			view.clearSelectedIngredient();
-		}
-	}
+//	class CloseDetailDialogListener implements ActionListener {
+//		@Override
+//		public void actionPerformed(ActionEvent ae) {
+////			JFrame dialog = (JFrame)ae.getSource();
+//			JDialog dialog = (JDialog)SwingUtilities.getRoot((JButton)ae.getSource());
+//			dialog.dispose();
+//			dialog.setVisible(false);
+//			
+//			view.clearSelectedIngredient();
+//		}
+//	}
 
 	class RecipeSelectedListener implements ListSelectionListener {
 		@Override
