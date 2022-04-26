@@ -70,13 +70,15 @@ public class FridgePageModel {
 			return this.fridgeItems;
 
 		return this.fridgeItems.stream()
-			.filter(i -> i.getGroup().equals(selectedGroup))
+			.filter(i -> i.getGroup().toLowerCase().equals(selectedGroup.toLowerCase()))
 			.collect(Collectors.toList());
 	}
 
 	public List<String> getItemCategories(){
 		return fridgeItems.stream()
 			.map(ItemModel::getGroup)
+			.map(String::toLowerCase)
+			.map(name -> name.substring(0, 1).toUpperCase() + name.substring(1))
 			.distinct()
 			.collect(Collectors.toList());
 	}
@@ -88,4 +90,16 @@ public class FridgePageModel {
 
 	}
 
+	public void addFridgeItem(ItemModel item){
+		try {
+			ItemModel createdItem = itemRepository.createItem(item);
+			itemRepository.addFridgeItem(this.fridgeID, createdItem.getID());
+			updateFridgeItems();
+			System.out.println(itemRepository.getAllItems());
+
+		} catch (Exception e){
+			throw e;
+		}
+
+	}
 }

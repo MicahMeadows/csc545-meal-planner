@@ -11,7 +11,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -31,6 +34,7 @@ public class FridgePageController {
 		this.view.setAddListener(new AddItemListener());
 		this.view.setSelectedItemChangeListener(new ItemSelectedListener());
 		this.view.setGroupChangeListener(new GroupFilterChangedListener());
+		this.view.setViewItemDetailsListener(new ViewDetailsListener());
 
 		initialize();
 	}
@@ -80,6 +84,16 @@ public class FridgePageController {
 
 	}
 
+	class ViewDetailsListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent ae) {
+			JFrame frame = (JFrame)SwingUtilities.getRoot((JButton)ae.getSource());
+
+			new ItemDetailController(frame, model.getSelectedItem(), () ->{}).show();
+		}
+
+	}
+	
 	class RemoveItemListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent ae) {
@@ -94,7 +108,19 @@ public class FridgePageController {
 	class AddItemListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent ae) {
-			System.out.println("do add stuff");
+			System.out.println(ae.getActionCommand());
+			JFrame source = (JFrame)SwingUtilities.getRoot((JButton)ae.getSource());
+
+			new AddItemController(source, (newItem) -> {
+				try {
+					model.addFridgeItem(newItem);
+					updateFridgeList();
+					updateGroupComboBox();
+					
+				} catch (Exception e){
+					view.displayErrorMessage("There was an issue adding the item.");
+				}
+			}).show();
 		}
 	}
 

@@ -25,12 +25,33 @@ public class NutritionModel {
 		this.sodium = builder.sodium;
 	}
 
-	public int getID(){return itemID;}
-	public int getCalories(){return calories;}
-	public int getSugar(){return sugar;}
-	public int getProtein(){return protein;}
-	public int getFat(){return fat;}
-	public int getSodium(){return sodium;}
+	private NutritionModel(int itemID, int calories, int sugar, int protein, int fat, int sodium){
+		this.itemID = itemID;
+		this.calories = calories;
+		this.sodium = sodium;
+		this.sugar = sugar;
+		this.protein = protein;
+		this.fat = fat;
+	}
+
+	public int getID() { return itemID; }
+	public int getCalories() { return calories; }
+	public int getSugar() { return sugar; }
+	public int getProtein() { return protein; }
+	public int getFat() { return fat; }
+	public int getSodium() { return sodium; }
+	
+
+	public NutritionModel copyWithNewId(int newID){
+		return new NutritionModel(
+			newID,
+			this.calories,
+			this.sugar,
+			this.protein,
+			this.fat,
+			this.sodium
+		);
+	}
 
 	public static class Builder {
 	final private int ID;
@@ -75,5 +96,7 @@ public class NutritionModel {
 			return nutrition;
 		}
 	}
+
+
 
 }

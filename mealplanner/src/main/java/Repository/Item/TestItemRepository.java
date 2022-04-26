@@ -6,10 +6,12 @@ package Repository.Item;
 
 import Model.FridgeItemModel;
 import Model.ItemModel;
+import Model.NutritionModel;
 import Model.RecipeItemModel;
 import Repository.Nutrition.INutritionRepository;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
@@ -112,7 +114,25 @@ public class TestItemRepository implements IItemRepository {
 
 	@Override
 	public void addFridgeItem(int fridgeID, int itemID) {
-		throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+		this.fridgeItems.add(new FridgeItemModel(fridgeID, itemID));
+	}
+
+	@Override
+	public ItemModel createItem(ItemModel item) {
+		ItemModel realCreatedItem = new ItemModel(
+			new Random().nextInt(Integer.MAX_VALUE),
+			item.getGroup(),
+			item.getName(),
+			item.getNutrition()
+		);
+		int generatedID = realCreatedItem.getID();
+		NutritionModel newNutrition = realCreatedItem.getNutrition().copyWithNewId(generatedID);
+		
+		realCreatedItem.setNutrition(newNutrition);
+
+		items.add(realCreatedItem);
+
+		return realCreatedItem;
 	}
 	
 }

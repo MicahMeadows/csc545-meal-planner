@@ -8,7 +8,7 @@ public class ItemModel {
 	final private int ID;
 	final private String group;
 	final private String name;
-	final private NutritionModel nutrition;
+	private NutritionModel nutrition;
 
 	public ItemModel(int ID, String group, String name, NutritionModel nutrition){
 		this.ID = ID;
@@ -19,6 +19,10 @@ public class ItemModel {
 
 	public int getID(){
 		return this.ID;
+	}
+
+	public void setNutrition(NutritionModel nutrition){
+		this.nutrition = nutrition;
 	}
 
 	public NutritionModel getNutrition(){

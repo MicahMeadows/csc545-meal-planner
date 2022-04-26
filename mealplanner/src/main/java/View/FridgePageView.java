@@ -11,7 +11,10 @@ import java.util.List;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.ListModel;
+import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionListener;
 
 /**
@@ -43,6 +46,7 @@ public class FridgePageView extends javax.swing.JPanel {
                 lblGroups = new javax.swing.JLabel();
                 btnAdd = new javax.swing.JButton();
                 btnDelete = new javax.swing.JButton();
+                btnViewDetails = new javax.swing.JButton();
 
                 lblItemsInFridge.setText("Items in your fridge");
 
@@ -56,26 +60,29 @@ public class FridgePageView extends javax.swing.JPanel {
 
                 btnDelete.setText("Delete Selected");
 
+                btnViewDetails.setText("View Details");
+
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
                 this.setLayout(layout);
                 layout.setHorizontalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addGap(21, 21, 21)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addGroup(layout.createSequentialGroup()
+                                                .addComponent(btnViewDetails)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(btnDelete)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(btnAdd))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(paneFridgeItems, javax.swing.GroupLayout.PREFERRED_SIZE, 674, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(lblItemsInFridge)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(lblGroups)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(cbGroups, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addContainerGap(35, Short.MAX_VALUE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(lblItemsInFridge)
+                                                .addGap(396, 396, 396)
+                                                .addComponent(lblGroups)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(cbGroups, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(paneFridgeItems, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addContainerGap(20, Short.MAX_VALUE))
                 );
                 layout.setVerticalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,10 +97,16 @@ public class FridgePageView extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(btnAdd)
-                                        .addComponent(btnDelete))
+                                        .addComponent(btnDelete)
+                                        .addComponent(btnViewDetails))
                                 .addContainerGap(23, Short.MAX_VALUE))
                 );
         }// </editor-fold>//GEN-END:initComponents
+
+	public void displayErrorMessage(String message){
+		JFrame frame = (JFrame)SwingUtilities.getRoot(this);
+		JOptionPane.showMessageDialog(frame, message);
+	}
 
 	public void setFridgeItemsList(List<ItemModel> items){
 		if (items == null) return;
@@ -134,6 +147,10 @@ public class FridgePageView extends javax.swing.JPanel {
 		btnAdd.addActionListener(listener);
 	}
 
+	public void setViewItemDetailsListener(ActionListener listener){
+		btnViewDetails.addActionListener(listener);
+	}
+
 	public void setSelectedItemChangeListener(ListSelectionListener listener){
 		lstFridgeItems.addListSelectionListener(listener);
 	}
@@ -142,6 +159,7 @@ public class FridgePageView extends javax.swing.JPanel {
         // Variables declaration - do not modify//GEN-BEGIN:variables
         private javax.swing.JButton btnAdd;
         private javax.swing.JButton btnDelete;
+        private javax.swing.JButton btnViewDetails;
         private javax.swing.JComboBox<String> cbGroups;
         private javax.swing.JLabel lblGroups;
         private javax.swing.JLabel lblItemsInFridge;

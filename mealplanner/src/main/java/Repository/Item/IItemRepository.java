@@ -20,4 +20,5 @@ public interface IItemRepository {
 	List<ItemModel> getFridgeItems(int fridgeID);
 	void deleteFridgeItem(int fridgeID, int itemID);
 	void addFridgeItem(int fridgeID, int itemID);
+	ItemModel createItem(ItemModel item);
 }
