@@ -61,9 +61,10 @@ public class RecipePageModel {
 	public void updateRecipes(){
 		recipes = new ArrayList<>();
 
-		ItemModel bun = new ItemModel(0, "Bread", "Bun");
-		ItemModel tomatoe = new ItemModel(1, "Veggie", "Tomatoe");
-		ItemModel hamburger = new ItemModel(2, "Meat", "Hamburger");
+		NutritionModel nutrition = new NutritionModel.Builder(1).calories(2).fat(5).sodium(9).sugar(23).build();
+		ItemModel bun = new ItemModel(0, "Bread", "Bun", nutrition);
+		ItemModel tomatoe = new ItemModel(1, "Veggie", "Tomatoe", nutrition);
+		ItemModel hamburger = new ItemModel(2, "Meat", "Hamburger", nutrition);
 
 		List<ItemModel> burgerIngredients = new ArrayList<>();
 		burgerIngredients.add(bun);

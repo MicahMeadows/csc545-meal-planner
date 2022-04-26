@@ -6,11 +6,8 @@ package View;
 
 import Model.ItemModel;
 import Model.RecipeModel;
-import java.awt.FlowLayout;
 import java.util.List;
-import java.util.Vector;
 import javax.swing.DefaultListModel;
-import javax.swing.ListModel;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionListener;
 
@@ -91,11 +88,7 @@ public class RecipePageView extends javax.swing.JPanel {
 
                 lblIngredientsList.setText("Ingredients");
 
-                lstIngredients.setModel(new javax.swing.AbstractListModel<String>() {
-                        String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-                        public int getSize() { return strings.length; }
-                        public String getElementAt(int i) { return strings[i]; }
-                });
+                lstIngredients.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
                 paneIngredientsList.setViewportView(lstIngredients);
 
                 javax.swing.GroupLayout recipeViewPanelLayout = new javax.swing.GroupLayout(recipeViewPanel);
@@ -210,6 +203,10 @@ public class RecipePageView extends javax.swing.JPanel {
 		lstRecipes.addListSelectionListener(listener);
 	}
 
+	public void setIngredientListListener(ListSelectionListener listener){
+		lstIngredients.addListSelectionListener(listener);
+	}
+
 
 	public String getCategoryText(){
 		return this.txtCategorySearch.getText();
@@ -232,6 +229,14 @@ public class RecipePageView extends javax.swing.JPanel {
 		lstRecipes.setModel(listModel);
 	}
 
+	public void setIngredientsList(List<ItemModel> ingredients){
+		DefaultListModel<ItemModel> listModel = new DefaultListModel<>();
+		for (ItemModel ingredient : ingredients){
+			listModel.addElement(ingredient);
+		}
+		lstIngredients.setModel(listModel);
+	}
+
 
 	private void setupVisiblityForSelectedRecipe(boolean recipeIsSelected){
 		lblIngredientsList.setVisible(recipeIsSelected);
@@ -248,6 +253,10 @@ public class RecipePageView extends javax.swing.JPanel {
 		setupVisiblityForSelectedRecipe(true);
 	}
 
+	public void showItemDetailsDialog(ItemModel item){
+		System.out.println("item details");
+	}
+
 	public void setSelectedRecipe(RecipeModel recipe){
 		if(recipe == null) {
 			setupForNoSelectedRecipe();
@@ -262,9 +271,8 @@ public class RecipePageView extends javax.swing.JPanel {
 		lblCategoryName.setText(recipe.getCategory());
 		taInstructions.setText(recipe.getInstructions());
 
-		ItemModel[] items = recipe.getIngredients().stream().toArray(ItemModel[]::new);
+		setIngredientsList(recipe.getIngredients());
 		
-		String[] ingredientLabels = recipe.getIngredients().stream().map(ingredient -> ingredient.getName()).toArray(String[]::new);
 	}
 
 
@@ -282,7 +290,7 @@ public class RecipePageView extends javax.swing.JPanel {
         private javax.swing.JLabel lblNameFilter;
         private javax.swing.JLabel lblRecipeName;
         private javax.swing.JLabel lblRecipes;
-        private javax.swing.JList<String> lstIngredients;
+        private javax.swing.JList<ItemModel> lstIngredients;
         private javax.swing.JList<RecipeModel> lstRecipes;
         private javax.swing.JScrollPane paneIngredientsList;
         private javax.swing.JScrollPane paneInstructions;

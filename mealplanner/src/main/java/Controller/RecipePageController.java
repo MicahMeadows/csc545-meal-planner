@@ -1,9 +1,14 @@
 package Controller;
 
+import Model.ItemModel;
+import Model.NutritionModel;
 import Model.RecipeModel;
 import Model.RecipePageModel;
+import View.ItemDetailsView;
 import View.RecipePageView;
+import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
@@ -22,6 +27,7 @@ public class RecipePageController {
 		view.setFilterListeners(new FilterUpdateListener());
 		view.setRecipeList(model.getAllRecipes());
 		view.setRecipeListListener(new RecipeSelectedListener());
+		view.setIngredientListListener(new IngredientSelectedListener());
 		view.setSelectedRecipe(null);
 	}
 
@@ -29,7 +35,19 @@ public class RecipePageController {
 
 		@Override
 		public void valueChanged(ListSelectionEvent lse) {
-			throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+			if (lse.getValueIsAdjusting()) return;
+
+			JList source = (JList)lse.getSource();
+			ItemModel item = (ItemModel)source.getSelectedValue();
+
+			if (item == null) return;
+			System.out.println(item);
+
+//			view.showItemDetailsDialog(item);
+			JFrame frame = (JFrame)SwingUtilities.getRoot(view);
+			ItemDetailsView itemDetailDialog = new ItemDetailsView(item, frame, true);
+			itemDetailDialog.setLocationRelativeTo(frame);
+			itemDetailDialog.setVisible(true);
 		}
 
 	}
@@ -37,6 +55,8 @@ public class RecipePageController {
 	class RecipeSelectedListener implements ListSelectionListener {
 		@Override
 		public void valueChanged(ListSelectionEvent lse) {
+			if (lse.getValueIsAdjusting()) return;
+
 			JList source = (JList)lse.getSource();
 			RecipeModel recipe = (RecipeModel)source.getSelectedValue();
 			view.setSelectedRecipe(recipe);
