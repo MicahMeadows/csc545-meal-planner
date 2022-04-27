@@ -31,6 +31,7 @@ public class MealPlanPageView extends javax.swing.JPanel {
 	@SuppressWarnings("unchecked")
         // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
         private void initComponents() {
+                java.awt.GridBagConstraints gridBagConstraints;
 
                 jProgressBar1 = new javax.swing.JProgressBar();
                 pnlWeekPlans = new javax.swing.JPanel();
@@ -41,64 +42,31 @@ public class MealPlanPageView extends javax.swing.JPanel {
                 dayPlanThursday = new View.DayPlanView();
                 dayPlanFriday = new View.DayPlanView();
                 dayPlanSaturday = new View.DayPlanView();
-                lblTitle = new javax.swing.JLabel();
-                btnNext = new javax.swing.JButton();
-                btnBack = new javax.swing.JButton();
                 jPanel1 = new javax.swing.JPanel();
                 sPaneRecipes = new javax.swing.JScrollPane();
                 lstRecipes = new javax.swing.JList<>();
                 lstRequiredRecipes = new javax.swing.JLabel();
                 lblMealTitle = new javax.swing.JLabel();
                 lblMealTime = new javax.swing.JLabel();
+                btnDeletePlannedMeal = new javax.swing.JButton();
+                btnEditPlannedMeal = new javax.swing.JButton();
                 lblMealType = new javax.swing.JLabel();
                 jSeparator1 = new javax.swing.JSeparator();
+                jPanel2 = new javax.swing.JPanel();
+                lblTitle = new javax.swing.JLabel();
+                jPanel3 = new javax.swing.JPanel();
+                btnBack = new javax.swing.JButton();
+                btnNext = new javax.swing.JButton();
+                jSeparator2 = new javax.swing.JSeparator();
 
-                javax.swing.GroupLayout pnlWeekPlansLayout = new javax.swing.GroupLayout(pnlWeekPlans);
-                pnlWeekPlans.setLayout(pnlWeekPlansLayout);
-                pnlWeekPlansLayout.setHorizontalGroup(
-                        pnlWeekPlansLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnlWeekPlansLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(dayPlanSunday, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dayPlanMonday, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dayPlanTuesday, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dayPlanWednesday, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dayPlanThursday, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dayPlanFriday, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dayPlanSaturday, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                );
-                pnlWeekPlansLayout.setVerticalGroup(
-                        pnlWeekPlansLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnlWeekPlansLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(pnlWeekPlansLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(pnlWeekPlansLayout.createSequentialGroup()
-                                                .addComponent(dayPlanSaturday, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 0, Short.MAX_VALUE))
-                                        .addComponent(dayPlanSunday, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(pnlWeekPlansLayout.createSequentialGroup()
-                                                .addGroup(pnlWeekPlansLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(dayPlanMonday, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(dayPlanWednesday, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(dayPlanTuesday, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(dayPlanFriday, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(dayPlanThursday, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                );
-
-                lblTitle.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-                lblTitle.setText("Weekly Meal Plan");
-
-                btnNext.setText(">");
-
-                btnBack.setText("<");
+                pnlWeekPlans.setLayout(new java.awt.GridLayout(1, 0));
+                pnlWeekPlans.add(dayPlanSunday);
+                pnlWeekPlans.add(dayPlanMonday);
+                pnlWeekPlans.add(dayPlanTuesday);
+                pnlWeekPlans.add(dayPlanWednesday);
+                pnlWeekPlans.add(dayPlanThursday);
+                pnlWeekPlans.add(dayPlanFriday);
+                pnlWeekPlans.add(dayPlanSaturday);
 
                 sPaneRecipes.setViewportView(lstRecipes);
 
@@ -110,6 +78,10 @@ public class MealPlanPageView extends javax.swing.JPanel {
                 lblMealTime.setFont(new java.awt.Font("sansserif", 2, 14)); // NOI18N
                 lblMealTime.setText("02/21/2052 - 8:02pm");
 
+                btnDeletePlannedMeal.setText("Delete");
+
+                btnEditPlannedMeal.setText("Edit");
+
                 lblMealType.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
                 lblMealType.setText("Dinner");
 
@@ -118,82 +90,117 @@ public class MealPlanPageView extends javax.swing.JPanel {
                 jPanel1Layout.setHorizontalGroup(
                         jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(76, 76, 76)
+                                .addGap(103, 103, 103)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(14, 14, 14)
-                                                .addComponent(lblMealTitle))
-                                        .addComponent(lblMealTime)
+                                                .addComponent(btnDeletePlannedMeal)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(btnEditPlannedMeal))
+                                        .addComponent(lblMealTitle)
                                         .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(44, 44, 44)
-                                                .addComponent(lblMealType)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(lblMealType)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(lblMealTime)))
+                                .addGap(34, 34, 34)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(lstRequiredRecipes)
                                         .addComponent(sPaneRecipes, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(65, 65, 65))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 );
                 jPanel1Layout.setVerticalGroup(
                         jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addComponent(lstRequiredRecipes)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addContainerGap()
+                                                .addComponent(lstRequiredRecipes)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(sPaneRecipes, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(sPaneRecipes, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(55, 55, 55)
+                                                .addGap(38, 38, 38)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(lblMealType)
+                                                        .addComponent(lblMealTime, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(lblMealTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(lblMealTime, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(lblMealType)))
-                                .addContainerGap(36, Short.MAX_VALUE))
+                                                .addGap(52, 52, 52)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(btnDeletePlannedMeal)
+                                                        .addComponent(btnEditPlannedMeal))))
+                                .addContainerGap(77, Short.MAX_VALUE))
+                );
+
+                lblTitle.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+                lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                lblTitle.setText("Weekly Meal Plan");
+
+                jPanel3.setLayout(new java.awt.GridBagLayout());
+
+                btnBack.setText("<");
+                gridBagConstraints = new java.awt.GridBagConstraints();
+                gridBagConstraints.gridx = 0;
+                gridBagConstraints.gridy = 0;
+                gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+                gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 0);
+                jPanel3.add(btnBack, gridBagConstraints);
+
+                btnNext.setText(">");
+                gridBagConstraints = new java.awt.GridBagConstraints();
+                gridBagConstraints.gridx = 1;
+                gridBagConstraints.gridy = 0;
+                gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+                gridBagConstraints.insets = new java.awt.Insets(6, 18, 6, 6);
+                jPanel3.add(btnNext, gridBagConstraints);
+
+                javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+                jPanel2.setLayout(jPanel2Layout);
+                jPanel2Layout.setHorizontalGroup(
+                        jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap())
+                );
+                jPanel2Layout.setVerticalGroup(
+                        jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(lblTitle)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
                 );
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
                 this.setLayout(layout);
                 layout.setHorizontalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(lblTitle)
-                                .addGap(335, 335, 335))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnBack)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnNext)
-                                .addGap(417, 417, 417))
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(6, 6, 6)
-                                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(pnlWeekPlans, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 0, Short.MAX_VALUE)))
+                                        .addComponent(pnlWeekPlans, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jSeparator2))
                                 .addContainerGap())
                 );
                 layout.setVerticalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addComponent(lblTitle)
+                                .addContainerGap()
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1)
+                                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(btnNext)
-                                        .addComponent(btnBack))
-                                .addGap(18, 18, 18)
                                 .addComponent(pnlWeekPlans, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(1, 1, 1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap())
                 );
         }// </editor-fold>//GEN-END:initComponents
 
@@ -246,6 +253,8 @@ public class MealPlanPageView extends javax.swing.JPanel {
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
         private javax.swing.JButton btnBack;
+        private javax.swing.JButton btnDeletePlannedMeal;
+        private javax.swing.JButton btnEditPlannedMeal;
         private javax.swing.JButton btnNext;
         private View.DayPlanView dayPlanFriday;
         private View.DayPlanView dayPlanMonday;
@@ -255,8 +264,11 @@ public class MealPlanPageView extends javax.swing.JPanel {
         private View.DayPlanView dayPlanTuesday;
         private View.DayPlanView dayPlanWednesday;
         private javax.swing.JPanel jPanel1;
+        private javax.swing.JPanel jPanel2;
+        private javax.swing.JPanel jPanel3;
         private javax.swing.JProgressBar jProgressBar1;
         private javax.swing.JSeparator jSeparator1;
+        private javax.swing.JSeparator jSeparator2;
         private javax.swing.JLabel lblMealTime;
         private javax.swing.JLabel lblMealTitle;
         private javax.swing.JLabel lblMealType;
