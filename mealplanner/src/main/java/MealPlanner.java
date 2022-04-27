@@ -37,7 +37,7 @@ public class MealPlanner {
 		final INutritionRepository nutritionRepository = new TestNutritionRepository();
 		final IItemRepository itemRepository = new TestItemRepository(nutritionRepository);
 		final IRecipeRepository recipeRepository = new TestRecipeRepository(itemRepository);
-		final IMealRepository mealRepository = new TestMealRepository();
+		final IMealRepository mealRepository = new TestMealRepository(recipeRepository);
 		final IPlannedMealRepository plannedMealRepository = new TestPlannedMealRepository(recipeRepository, mealRepository);
 		
 		// Models

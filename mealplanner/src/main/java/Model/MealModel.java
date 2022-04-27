@@ -4,6 +4,8 @@
  */
 package Model;
 
+import java.util.List;
+
 /**
  *
  * @author micah
@@ -11,14 +13,17 @@ package Model;
 public class MealModel {
 	private final int ID;
 	private final String name;
+	private final List<RecipeModel> recipes;
 
-	public MealModel(int ID, String name){
+	public MealModel(int ID, String name, List<RecipeModel> recipes){
 		this.ID = ID;
 		this.name = name;
+		this.recipes = recipes;
 	}
 
 	public String getName() { return this.name; }
 	public int getID() { return this.ID; }
+	public List<RecipeModel> getRecipes() { return this.recipes; }
 
 	@Override
 	public String toString() {

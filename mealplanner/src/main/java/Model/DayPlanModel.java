@@ -31,9 +31,16 @@ public class DayPlanModel {
 		return date.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.US);
 	}
 
+	public LocalDate getDate() {
+		return this.date; 
+	}
+
 	public String getDateString(){
 		return date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+	}
 
+	public void addPlannedMeal(PlannedMealModel plannedMeal){
+		this.plannedMeals.add(plannedMeal);
 	}
 
 }

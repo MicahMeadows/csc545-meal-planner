@@ -6,6 +6,8 @@ package View;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -30,6 +32,7 @@ public class EditPlannedMealView extends javax.swing.JDialog {
         // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
         private void initComponents() {
 
+                bgTimeButtons = new javax.swing.ButtonGroup();
                 lblTimeType = new javax.swing.JLabel();
                 lblTime = new javax.swing.JLabel();
                 lblMeal = new javax.swing.JLabel();
@@ -55,14 +58,17 @@ public class EditPlannedMealView extends javax.swing.JDialog {
                 lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                 lblTitle.setText("Edit Planned Meal");
 
-                cbTime.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "12:00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00", "7:00", "8:00", "9:00", "10:00", "11:00" }));
+                cbTime.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "12:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00" }));
 
                 lblMealName.setText("Steak and egg");
 
                 btnSetMeal.setText("set");
 
+                bgTimeButtons.add(rbAm);
+                rbAm.setSelected(true);
                 rbAm.setText("am");
 
+                bgTimeButtons.add(rbPm);
                 rbPm.setText("pm");
 
                 btnSubmit.setText("Submit");
@@ -178,6 +184,10 @@ public class EditPlannedMealView extends javax.swing.JDialog {
 		});
 	}
 
+	public void showError(String message){
+		JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
+	}
+
 	public void setCancelListener(ActionListener l){
 		btnCancel.addActionListener(l);
 	}
@@ -202,7 +212,25 @@ public class EditPlannedMealView extends javax.swing.JDialog {
 		rbPm.addActionListener(l);
 	}
 
+	public String getMealType(){
+		return tfType.getText();
+	}
+
+	public boolean getIsAm(){
+		return rbAm.isSelected();
+	}
+
+	public String getTimeString(){
+		return cbTime.getSelectedItem().toString();
+	}
+
+	public void close(){
+		this.dispose();
+		this.setVisible(false);
+	}
+
         // Variables declaration - do not modify//GEN-BEGIN:variables
+        private javax.swing.ButtonGroup bgTimeButtons;
         private javax.swing.JButton btnCancel;
         private javax.swing.JButton btnSetMeal;
         private javax.swing.JButton btnSubmit;
