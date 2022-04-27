@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
  *
  * @author micah
  */
-public class FridgePageModel {
+public class FridgeViewModel {
 	private final IItemRepository itemRepository;
 	private final int fridgeID;
 
@@ -22,7 +22,7 @@ public class FridgePageModel {
 	private ItemModel selectedItem = null;
 	private String selectedGroup = defaultGroupText;
 
-	public FridgePageModel(IItemRepository itemRepository, int fridgeID){
+	public FridgeViewModel(IItemRepository itemRepository, int fridgeID){
 		this.itemRepository = itemRepository;
 		this.fridgeID = fridgeID;
 	}

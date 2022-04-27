@@ -27,17 +27,135 @@ public class EditMealView extends javax.swing.JDialog {
         // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
         private void initComponents() {
 
+                lblWindowTitle = new javax.swing.JLabel();
+                lblMealName = new javax.swing.JLabel();
+                txtMealName = new javax.swing.JTextField();
+                jScrollPane1 = new javax.swing.JScrollPane();
+                lstAllRecipes = new javax.swing.JList<>();
+                txtRecipeFilter = new javax.swing.JTextField();
+                jScrollPane2 = new javax.swing.JScrollPane();
+                lstMealRecipes = new javax.swing.JList<>();
+                btnMoveRight = new javax.swing.JButton();
+                btnMoveLeft = new javax.swing.JButton();
+                btnAddRecipe = new javax.swing.JButton();
+                lblMealRecipes = new javax.swing.JLabel();
+                lblAllRecipes = new javax.swing.JLabel();
+                btnSubmit = new javax.swing.JButton();
+                btnCancel = new javax.swing.JButton();
+
                 setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+                lblWindowTitle.setText("Edit Meal");
+
+                lblMealName.setText("name");
+
+                lstAllRecipes.setModel(new javax.swing.AbstractListModel<String>() {
+                        String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+                        public int getSize() { return strings.length; }
+                        public String getElementAt(int i) { return strings[i]; }
+                });
+                jScrollPane1.setViewportView(lstAllRecipes);
+
+                txtRecipeFilter.setText("jTextField2");
+
+                lstMealRecipes.setModel(new javax.swing.AbstractListModel<String>() {
+                        String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+                        public int getSize() { return strings.length; }
+                        public String getElementAt(int i) { return strings[i]; }
+                });
+                jScrollPane2.setViewportView(lstMealRecipes);
+
+                btnMoveRight.setText(">");
+
+                btnMoveLeft.setText("<");
+
+                btnAddRecipe.setText("+");
+
+                lblMealRecipes.setText("Meal Recipes");
+
+                lblAllRecipes.setText("All Recipes");
+
+                btnSubmit.setText("Submit");
+
+                btnCancel.setText("Cancel");
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                 getContentPane().setLayout(layout);
                 layout.setHorizontalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 400, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(226, 226, 226)
+                                .addComponent(lblWindowTitle)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addGap(18, 18, 18)
+                                                .addComponent(lblMealName)
+                                                .addGap(19, 19, 19))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(32, 32, 32)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(lblAllRecipes)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addComponent(txtRecipeFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                                .addComponent(btnAddRecipe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(btnMoveRight, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(btnMoveLeft, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                        .addComponent(btnCancel))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(19, 19, 19)
+                                                .addComponent(txtMealName, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(36, 36, 36)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(lblMealRecipes)
+                                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(0, 70, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnSubmit)
+                                .addGap(25, 25, 25))
                 );
                 layout.setVerticalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 300, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(lblWindowTitle)
+                                .addGap(32, 32, 32)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txtMealName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblMealName))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(115, 115, 115)
+                                                .addComponent(btnMoveRight)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(btnMoveLeft))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(20, 20, 20)
+                                                .addComponent(lblAllRecipes)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(txtRecipeFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btnAddRecipe)
+                                                        .addComponent(lblMealRecipes))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(btnSubmit)
+                                        .addComponent(btnCancel))
+                                .addGap(18, 18, 18))
                 );
 
                 pack();
@@ -86,5 +204,20 @@ public class EditMealView extends javax.swing.JDialog {
 	}
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
+        private javax.swing.JButton btnAddRecipe;
+        private javax.swing.JButton btnCancel;
+        private javax.swing.JButton btnMoveLeft;
+        private javax.swing.JButton btnMoveRight;
+        private javax.swing.JButton btnSubmit;
+        private javax.swing.JScrollPane jScrollPane1;
+        private javax.swing.JScrollPane jScrollPane2;
+        private javax.swing.JLabel lblAllRecipes;
+        private javax.swing.JLabel lblMealName;
+        private javax.swing.JLabel lblMealRecipes;
+        private javax.swing.JLabel lblWindowTitle;
+        private javax.swing.JList<String> lstAllRecipes;
+        private javax.swing.JList<String> lstMealRecipes;
+        private javax.swing.JTextField txtMealName;
+        private javax.swing.JTextField txtRecipeFilter;
         // End of variables declaration//GEN-END:variables
 }

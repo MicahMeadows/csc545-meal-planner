@@ -2,9 +2,9 @@
 import Controller.FridgePageController;
 import Controller.MealPlanPageController;
 import Controller.RecipePageController;
-import Model.FridgePageModel;
-import Model.MealPlanPageModel;
-import Model.RecipePageModel;
+import Model.FridgeViewModel;
+import Model.MealPlanViewModel;
+import Model.RecipeViewModel;
 import Repository.Item.IItemRepository;
 import Repository.Item.TestItemRepository;
 import Repository.Meal.IMealRepository;
@@ -41,9 +41,9 @@ public class MealPlanner {
 		final IPlannedMealRepository plannedMealRepository = new TestPlannedMealRepository(recipeRepository, mealRepository);
 		
 		// Models
-		RecipePageModel recipePageModel = new RecipePageModel(recipeRepository);
-		FridgePageModel fridgePageModel = new FridgePageModel(itemRepository, 0); // default 0 fridge value for testing
-		MealPlanPageModel mealPlanPageModel = new MealPlanPageModel(plannedMealRepository);
+		RecipeViewModel recipePageModel = new RecipeViewModel(recipeRepository);
+		FridgeViewModel fridgePageModel = new FridgeViewModel(itemRepository, 0); // default 0 fridge value for testing
+		MealPlanViewModel mealPlanPageModel = new MealPlanViewModel(plannedMealRepository);
 
 		// Views
 		MealPlannerNavigationView navigation = new MealPlannerNavigationView();

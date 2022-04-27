@@ -3,7 +3,7 @@ package Controller;
 import Model.ItemModel;
 import Model.NutritionModel;
 import Model.RecipeModel;
-import Model.RecipePageModel;
+import Model.RecipeViewModel;
 import View.ItemDetailsView;
 import View.RecipePageView;
 import java.awt.event.ActionEvent;
@@ -21,10 +21,10 @@ import javax.swing.event.ListSelectionListener;
 
 
 public class RecipePageController {
-	final private RecipePageModel model;
+	final private RecipeViewModel model;
 	final private RecipePageView view;
 
-	public RecipePageController(RecipePageModel model, RecipePageView view){
+	public RecipePageController(RecipeViewModel model, RecipePageView view){
 		this.model = model;
 		this.view = view;
 

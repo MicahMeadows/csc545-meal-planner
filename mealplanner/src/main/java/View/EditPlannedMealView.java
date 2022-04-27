@@ -4,6 +4,9 @@
  */
 package View;
 
+import java.awt.event.ActionListener;
+import java.awt.event.ItemListener;
+
 /**
  *
  * @author micah
@@ -27,44 +30,44 @@ public class EditPlannedMealView extends javax.swing.JDialog {
         // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
         private void initComponents() {
 
-                jLabel1 = new javax.swing.JLabel();
-                jLabel2 = new javax.swing.JLabel();
-                jLabel3 = new javax.swing.JLabel();
-                jLabel4 = new javax.swing.JLabel();
-                jTextField1 = new javax.swing.JTextField();
-                jComboBox2 = new javax.swing.JComboBox<>();
-                jLabel5 = new javax.swing.JLabel();
-                jButton1 = new javax.swing.JButton();
-                jRadioButton1 = new javax.swing.JRadioButton();
-                jRadioButton2 = new javax.swing.JRadioButton();
-                jButton2 = new javax.swing.JButton();
-                jButton3 = new javax.swing.JButton();
+                lblTimeType = new javax.swing.JLabel();
+                lblTime = new javax.swing.JLabel();
+                lblMeal = new javax.swing.JLabel();
+                lblTitle = new javax.swing.JLabel();
+                tfType = new javax.swing.JTextField();
+                cbTime = new javax.swing.JComboBox<>();
+                lblMealName = new javax.swing.JLabel();
+                btnSetMeal = new javax.swing.JButton();
+                rbAm = new javax.swing.JRadioButton();
+                rbPm = new javax.swing.JRadioButton();
+                btnSubmit = new javax.swing.JButton();
+                btnCancel = new javax.swing.JButton();
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-                jLabel1.setText("Type");
+                lblTimeType.setText("Type");
 
-                jLabel2.setText("Time");
+                lblTime.setText("Time");
 
-                jLabel3.setText("Meal");
+                lblMeal.setText("Meal");
 
-                jLabel4.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-                jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                jLabel4.setText("Edit Planned Meal");
+                lblTitle.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+                lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                lblTitle.setText("Edit Planned Meal");
 
-                jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "12:00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00", "7:00", "8:00", "9:00", "10:00", "11:00" }));
+                cbTime.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "12:00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00", "7:00", "8:00", "9:00", "10:00", "11:00" }));
 
-                jLabel5.setText("Steak and egg");
+                lblMealName.setText("Steak and egg");
 
-                jButton1.setText("set");
+                btnSetMeal.setText("set");
 
-                jRadioButton1.setText("am");
+                rbAm.setText("am");
 
-                jRadioButton2.setText("pm");
+                rbPm.setText("pm");
 
-                jButton2.setText("Submit");
+                btnSubmit.setText("Submit");
 
-                jButton3.setText("Cancel");
+                btnCancel.setText("Cancel");
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                 getContentPane().setLayout(layout);
@@ -74,32 +77,32 @@ public class EditPlannedMealView extends javax.swing.JDialog {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                                 .addContainerGap()
-                                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGroup(layout.createSequentialGroup()
                                                 .addGap(48, 48, 48)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                        .addComponent(jButton2)
+                                                        .addComponent(btnSubmit)
                                                         .addGroup(layout.createSequentialGroup()
                                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                                        .addComponent(jLabel3)
-                                                                        .addComponent(jLabel2)
-                                                                        .addComponent(jLabel1))
+                                                                        .addComponent(lblMeal)
+                                                                        .addComponent(lblTime)
+                                                                        .addComponent(lblTimeType))
                                                                 .addGap(18, 18, 18)
                                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                                         .addGroup(layout.createSequentialGroup()
-                                                                                .addComponent(jLabel5)
+                                                                                .addComponent(lblMealName)
                                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                                                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                                                .addComponent(btnSetMeal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                                                         .addGroup(layout.createSequentialGroup()
-                                                                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                .addComponent(cbTime, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                .addComponent(jRadioButton1)
+                                                                                .addComponent(rbAm)
                                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                .addComponent(jRadioButton2))
-                                                                        .addComponent(jTextField1)))
+                                                                                .addComponent(rbPm))
+                                                                        .addComponent(tfType)))
                                                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                                                 .addGap(1, 1, 1)
-                                                                .addComponent(jButton3)))
+                                                                .addComponent(btnCancel)))
                                                 .addGap(0, 42, Short.MAX_VALUE)))
                                 .addContainerGap())
                 );
@@ -107,26 +110,26 @@ public class EditPlannedMealView extends javax.swing.JDialog {
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jLabel4)
+                                .addComponent(lblTitle)
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel1)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(lblTimeType)
+                                        .addComponent(tfType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel2)
-                                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jRadioButton1)
-                                        .addComponent(jRadioButton2))
+                                        .addComponent(lblTime)
+                                        .addComponent(cbTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(rbAm)
+                                        .addComponent(rbPm))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel3)
-                                        .addComponent(jLabel5)
-                                        .addComponent(jButton1))
+                                        .addComponent(lblMeal)
+                                        .addComponent(lblMealName)
+                                        .addComponent(btnSetMeal))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jButton2)
-                                        .addComponent(jButton3))
+                                        .addComponent(btnSubmit)
+                                        .addComponent(btnCancel))
                                 .addContainerGap(15, Short.MAX_VALUE))
                 );
 
@@ -175,18 +178,42 @@ public class EditPlannedMealView extends javax.swing.JDialog {
 		});
 	}
 
+	public void setCancelListener(ActionListener l){
+		btnCancel.addActionListener(l);
+	}
+
+	public void setSubmitListener(ActionListener l){
+		btnSubmit.addActionListener(l);
+	}
+
+	public void setSetMealListener(ActionListener l){
+		btnSetMeal.addActionListener(l);
+	}
+
+	public void setTimeChangeListener(ItemListener l){
+		cbTime.addItemListener(l);
+	}
+
+	public void setAmListener(ActionListener l){
+		rbAm.addActionListener(l);
+	}
+
+	public void setPmListener(ActionListener l){
+		rbPm.addActionListener(l);
+	}
+
         // Variables declaration - do not modify//GEN-BEGIN:variables
-        private javax.swing.JButton jButton1;
-        private javax.swing.JButton jButton2;
-        private javax.swing.JButton jButton3;
-        private javax.swing.JComboBox<String> jComboBox2;
-        private javax.swing.JLabel jLabel1;
-        private javax.swing.JLabel jLabel2;
-        private javax.swing.JLabel jLabel3;
-        private javax.swing.JLabel jLabel4;
-        private javax.swing.JLabel jLabel5;
-        private javax.swing.JRadioButton jRadioButton1;
-        private javax.swing.JRadioButton jRadioButton2;
-        private javax.swing.JTextField jTextField1;
+        private javax.swing.JButton btnCancel;
+        private javax.swing.JButton btnSetMeal;
+        private javax.swing.JButton btnSubmit;
+        private javax.swing.JComboBox<String> cbTime;
+        private javax.swing.JLabel lblMeal;
+        private javax.swing.JLabel lblMealName;
+        private javax.swing.JLabel lblTime;
+        private javax.swing.JLabel lblTimeType;
+        private javax.swing.JLabel lblTitle;
+        private javax.swing.JRadioButton rbAm;
+        private javax.swing.JRadioButton rbPm;
+        private javax.swing.JTextField tfType;
         // End of variables declaration//GEN-END:variables
 }

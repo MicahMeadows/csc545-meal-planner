@@ -4,7 +4,7 @@
  */
 package Controller;
 
-import Model.FridgePageModel;
+import Model.FridgeViewModel;
 import Model.ItemModel;
 import View.FridgePageView;
 import java.awt.event.ActionEvent;
@@ -24,9 +24,9 @@ import javax.swing.event.ListSelectionListener;
  */
 public class FridgePageController {
 	private final FridgePageView view;
-	private final FridgePageModel model;
+	private final FridgeViewModel model;
 
-	public FridgePageController(FridgePageModel model, FridgePageView view){
+	public FridgePageController(FridgeViewModel model, FridgePageView view){
 		this.view = view;
 		this.model = model;
 		

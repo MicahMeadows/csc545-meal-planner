@@ -16,7 +16,7 @@ import java.util.Locale;
  *
  * @author micah
  */
-public class MealPlanPageModel {
+public class MealPlanViewModel {
 	private final LocalDate todaysDate;
 	private final DayOfWeek firstDayOfWeek;
 	private final IPlannedMealRepository plannedMealRepository;
@@ -24,7 +24,7 @@ public class MealPlanPageModel {
 	private int weekOffset = 0;
 	private PlannedMealModel selectedPlannedMeal;
 
-	public MealPlanPageModel(IPlannedMealRepository plannedMealRepository){
+	public MealPlanViewModel(IPlannedMealRepository plannedMealRepository){
 		this.todaysDate = LocalDate.now();
 		this.plannedMealRepository = plannedMealRepository;
 		this.firstDayOfWeek = WeekFields.of(Locale.US).getFirstDayOfWeek();

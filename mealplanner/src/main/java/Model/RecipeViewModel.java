@@ -7,10 +7,10 @@ import java.util.ArrayList;
 
 
 
-public class RecipePageModel {
+public class RecipeViewModel {
 	final private IRecipeRepository recipeRepository;
 
-	public RecipePageModel(IRecipeRepository recipeRepository){
+	public RecipeViewModel(IRecipeRepository recipeRepository){
 		this.recipeRepository = recipeRepository;
 		this.updateRecipes();
 	}

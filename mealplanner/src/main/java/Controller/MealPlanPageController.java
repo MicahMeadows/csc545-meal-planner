@@ -5,7 +5,7 @@
 package Controller;
 
 import Model.DayPlanModel;
-import Model.MealPlanPageModel;
+import Model.MealPlanViewModel;
 import Model.PlannedMealModel;
 import View.DayPlanView;
 import View.MealPlanPageView;
@@ -24,7 +24,7 @@ import javax.swing.event.ListSelectionListener;
  */
 public class MealPlanPageController {
 	final private MealPlanPageView view;
-	final private MealPlanPageModel model;
+	final private MealPlanViewModel model;
 
 	private DayPlanController sundayController;
 	private DayPlanController mondayController;
@@ -34,7 +34,7 @@ public class MealPlanPageController {
 	private DayPlanController fridayController;
 	private DayPlanController saturdayController;
 
-	public MealPlanPageController(MealPlanPageModel model, MealPlanPageView view){
+	public MealPlanPageController(MealPlanViewModel model, MealPlanPageView view){
 		this.view = view;
 		this.model = model;
 
