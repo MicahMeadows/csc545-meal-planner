@@ -17,5 +17,6 @@ public interface IRecipeRepository {
 	public List<RecipeModel> getAllRecipes();
 	public RecipeModel getRecipeWithID(int ID);
 	public List<RecipeModel> getFilteredRecipes(String name, String group, String ingredients);
+	public List<RecipeModel> getRecipesForMealID(int mealID);
 
 }

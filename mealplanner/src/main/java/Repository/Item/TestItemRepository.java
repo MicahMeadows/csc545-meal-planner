@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
  */
 public class TestItemRepository implements IItemRepository {
 	final private INutritionRepository nutritionRepo;
+
 	List<ItemModel> items = new ArrayList<>();
 	List<RecipeItemModel> recipeItems = new ArrayList<>();
 	List<FridgeItemModel> fridgeItems = new ArrayList<>();
@@ -36,20 +37,34 @@ public class TestItemRepository implements IItemRepository {
 		items.add(new ItemModel(3, "Veggie", "Onion", nutritionRepo.getNutritionForItemId(3)));
 		items.add(new ItemModel(4, "Fruit", "Apple", nutritionRepo.getNutritionForItemId(4)));
 		items.add(new ItemModel(5, "Seasoning", "Salt", nutritionRepo.getNutritionForItemId(5)));
+		items.add(new ItemModel(6, "Fruit", "Strawberry", nutritionRepo.getNutritionForItemId(0)));
+		items.add(new ItemModel(7, "Veggie", "Cucumber", nutritionRepo.getNutritionForItemId(1)));
+		items.add(new ItemModel(8, "Meat", "Bacon", nutritionRepo.getNutritionForItemId(2)));
+		items.add(new ItemModel(9, "Veggie", "Pepper", nutritionRepo.getNutritionForItemId(3)));
+		items.add(new ItemModel(10, "Fruit", "Banana", nutritionRepo.getNutritionForItemId(4)));
+		items.add(new ItemModel(11, "Seasoning", "Pepper", nutritionRepo.getNutritionForItemId(5)));
 
 		recipeItems.add(new RecipeItemModel(1, 0));
 		recipeItems.add(new RecipeItemModel(1, 1));
-		recipeItems.add(new RecipeItemModel(3, 2));
-		recipeItems.add(new RecipeItemModel(3, 4));
+		recipeItems.add(new RecipeItemModel(1, 2));
 		recipeItems.add(new RecipeItemModel(2, 3));
+		recipeItems.add(new RecipeItemModel(2, 4));
 		recipeItems.add(new RecipeItemModel(2, 5));
+		recipeItems.add(new RecipeItemModel(4, 6));
+		recipeItems.add(new RecipeItemModel(4, 7));
+		recipeItems.add(new RecipeItemModel(4, 8));
+		recipeItems.add(new RecipeItemModel(5, 9));
 
 		fridgeItems.add(new FridgeItemModel(0, 1));
 		fridgeItems.add(new FridgeItemModel(0, 2));
 		fridgeItems.add(new FridgeItemModel(0, 3));
 		fridgeItems.add(new FridgeItemModel(0, 4));
-		fridgeItems.add(new FridgeItemModel(1, 2));
-		fridgeItems.add(new FridgeItemModel(1, 2));
+		fridgeItems.add(new FridgeItemModel(0, 5));
+		fridgeItems.add(new FridgeItemModel(0, 7));
+		fridgeItems.add(new FridgeItemModel(0, 8));
+		fridgeItems.add(new FridgeItemModel(0, 9));
+		fridgeItems.add(new FridgeItemModel(0, 10));
+		fridgeItems.add(new FridgeItemModel(0, 11));
 	}
 
 	@Override

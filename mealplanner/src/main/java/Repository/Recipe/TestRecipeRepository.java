@@ -1,7 +1,6 @@
 package Repository.Recipe;
 
-import Model.ItemModel;
-import Model.NutritionModel;
+import Model.MealRecipeModel;
 import Model.RecipeModel;
 import Repository.Item.IItemRepository;
 import java.util.ArrayList;
@@ -20,7 +19,8 @@ import java.util.stream.Collectors;
  */
 public class TestRecipeRepository implements IRecipeRepository {
 	final private IItemRepository itemRepository;
-	List<RecipeModel> recipes = new ArrayList<>();
+	private List<RecipeModel> recipes = new ArrayList<>();
+	private List<MealRecipeModel> mealRecipes = new ArrayList<>();
 
 	public TestRecipeRepository(IItemRepository itemRepository){
 		this.itemRepository = itemRepository;
@@ -30,7 +30,18 @@ public class TestRecipeRepository implements IRecipeRepository {
 	void setupTestData(){
 		recipes.add(new RecipeModel(1, "Burger", "Make burger", "American", itemRepository.getItemsForRecipeID(1)));
 		recipes.add(new RecipeModel(2, "Sandwhich", "Make sandwhich", "American", itemRepository.getItemsForRecipeID(2)));
-		recipes.add(new RecipeModel(0, "Pizza", "Make pizaz", "Italian", itemRepository.getItemsForRecipeID(3)));
+		recipes.add(new RecipeModel(3, "Fries", "Make fires", "American", itemRepository.getItemsForRecipeID(3)));
+		recipes.add(new RecipeModel(4, "Fish", "Make fish", "Seafood", itemRepository.getItemsForRecipeID(4)));
+		recipes.add(new RecipeModel(5, "Chips", "Make chips", "British", itemRepository.getItemsForRecipeID(5)));
+		recipes.add(new RecipeModel(6, "Rice", "Make rice", "Asian", itemRepository.getItemsForRecipeID(6)));
+		recipes.add(new RecipeModel(7, "Lasagna", "Make lasag", "Italian", itemRepository.getItemsForRecipeID(7)));
+		
+		mealRecipes.add(new MealRecipeModel(0, 1));
+		mealRecipes.add(new MealRecipeModel(1, 2));
+		mealRecipes.add(new MealRecipeModel(2, 3));
+		mealRecipes.add(new MealRecipeModel(3, 4));
+		mealRecipes.add(new MealRecipeModel(4, 5));
+
 	}
 
 	@Override
@@ -76,5 +87,21 @@ public class TestRecipeRepository implements IRecipeRepository {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public List<RecipeModel> getRecipesForMealID(int mealID) {
+		List<RecipeModel> foundRecipes = new ArrayList<>();
+
+		mealRecipes.stream()
+			.filter(recipe -> recipe.getMealID() == mealID)
+			.map(MealRecipeModel::getMealID)
+			.forEach(id -> {
+				RecipeModel recipeWithId = recipes.stream().filter(recipe -> recipe.getID() == id).findFirst().orElse(null);
+				if (recipeWithId != null) {
+					foundRecipes.add(recipeWithId);
+				}
+			});
+		return foundRecipes;
 	}
 }
