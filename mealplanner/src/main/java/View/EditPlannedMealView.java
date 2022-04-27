@@ -60,7 +60,7 @@ public class EditPlannedMealView extends javax.swing.JDialog {
 
                 cbTime.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "12:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00" }));
 
-                lblMealName.setText("Steak and egg");
+                lblMealName.setText("None Selected");
 
                 btnSetMeal.setText("set");
 
@@ -210,6 +210,10 @@ public class EditPlannedMealView extends javax.swing.JDialog {
 
 	public void setPmListener(ActionListener l){
 		rbPm.addActionListener(l);
+	}
+
+	public void setMealNameText(String name){
+		lblMealName.setText(name);
 	}
 
 	public String getMealType(){

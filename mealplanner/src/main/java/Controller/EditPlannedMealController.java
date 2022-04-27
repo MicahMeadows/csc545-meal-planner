@@ -58,6 +58,7 @@ public class EditPlannedMealController {
 		@Override
 		public void actionPerformed(ActionEvent ae) {
 			model.setSelectedMeal(new MealModel(0, "SomeMeal", new ArrayList<RecipeModel>()));
+			view.setMealNameText(model.getSelectedMeal().getName());
 
 		}
 

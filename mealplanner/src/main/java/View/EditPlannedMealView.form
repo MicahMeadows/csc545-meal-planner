@@ -157,7 +157,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblMealName">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Steak and egg"/>
+        <Property name="text" type="java.lang.String" value="None Selected"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnSetMeal">
