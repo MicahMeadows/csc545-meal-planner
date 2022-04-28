@@ -53,7 +53,7 @@ public class FridgePageController {
 		view.setGroupOptions(model.getDefaultGroupText(), model.getItemCategories(), model.getSelectedGroup());
 	}
 
-	class GroupFilterChangedListener implements ItemListener {
+	private class GroupFilterChangedListener implements ItemListener {
 		@Override
 		public void itemStateChanged(ItemEvent ie) {
 			if (ie.getStateChange() == ItemEvent.SELECTED){
@@ -69,7 +69,7 @@ public class FridgePageController {
 
 	}
 
-	class ItemSelectedListener implements ListSelectionListener{
+	private class ItemSelectedListener implements ListSelectionListener{
 		@Override
 		public void valueChanged(ListSelectionEvent lse) {
 			if (lse.getValueIsAdjusting()) return;
@@ -84,7 +84,7 @@ public class FridgePageController {
 
 	}
 
-	class ViewDetailsListener implements ActionListener {
+	private class ViewDetailsListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent ae) {
 			JFrame frame = (JFrame)SwingUtilities.getRoot((JButton)ae.getSource());
@@ -94,7 +94,7 @@ public class FridgePageController {
 
 	}
 	
-	class RemoveItemListener implements ActionListener {
+	private class RemoveItemListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent ae) {
 			if (model.getSelectedItem() == null) return;
@@ -105,7 +105,7 @@ public class FridgePageController {
 		}
 	}
 
-	class AddItemListener implements ActionListener{
+	private class AddItemListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent ae) {
 			System.out.println(ae.getActionCommand());

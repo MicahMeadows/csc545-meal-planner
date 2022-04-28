@@ -5,9 +5,11 @@
 package Repository.Meal;
 
 import Model.MealModel;
+import Model.RecipeModel;
 import Repository.Recipe.IRecipeRepository;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -44,6 +46,11 @@ public class TestMealRepository implements IMealRepository {
 			.filter(meal -> meal.getID() == ID)
 			.findAny()
 			.orElse(null);
+	}
+
+	@Override
+	public MealModel createMeal(String name, List<RecipeModel> recipes) {
+		return new MealModel(new Random().nextInt(Integer.MAX_VALUE), name, recipes);
 	}
 	
 }

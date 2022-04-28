@@ -4,6 +4,14 @@
  */
 package View;
 
+import Model.MealModel;
+import Model.RecipeModel;
+import java.awt.event.ActionListener;
+import java.util.List;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.event.DocumentListener;
+
 /**
  *
  * @author micah
@@ -29,10 +37,10 @@ public class EditMealView extends javax.swing.JDialog {
 
                 lblWindowTitle = new javax.swing.JLabel();
                 lblMealName = new javax.swing.JLabel();
-                txtMealName = new javax.swing.JTextField();
+                tfMealName = new javax.swing.JTextField();
                 jScrollPane1 = new javax.swing.JScrollPane();
                 lstAllRecipes = new javax.swing.JList<>();
-                txtRecipeFilter = new javax.swing.JTextField();
+                tfRecipeFilter = new javax.swing.JTextField();
                 jScrollPane2 = new javax.swing.JScrollPane();
                 lstMealRecipes = new javax.swing.JList<>();
                 btnMoveRight = new javax.swing.JButton();
@@ -47,22 +55,10 @@ public class EditMealView extends javax.swing.JDialog {
 
                 lblWindowTitle.setText("Edit Meal");
 
-                lblMealName.setText("name");
+                lblMealName.setText("Meal Name");
 
-                lstAllRecipes.setModel(new javax.swing.AbstractListModel<String>() {
-                        String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-                        public int getSize() { return strings.length; }
-                        public String getElementAt(int i) { return strings[i]; }
-                });
                 jScrollPane1.setViewportView(lstAllRecipes);
 
-                txtRecipeFilter.setText("jTextField2");
-
-                lstMealRecipes.setModel(new javax.swing.AbstractListModel<String>() {
-                        String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-                        public int getSize() { return strings.length; }
-                        public String getElementAt(int i) { return strings[i]; }
-                });
                 jScrollPane2.setViewportView(lstMealRecipes);
 
                 btnMoveRight.setText(">");
@@ -83,16 +79,19 @@ public class EditMealView extends javax.swing.JDialog {
                 getContentPane().setLayout(layout);
                 layout.setHorizontalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(226, 226, 226)
-                                .addComponent(lblWindowTitle)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(layout.createSequentialGroup()
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addGap(18, 18, 18)
+                                                .addComponent(btnSubmit)
+                                                .addGap(25, 25, 25))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                                 .addComponent(lblMealName)
-                                                .addGap(19, 19, 19))
+                                                .addGap(18, 18, 18)
+                                                .addComponent(tfMealName, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(146, 146, 146))))
+                        .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
                                                 .addGap(32, 32, 32)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,37 +100,31 @@ public class EditMealView extends javax.swing.JDialog {
                                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                         .addGroup(layout.createSequentialGroup()
-                                                                                .addComponent(txtRecipeFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                .addComponent(tfRecipeFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                                 .addComponent(btnAddRecipe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                                         .addComponent(btnMoveRight, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                         .addComponent(btnMoveLeft, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                        .addComponent(btnCancel))))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(19, 19, 19)
-                                                .addComponent(txtMealName, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
+                                                        .addComponent(btnCancel))
                                                 .addGap(36, 36, 36)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addComponent(lblMealRecipes)
-                                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(248, 248, 248)
+                                                .addComponent(lblWindowTitle)))
                                 .addGap(0, 70, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnSubmit)
-                                .addGap(25, 25, 25))
                 );
                 layout.setVerticalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
+                                .addGap(17, 17, 17)
                                 .addComponent(lblWindowTitle)
-                                .addGap(32, 32, 32)
+                                .addGap(33, 33, 33)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txtMealName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(tfMealName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(lblMealName))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
@@ -144,7 +137,7 @@ public class EditMealView extends javax.swing.JDialog {
                                                 .addComponent(lblAllRecipes)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(txtRecipeFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(tfRecipeFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(btnAddRecipe)
                                                         .addComponent(lblMealRecipes))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -161,46 +154,65 @@ public class EditMealView extends javax.swing.JDialog {
                 pack();
         }// </editor-fold>//GEN-END:initComponents
 
-	/**
-	 * @param args the command line arguments
-	 */
-	public static void main(String args[]) {
-		/* Set the Nimbus look and feel */
-		//<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-		/* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-		 */
-		try {
-			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-				if ("Nimbus".equals(info.getName())) {
-					javax.swing.UIManager.setLookAndFeel(info.getClassName());
-					break;
-				}
-			}
-		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(EditMealView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(EditMealView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(EditMealView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(EditMealView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		}
-		//</editor-fold>
+	public void close(){
+		this.dispose();
+		this.setVisible(false);
+	}
 
-		/* Create and display the dialog */
-		java.awt.EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				EditMealView dialog = new EditMealView(new javax.swing.JFrame(), true);
-				dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-					@Override
-					public void windowClosing(java.awt.event.WindowEvent e) {
-						System.exit(0);
-					}
-				});
-				dialog.setVisible(true);
-			}
-		});
+	public String getMealNameText(){
+		return tfMealName.getText();
+	}
+
+	public String getFilterText(){
+		return tfRecipeFilter.getText();
+	}
+
+	public void setCloseListener(ActionListener l){
+		btnCancel.addActionListener(l);
+	}
+
+	public void setAddRecipeListener(ActionListener l){
+		btnAddRecipe.addActionListener(l);
+	}
+
+	public void setSubmitListener(ActionListener l){
+		btnSubmit.addActionListener(l);
+	}
+
+	public void setMoveLeftListener(ActionListener l){
+		btnMoveLeft.addActionListener(l);
+	}
+
+	public void setMoveRightListener(ActionListener l){
+		btnMoveRight.addActionListener(l);
+	}
+
+	public void setFilterListener(DocumentListener l){
+		tfRecipeFilter.getDocument().addDocumentListener(l);
+	}
+	
+	public List<RecipeModel> getSelectedPotentialRecipes(){
+		return lstAllRecipes.getSelectedValuesList();
+	}
+
+	public List<RecipeModel> getSelectedChosenRecipes(){
+		return lstMealRecipes.getSelectedValuesList();
+	}
+
+	public void setPotentialRecipes(List<RecipeModel> recipes){
+		DefaultListModel<RecipeModel> listModel = new DefaultListModel<>();
+		recipes.stream().forEach(recipe -> listModel.addElement(recipe));
+		lstAllRecipes.setModel(listModel);
+	}
+
+	public void setMealRecipes(List<RecipeModel> recipes){
+		DefaultListModel<RecipeModel> listModel = new DefaultListModel<>();
+		recipes.stream().forEach(recipe -> listModel.addElement(recipe));
+		lstMealRecipes.setModel(listModel);
+	}
+
+	public void displayError(String message){
+		JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
 	}
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -215,9 +227,9 @@ public class EditMealView extends javax.swing.JDialog {
         private javax.swing.JLabel lblMealName;
         private javax.swing.JLabel lblMealRecipes;
         private javax.swing.JLabel lblWindowTitle;
-        private javax.swing.JList<String> lstAllRecipes;
-        private javax.swing.JList<String> lstMealRecipes;
-        private javax.swing.JTextField txtMealName;
-        private javax.swing.JTextField txtRecipeFilter;
+        private javax.swing.JList<RecipeModel> lstAllRecipes;
+        private javax.swing.JList<RecipeModel> lstMealRecipes;
+        private javax.swing.JTextField tfMealName;
+        private javax.swing.JTextField tfRecipeFilter;
         // End of variables declaration//GEN-END:variables
 }

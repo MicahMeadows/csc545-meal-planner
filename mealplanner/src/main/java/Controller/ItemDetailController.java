@@ -38,7 +38,7 @@ public class ItemDetailController {
 
 	}
 		
-	class CloseDetailDialogListener implements ActionListener {
+	private class CloseDetailDialogListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent ae) {
 			JDialog dialog = (JDialog)SwingUtilities.getRoot((JButton)ae.getSource());

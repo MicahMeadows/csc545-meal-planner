@@ -6,6 +6,7 @@ import Model.MealModel;
 import Model.PlannedMealModel;
 import Model.RecipeModel;
 import Repository.Meal.IMealRepository;
+import Repository.Recipe.IRecipeRepository;
 import View.EditPlannedMealView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,14 +29,18 @@ import javax.swing.event.ChangeEvent;
  * @author micah
  */
 public class EditPlannedMealController {
+	private final IMealRepository mealRepository;
+	private final IRecipeRepository recipeRepository; 
+
 	private final EditPlannedMealViewModel model;
 	private final EditPlannedMealView view;
+
 	private final JFrame frame;
-	private final IMealRepository mealRepository;
 	private final Consumer<PlannedMealModel> onSubmit;
 	
-	public EditPlannedMealController(IMealRepository mealRepository, JFrame frame, LocalDate planDate, Consumer<PlannedMealModel> onSubmit){
+	public EditPlannedMealController(IRecipeRepository recipeRepository, IMealRepository mealRepository, JFrame frame, LocalDate planDate, Consumer<PlannedMealModel> onSubmit){
 		this.mealRepository = mealRepository;
+		this.recipeRepository = recipeRepository;
 		this.onSubmit = onSubmit;
 		this.frame = frame;
 
@@ -57,11 +62,11 @@ public class EditPlannedMealController {
 		view.setVisible(true);
 	}
 
-	class SetMealButtonListener implements ActionListener {
+	private class SetMealButtonListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent ae) {
-			new SelectMealController(mealRepository, frame, (meal) -> {
+			new SelectMealController(recipeRepository, mealRepository, frame, (meal) -> {
 				model.setSelectedMeal(meal);
 				updateView();
 
@@ -71,7 +76,7 @@ public class EditPlannedMealController {
 
 	}
 
-	class CancelButtonListener implements ActionListener {
+	private class CancelButtonListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent ae) {
@@ -80,7 +85,7 @@ public class EditPlannedMealController {
 
 	}
 
-	class SubmitButtonListener implements ActionListener {
+	private class SubmitButtonListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent ae) {

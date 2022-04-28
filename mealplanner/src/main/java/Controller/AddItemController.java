@@ -33,14 +33,14 @@ public class AddItemController {
 		this.view.setVisible(true);
 	}
 
-	class CancelListener implements ActionListener {
+	private class CancelListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent ae) {
 			view.close();
 		}
 	}
 
-	class SubmitListener implements ActionListener {
+	private class SubmitListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent ae) {
 			ItemModel newItem = view.getSubmittedItem();

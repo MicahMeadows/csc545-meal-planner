@@ -128,6 +128,7 @@ public class SelectMealView extends javax.swing.JDialog {
 		tfSearch.getDocument().addDocumentListener(l);
 	}
 
+
 	public MealModel getSelectedMeal(){
 		return lstMeals.getSelectedValue();
 	}

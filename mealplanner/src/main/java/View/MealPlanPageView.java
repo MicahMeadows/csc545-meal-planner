@@ -115,7 +115,7 @@ public class MealPlanPageView extends javax.swing.JPanel {
                                                 .addContainerGap()
                                                 .addComponent(lstRequiredRecipes)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(sPaneRecipes, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(sPaneRecipes))
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGap(38, 38, 38)
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -126,8 +126,9 @@ public class MealPlanPageView extends javax.swing.JPanel {
                                                 .addGap(52, 52, 52)
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                         .addComponent(btnDeletePlannedMeal)
-                                                        .addComponent(btnEditPlannedMeal))))
-                                .addContainerGap(77, Short.MAX_VALUE))
+                                                        .addComponent(btnEditPlannedMeal))
+                                                .addGap(0, 132, Short.MAX_VALUE)))
+                                .addContainerGap())
                 );
 
                 lblTitle.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N

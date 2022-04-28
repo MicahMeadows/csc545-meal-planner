@@ -8,6 +8,7 @@ import Model.DayPlanModel;
 import Model.MealPlanViewModel;
 import Model.PlannedMealModel;
 import Repository.Meal.IMealRepository;
+import Repository.Recipe.IRecipeRepository;
 import View.DayPlanView;
 import View.MealPlanPageView;
 import java.awt.event.ActionEvent;
@@ -27,6 +28,7 @@ public class MealPlanPageController {
 	final private MealPlanPageView view;
 	final private MealPlanViewModel model;
 	final private IMealRepository mealRepository;
+	final private IRecipeRepository recipeRepository;
 
 	private DayPlanController sundayController;
 	private DayPlanController mondayController;
@@ -36,8 +38,10 @@ public class MealPlanPageController {
 	private DayPlanController fridayController;
 	private DayPlanController saturdayController;
 
-	public MealPlanPageController(IMealRepository mealRepository, MealPlanViewModel model, MealPlanPageView view){
+	public MealPlanPageController(IRecipeRepository recipeRepository, IMealRepository mealRepository, MealPlanViewModel model, MealPlanPageView view){
 		this.mealRepository = mealRepository;
+		this.recipeRepository = recipeRepository;
+
 		this.view = view;
 		this.model = model;
 
@@ -60,13 +64,13 @@ public class MealPlanPageController {
 		LocalDate day6 = model.getStartDayDate().plusDays(5);
 		LocalDate day7 = model.getStartDayDate().plusDays(6);
 
-		sundayController = new DayPlanController(mealRepository, new DayPlanModel(day1, model.getPlannedMealsForDay(day1)), view.getSundayPlanView());
-		mondayController = new DayPlanController(mealRepository, new DayPlanModel(day2, model.getPlannedMealsForDay(day2)), view.getMondayPlanView());
-		tuesdayController = new DayPlanController(mealRepository, new DayPlanModel(day3, model.getPlannedMealsForDay(day3)), view.getTuesdayPlanView());
-		wednesdayController = new DayPlanController(mealRepository, new DayPlanModel(day4, model.getPlannedMealsForDay(day4)), view.getWednesdayPlanView());
-		thursdayController = new DayPlanController(mealRepository, new DayPlanModel(day5, model.getPlannedMealsForDay(day5)), view.getThursdayPlanView());
-		fridayController = new DayPlanController(mealRepository, new DayPlanModel(day6, model.getPlannedMealsForDay(day6)), view.getFridayPlanView());
-		saturdayController = new DayPlanController(mealRepository, new DayPlanModel(day7, model.getPlannedMealsForDay(day7)), view.getSaturdayPlanView());
+		sundayController = new DayPlanController(recipeRepository, mealRepository, new DayPlanModel(day1, model.getPlannedMealsForDay(day1)), view.getSundayPlanView());
+		mondayController = new DayPlanController(recipeRepository, mealRepository, new DayPlanModel(day2, model.getPlannedMealsForDay(day2)), view.getMondayPlanView());
+		tuesdayController = new DayPlanController(recipeRepository, mealRepository, new DayPlanModel(day3, model.getPlannedMealsForDay(day3)), view.getTuesdayPlanView());
+		wednesdayController = new DayPlanController(recipeRepository, mealRepository, new DayPlanModel(day4, model.getPlannedMealsForDay(day4)), view.getWednesdayPlanView());
+		thursdayController = new DayPlanController(recipeRepository, mealRepository, new DayPlanModel(day5, model.getPlannedMealsForDay(day5)), view.getThursdayPlanView());
+		fridayController = new DayPlanController(recipeRepository, mealRepository, new DayPlanModel(day6, model.getPlannedMealsForDay(day6)), view.getFridayPlanView());
+		saturdayController = new DayPlanController(recipeRepository, mealRepository, new DayPlanModel(day7, model.getPlannedMealsForDay(day7)), view.getSaturdayPlanView());
 
 		sundayController.setMealSelectedListener(new MealSelectedListener());
 		mondayController.setMealSelectedListener(new MealSelectedListener());
@@ -92,7 +96,7 @@ public class MealPlanPageController {
 		saturdayController.clearSelectedItem();
 	}
 
-	class MealSelectedListener implements ListSelectionListener {
+	private class MealSelectedListener implements ListSelectionListener {
 		@Override
 		public void valueChanged(ListSelectionEvent lse) {
 			if (lse.getValueIsAdjusting()) return;
@@ -110,14 +114,14 @@ public class MealPlanPageController {
 		}
 	}
 
-	class BackListener implements ActionListener {
+	private class BackListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent ae) {
 			changeSelectedWeek(-1);
 		}
 	}
 
-	class NextListener implements ActionListener {
+	private class NextListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent ae) {
 			changeSelectedWeek(1);

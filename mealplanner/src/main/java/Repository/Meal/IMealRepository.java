@@ -5,6 +5,7 @@
 package Repository.Meal;
 
 import Model.MealModel;
+import Model.RecipeModel;
 import java.util.List;
 
 /**
@@ -14,5 +15,5 @@ import java.util.List;
 public interface IMealRepository {
 	public List<MealModel> getAllMeals();
 	public MealModel getMealForID(int ID);
-	
+	public MealModel createMeal(String name, List<RecipeModel> recipes);
 }

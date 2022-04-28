@@ -35,7 +35,7 @@ public class RecipePageController {
 		view.setSelectedRecipe(null);
 	}
 
-	class IngredientSelectedListener implements ListSelectionListener{
+	private class IngredientSelectedListener implements ListSelectionListener{
 
 		@Override
 		public void valueChanged(ListSelectionEvent lse) {
@@ -55,7 +55,7 @@ public class RecipePageController {
 	}
 
 
-	class RecipeSelectedListener implements ListSelectionListener {
+	private class RecipeSelectedListener implements ListSelectionListener {
 		@Override
 		public void valueChanged(ListSelectionEvent lse) {
 			if (lse.getValueIsAdjusting()) return;
@@ -66,8 +66,7 @@ public class RecipePageController {
 		}
 	}
 
-
-	class FilterUpdateListener implements DocumentListener {
+	private class FilterUpdateListener implements DocumentListener {
 		@Override
 		public void insertUpdate(DocumentEvent de) {
 			updateRecipeList();

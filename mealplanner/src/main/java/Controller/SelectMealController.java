@@ -7,6 +7,7 @@ package Controller;
 import Model.MealModel;
 import Model.SelectMealViewModel;
 import Repository.Meal.IMealRepository;
+import Repository.Recipe.IRecipeRepository;
 import View.SelectMealView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,12 +21,17 @@ import javax.swing.event.DocumentListener;
  * @author micah
  */
 public class SelectMealController {
+	private final IMealRepository mealRepository;
+	private final IRecipeRepository recipeRepository;
 	private final SelectMealViewModel model;
 	private final SelectMealView view;
 	private final JFrame frame;
 	private final Consumer<MealModel> onSubmit;
 
-	public SelectMealController(IMealRepository mealRepository, JFrame frame, Consumer<MealModel> onSubmit){
+	public SelectMealController(IRecipeRepository recipeRepository, IMealRepository mealRepository, JFrame frame, Consumer<MealModel> onSubmit){
+		this.mealRepository = mealRepository;
+		this.recipeRepository = recipeRepository;
+
 		this.frame = frame;
 		this.onSubmit = onSubmit;
 
@@ -62,8 +68,12 @@ public class SelectMealController {
 
 		@Override
 		public void actionPerformed(ActionEvent ae) {
-			System.out.println("add");
-			// on submit accept new model
+			new EditMealController(mealRepository, recipeRepository, frame, (newMeal) -> {
+				if (newMeal != null) {
+					onSubmit.accept(newMeal);
+					view.close();
+				}
+			}).show();
 		}
 
 	}

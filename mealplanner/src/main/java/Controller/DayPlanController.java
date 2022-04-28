@@ -6,6 +6,7 @@ package Controller;
 
 import Model.DayPlanModel;
 import Repository.Meal.IMealRepository;
+import Repository.Recipe.IRecipeRepository;
 import View.DayPlanView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,12 +21,16 @@ import javax.swing.event.ListSelectionListener;
  * @author micah
  */
 public class DayPlanController {
+	private final IMealRepository mealRepository;
+	private final IRecipeRepository recipeRepository;
+
 	private final DayPlanView view;
 	private final DayPlanModel model;
-	private final IMealRepository mealRepository;
 
-	public DayPlanController(IMealRepository mealRepository, DayPlanModel model, DayPlanView view){
+	public DayPlanController(IRecipeRepository recipeRepository, IMealRepository mealRepository, DayPlanModel model, DayPlanView view){
 		this.mealRepository = mealRepository;
+		this.recipeRepository = recipeRepository;
+
 		this.view = view;
 		this.model = model;
 		
@@ -56,10 +61,10 @@ public class DayPlanController {
 		view.setPlannedMealsList(model.getPlannedMeals());
 	}
 
-	class AddMealListener implements ActionListener {
+	private class AddMealListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent ae) {
-			new EditPlannedMealController(mealRepository, (JFrame) SwingUtilities.getRoot(view), model.getDate(), (newPlan) -> {
+			new EditPlannedMealController(recipeRepository, mealRepository, (JFrame) SwingUtilities.getRoot(view), model.getDate(), (newPlan) -> {
 				model.addPlannedMeal(newPlan);
 				updatePlannedMealsList();
 			}).show();
