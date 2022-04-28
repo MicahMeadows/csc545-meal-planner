@@ -14,4 +14,6 @@ import java.util.List;
  */
 public interface IPlannedMealRepository {
 	List<PlannedMealModel> getPlannedMealsForDay(LocalDate date);
+	void removePlannedMeal(int ID);
+	PlannedMealModel createPlannedMeal(PlannedMealModel plannedMeal);
 }

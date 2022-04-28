@@ -4,6 +4,7 @@
  */
 package Model;
 
+import Repository.PlannedMeal.IPlannedMealRepository;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
@@ -15,16 +16,16 @@ import java.util.Locale;
  * @author micah
  */
 public class DayPlanModel {
+	final private IPlannedMealRepository plannedMealRepository;
 	final private LocalDate date;
-	private List<PlannedMealModel> plannedMeals;
 
-	public DayPlanModel(LocalDate date, List<PlannedMealModel> plannedMeals){
-		this.plannedMeals = plannedMeals;
+	public DayPlanModel(IPlannedMealRepository plannedMealRepository, LocalDate date){
+		this.plannedMealRepository = plannedMealRepository;
 		this.date = date;
 	}
 
 	public List<PlannedMealModel> getPlannedMeals(){
-		return this.plannedMeals;
+		return plannedMealRepository.getPlannedMealsForDay(date);
 	}
 
 	public String getDayName(){
@@ -40,7 +41,7 @@ public class DayPlanModel {
 	}
 
 	public void addPlannedMeal(PlannedMealModel plannedMeal){
-		this.plannedMeals.add(plannedMeal);
+		plannedMealRepository.createPlannedMeal(plannedMeal);
 	}
 
 }

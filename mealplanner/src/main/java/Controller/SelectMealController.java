@@ -68,11 +68,12 @@ public class SelectMealController {
 
 		@Override
 		public void actionPerformed(ActionEvent ae) {
+			view.setVisible(false);
 			new EditMealController(mealRepository, recipeRepository, frame, (newMeal) -> {
 				if (newMeal != null) {
 					onSubmit.accept(newMeal);
-					view.close();
 				}
+				view.setVisible(true);
 			}).show();
 		}
 
@@ -83,6 +84,7 @@ public class SelectMealController {
 		@Override
 		public void actionPerformed(ActionEvent ae) {
 			view.close();
+			onSubmit.accept(null);
 		}
 
 	}
@@ -95,10 +97,11 @@ public class SelectMealController {
 
 			if (selectedMeal == null) {
 				view.displayErrorPopup("There was no item selected");
+				return;
 			}
 
-			onSubmit.accept(selectedMeal);
 			view.close();
+			onSubmit.accept(selectedMeal);
 		}
 
 	}

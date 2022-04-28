@@ -50,6 +50,10 @@ public class MealPlanViewModel {
 		return this.weekOffset;
 	}
 
+	public void deletePlannedMeal(PlannedMealModel plannedMeal) {
+		plannedMealRepository.removePlannedMeal(plannedMeal.getID());
+	}
+
 	public LocalDate getStartDayDate(){
 		return todaysDate.plusWeeks(weekOffset).with(TemporalAdjusters.previousOrSame(this.firstDayOfWeek));
 	}

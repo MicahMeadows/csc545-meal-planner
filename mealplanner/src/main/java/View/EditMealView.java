@@ -212,7 +212,7 @@ public class EditMealView extends javax.swing.JDialog {
 	}
 
 	public void displayError(String message){
-		JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
 	}
 
         // Variables declaration - do not modify//GEN-BEGIN:variables

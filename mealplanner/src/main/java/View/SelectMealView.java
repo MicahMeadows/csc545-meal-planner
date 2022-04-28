@@ -109,7 +109,7 @@ public class SelectMealView extends javax.swing.JDialog {
 	 */
 
 	public void displayErrorPopup(String message){
-		JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
 	}
 
 	public void setCancelListener(ActionListener l) {

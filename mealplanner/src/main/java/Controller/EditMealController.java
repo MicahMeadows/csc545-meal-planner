@@ -104,10 +104,11 @@ public class EditMealController {
 
 			if (newMeal == null) {
 				view.displayError("Invalid meal options.");
+				return;
 			}
 
-			onSubmit.accept(newMeal);
 			view.close();
+			onSubmit.accept(newMeal);
 		}
 		
 	}
@@ -117,6 +118,7 @@ public class EditMealController {
 		@Override
 		public void actionPerformed(ActionEvent ae) {
 			view.close();
+			onSubmit.accept(null);
 		}
 
 	}

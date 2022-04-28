@@ -49,7 +49,6 @@ public class MealPlanPageView extends javax.swing.JPanel {
                 lblMealTitle = new javax.swing.JLabel();
                 lblMealTime = new javax.swing.JLabel();
                 btnDeletePlannedMeal = new javax.swing.JButton();
-                btnEditPlannedMeal = new javax.swing.JButton();
                 lblMealType = new javax.swing.JLabel();
                 jSeparator1 = new javax.swing.JSeparator();
                 jPanel2 = new javax.swing.JPanel();
@@ -80,8 +79,6 @@ public class MealPlanPageView extends javax.swing.JPanel {
 
                 btnDeletePlannedMeal.setText("Delete");
 
-                btnEditPlannedMeal.setText("Edit");
-
                 lblMealType.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
                 lblMealType.setText("Dinner");
 
@@ -92,10 +89,7 @@ public class MealPlanPageView extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(103, 103, 103)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(btnDeletePlannedMeal)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(btnEditPlannedMeal))
+                                        .addComponent(btnDeletePlannedMeal)
                                         .addComponent(lblMealTitle)
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addComponent(lblMealType)
@@ -115,7 +109,7 @@ public class MealPlanPageView extends javax.swing.JPanel {
                                                 .addContainerGap()
                                                 .addComponent(lstRequiredRecipes)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(sPaneRecipes))
+                                                .addComponent(sPaneRecipes, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE))
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGap(38, 38, 38)
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -123,11 +117,9 @@ public class MealPlanPageView extends javax.swing.JPanel {
                                                         .addComponent(lblMealTime, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(lblMealTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(52, 52, 52)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(btnDeletePlannedMeal)
-                                                        .addComponent(btnEditPlannedMeal))
-                                                .addGap(0, 132, Short.MAX_VALUE)))
+                                                .addGap(31, 31, 31)
+                                                .addComponent(btnDeletePlannedMeal)
+                                                .addGap(0, 0, Short.MAX_VALUE)))
                                 .addContainerGap())
                 );
 
@@ -250,12 +242,16 @@ public class MealPlanPageView extends javax.swing.JPanel {
 	public void setBackListener(ActionListener listener){
 		btnBack.addActionListener(listener);
 	}
+	
+	public void setDeleteListener(ActionListener l){
+		btnDeletePlannedMeal.addActionListener(l);
+	}
+
 
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
         private javax.swing.JButton btnBack;
         private javax.swing.JButton btnDeletePlannedMeal;
-        private javax.swing.JButton btnEditPlannedMeal;
         private javax.swing.JButton btnNext;
         private View.DayPlanView dayPlanFriday;
         private View.DayPlanView dayPlanMonday;

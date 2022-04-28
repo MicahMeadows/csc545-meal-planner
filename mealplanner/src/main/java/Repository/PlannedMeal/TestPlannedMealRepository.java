@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
@@ -41,31 +42,43 @@ public class TestPlannedMealRepository implements IPlannedMealRepository {
 		plannedMeals.add(new PlannedMealModel(2, LocalDateTime.now(), 2, "Lunch", mealRepository.getMealForID(2), recipeRepository.getRecipesForMealID(2)));
 		plannedMeals.add(new PlannedMealModel(3, LocalDateTime.now(), 3, "Dinner", mealRepository.getMealForID(3), recipeRepository.getRecipesForMealID(3)));
 		plannedMeals.add(new PlannedMealModel(4, LocalDateTime.now().plusDays(1), 4, "Lunch", mealRepository.getMealForID(4), recipeRepository.getRecipesForMealID(4)));
-
-//		dinner = new PlannedMealModel(0, LocalDateTime.now().minusDays(1), 0, "Dinner");
-//
-//		PlannedMealModel dinner = new PlannedMealModel(0, LocalDateTime.now(), 1, "Dinner"); 
-//		dinner.setMeal(new MealModel(1, "Burger Meal"));
-//		List<RecipeModel> burgerMealRecipes = new ArrayList<>();
-//		burgerMealRecipes.add(new RecipeModel(0, "Burger", "make burger", "American", new ArrayList<>()));
-//		burgerMealRecipes.add(new RecipeModel(1, "Fries", "make fries", "American", new ArrayList<>()));
-//		dinner.setRecipeList(burgerMealRecipes);
-//		
-//		PlannedMealModel lunch = new PlannedMealModel(1, LocalDateTime.now(), 1, "Lunch"); 
-//		lunch.setMeal(new MealModel(1, "Asian Meal"));
-//		List<RecipeModel> asianMealRecipes = new ArrayList<>();
-//		asianMealRecipes.add(new RecipeModel(0, "Burger", "make burger", "American", new ArrayList<>()));
-//		asianMealRecipes.add(new RecipeModel(1, "Fries", "make fries", "American", new ArrayList<>()));
-//		lunch.setRecipeList(asianMealRecipes);
-//
-//		plannedMeals.add(lunch);
-//		plannedMeals.add(dinner);
-
 	}
 	
 	@Override
 	public List<PlannedMealModel> getPlannedMealsForDay(LocalDate date) {
 		return this.plannedMeals.stream().filter(meal -> date.equals(meal.getPlannedTime().toLocalDate())).collect(Collectors.toList());
+	}
+
+	@Override
+	public void removePlannedMeal(int ID) {
+		PlannedMealModel mealToRemove = plannedMeals.stream()
+			.filter(meal -> meal.getID() == ID)
+			.findFirst().orElse(null);
+
+		if (mealToRemove != null) {
+			this.plannedMeals.remove(mealToRemove);
+		}
+	}
+
+	@Override
+	public PlannedMealModel createPlannedMeal(PlannedMealModel plannedMeal) {
+		try {
+			PlannedMealModel newPlannedMeal = new PlannedMealModel(
+				new Random().nextInt(Integer.MAX_VALUE),
+				plannedMeal.getPlannedTime(),
+				plannedMeal.getMealID(),
+				plannedMeal.getMealType(),
+				plannedMeal.getMeal(),
+				plannedMeal.getRecipes()
+			);
+
+			plannedMeals.add(newPlannedMeal);
+
+			return newPlannedMeal;
+		} catch (Exception e) {
+			return null;
+		}
+
 	}
 	
 }

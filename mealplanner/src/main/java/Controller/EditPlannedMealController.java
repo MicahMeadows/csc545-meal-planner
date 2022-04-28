@@ -66,12 +66,14 @@ public class EditPlannedMealController {
 
 		@Override
 		public void actionPerformed(ActionEvent ae) {
+			view.setVisible(false);
 			new SelectMealController(recipeRepository, mealRepository, frame, (meal) -> {
-				model.setSelectedMeal(meal);
-				updateView();
-
+				if (meal != null) {
+					model.setSelectedMeal(meal);
+					updateView();
+				}
+				view.setVisible(true);
 			}).show();
-
 		}
 
 	}
