@@ -49,6 +49,7 @@ public class EditPlannedMealController {
 		view.setCancelListener(new CancelButtonListener());
 		view.setSubmitListener(new SubmitButtonListener());
 		view.setSetMealListener(new SetMealButtonListener());
+		updateView();
 	}
 
 	public void show() {
@@ -60,10 +61,9 @@ public class EditPlannedMealController {
 
 		@Override
 		public void actionPerformed(ActionEvent ae) {
-//			model.setSelectedMeal(new MealModel(0, "SomeMeal", new ArrayList<RecipeModel>()));
-//			view.setMealNameText(model.getSelectedMeal().getName());
 			new SelectMealController(mealRepository, frame, (meal) -> {
-				System.out.println("new meal");
+				model.setSelectedMeal(meal);
+				updateView();
 
 			}).show();
 
@@ -97,6 +97,16 @@ public class EditPlannedMealController {
 			onSubmit.accept(plannedMeal);
 		}
 
+	}
+
+	private void updateView() {
+		MealModel selectedMeal = model.getSelectedMeal();
+
+		String newMealNameText = selectedMeal == null ? "None Selected" : selectedMeal.getName();
+		view.setMealNameText(newMealNameText);
+
+		String newSetText = selectedMeal == null ? "Set" : "Edit";
+		view.setSetButtonText(newSetText);
 	}
 
 	private void updateModel() {

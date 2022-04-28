@@ -8,6 +8,7 @@ import Model.MealModel;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.event.DocumentListener;
 
 /**
@@ -107,6 +108,10 @@ public class SelectMealView extends javax.swing.JDialog {
 	 * @param args the command line arguments
 	 */
 
+	public void displayErrorPopup(String message){
+		JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
+	}
+
 	public void setCancelListener(ActionListener l) {
 		btnCancel.addActionListener(l);
 	}
@@ -121,6 +126,10 @@ public class SelectMealView extends javax.swing.JDialog {
 
 	public void setFilterListener(DocumentListener l){
 		tfSearch.getDocument().addDocumentListener(l);
+	}
+
+	public MealModel getSelectedMeal(){
+		return lstMeals.getSelectedValue();
 	}
 
 	public String getSearchText(){

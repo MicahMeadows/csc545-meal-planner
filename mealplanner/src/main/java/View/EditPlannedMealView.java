@@ -62,7 +62,7 @@ public class EditPlannedMealView extends javax.swing.JDialog {
 
                 lblMealName.setText("None Selected");
 
-                btnSetMeal.setText("set");
+                btnSetMeal.setText("Set");
 
                 bgTimeButtons.add(rbAm);
                 rbAm.setSelected(true);
@@ -226,6 +226,10 @@ public class EditPlannedMealView extends javax.swing.JDialog {
 
 	public String getTimeString(){
 		return cbTime.getSelectedItem().toString();
+	}
+
+	public void setSetButtonText(String text){
+		btnSetMeal.setText(text);
 	}
 
 	public void close(){

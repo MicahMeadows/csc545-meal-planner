@@ -81,7 +81,14 @@ public class SelectMealController {
 
 		@Override
 		public void actionPerformed(ActionEvent ae) {
-			System.out.println("submit");
+			MealModel selectedMeal = view.getSelectedMeal();
+
+			if (selectedMeal == null) {
+				view.displayErrorPopup("There was no item selected");
+			}
+
+			onSubmit.accept(selectedMeal);
+			view.close();
 		}
 
 	}

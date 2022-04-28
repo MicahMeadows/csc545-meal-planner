@@ -162,7 +162,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnSetMeal">
       <Properties>
-        <Property name="text" type="java.lang.String" value="set"/>
+        <Property name="text" type="java.lang.String" value="Set"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JRadioButton" name="rbAm">
