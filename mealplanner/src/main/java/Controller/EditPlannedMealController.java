@@ -5,6 +5,7 @@ import Model.EditPlannedMealViewModel;
 import Model.MealModel;
 import Model.PlannedMealModel;
 import Model.RecipeModel;
+import Repository.Meal.IMealRepository;
 import View.EditPlannedMealView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,9 +31,11 @@ public class EditPlannedMealController {
 	private final EditPlannedMealViewModel model;
 	private final EditPlannedMealView view;
 	private final JFrame frame;
+	private final IMealRepository mealRepository;
 	private final Consumer<PlannedMealModel> onSubmit;
 	
-	public EditPlannedMealController(JFrame frame, LocalDate planDate, Consumer<PlannedMealModel> onSubmit){
+	public EditPlannedMealController(IMealRepository mealRepository, JFrame frame, LocalDate planDate, Consumer<PlannedMealModel> onSubmit){
+		this.mealRepository = mealRepository;
 		this.onSubmit = onSubmit;
 		this.frame = frame;
 
@@ -49,7 +52,7 @@ public class EditPlannedMealController {
 	}
 
 	public void show() {
-		view.setLocationRelativeTo(view);
+		view.setLocationRelativeTo(frame);
 		view.setVisible(true);
 	}
 
@@ -57,8 +60,12 @@ public class EditPlannedMealController {
 
 		@Override
 		public void actionPerformed(ActionEvent ae) {
-			model.setSelectedMeal(new MealModel(0, "SomeMeal", new ArrayList<RecipeModel>()));
-			view.setMealNameText(model.getSelectedMeal().getName());
+//			model.setSelectedMeal(new MealModel(0, "SomeMeal", new ArrayList<RecipeModel>()));
+//			view.setMealNameText(model.getSelectedMeal().getName());
+			new SelectMealController(mealRepository, frame, (meal) -> {
+				System.out.println("new meal");
+
+			}).show();
 
 		}
 

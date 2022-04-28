@@ -54,7 +54,7 @@ public class MealPlanner {
 		// Controllers
 		RecipePageController recipePageController = new RecipePageController(recipePageModel, recipePage);
 		FridgePageController fridgePageController = new FridgePageController(fridgePageModel, fridgePage);
-		MealPlanPageController mealPlanPageController = new MealPlanPageController(mealPlanPageModel, mealPlanPage);
+		MealPlanPageController mealPlanPageController = new MealPlanPageController(mealRepository, mealPlanPageModel, mealPlanPage);
 
 		// Add Tabs to navigation in order
 		navigation.setRecipePageView(recipePage); 	// Tab1

@@ -4,6 +4,12 @@
  */
 package View;
 
+import Model.MealModel;
+import java.awt.event.ActionListener;
+import java.util.List;
+import javax.swing.DefaultListModel;
+import javax.swing.event.DocumentListener;
+
 /**
  *
  * @author micah
@@ -27,33 +33,28 @@ public class SelectMealView extends javax.swing.JDialog {
         // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
         private void initComponents() {
 
-                jLabel1 = new javax.swing.JLabel();
+                lblTitle = new javax.swing.JLabel();
                 jScrollPane1 = new javax.swing.JScrollPane();
-                jList1 = new javax.swing.JList<>();
-                jTextField1 = new javax.swing.JTextField();
-                jLabel2 = new javax.swing.JLabel();
-                jButton1 = new javax.swing.JButton();
-                jButton2 = new javax.swing.JButton();
-                jButton3 = new javax.swing.JButton();
+                lstMeals = new javax.swing.JList<>();
+                tfSearch = new javax.swing.JTextField();
+                lblSearch = new javax.swing.JLabel();
+                btnSelect = new javax.swing.JButton();
+                btnCancel = new javax.swing.JButton();
+                btnAddMeal = new javax.swing.JButton();
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-                jLabel1.setText("Select meal");
+                lblTitle.setText("Select meal");
 
-                jList1.setModel(new javax.swing.AbstractListModel<String>() {
-                        String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-                        public int getSize() { return strings.length; }
-                        public String getElementAt(int i) { return strings[i]; }
-                });
-                jScrollPane1.setViewportView(jList1);
+                jScrollPane1.setViewportView(lstMeals);
 
-                jLabel2.setText("Search");
+                lblSearch.setText("Search");
 
-                jButton1.setText("Select");
+                btnSelect.setText("Select");
 
-                jButton2.setText("Cancel");
+                btnCancel.setText("Cancel");
 
-                jButton3.setText("Add");
+                btnAddMeal.setText("Add");
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                 getContentPane().setLayout(layout);
@@ -63,20 +64,20 @@ public class SelectMealView extends javax.swing.JDialog {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
                                                 .addGap(265, 265, 265)
-                                                .addComponent(jLabel1))
+                                                .addComponent(lblTitle))
                                         .addGroup(layout.createSequentialGroup()
                                                 .addGap(32, 32, 32)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                         .addGroup(layout.createSequentialGroup()
-                                                                .addComponent(jLabel2)
+                                                                .addComponent(lblSearch)
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                .addComponent(jButton3))
+                                                                .addComponent(btnAddMeal))
                                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                                .addComponent(jButton2)
+                                                                .addComponent(btnCancel)
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                .addComponent(jButton1))
+                                                                .addComponent(btnSelect))
                                                         .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addContainerGap(52, Short.MAX_VALUE))
                 );
@@ -84,18 +85,18 @@ public class SelectMealView extends javax.swing.JDialog {
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addGap(30, 30, 30)
-                                .addComponent(jLabel1)
+                                .addComponent(lblTitle)
                                 .addGap(27, 27, 27)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel2)
-                                        .addComponent(jButton3))
+                                        .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblSearch)
+                                        .addComponent(btnAddMeal))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jButton1)
-                                        .addComponent(jButton2))
+                                        .addComponent(btnSelect)
+                                        .addComponent(btnCancel))
                                 .addGap(15, 15, 15))
                 );
 
@@ -105,53 +106,53 @@ public class SelectMealView extends javax.swing.JDialog {
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String args[]) {
-		/* Set the Nimbus look and feel */
-		//<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-		/* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-		 */
-		try {
-			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-				if ("Nimbus".equals(info.getName())) {
-					javax.swing.UIManager.setLookAndFeel(info.getClassName());
-					break;
-				}
-			}
-		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(SelectMealView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(SelectMealView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(SelectMealView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(SelectMealView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		}
-		//</editor-fold>
 
-		/* Create and display the dialog */
-		java.awt.EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				SelectMealView dialog = new SelectMealView(new javax.swing.JFrame(), true);
-				dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-					@Override
-					public void windowClosing(java.awt.event.WindowEvent e) {
-						System.exit(0);
-					}
-				});
-				dialog.setVisible(true);
-			}
-		});
+	public void setCancelListener(ActionListener l) {
+		btnCancel.addActionListener(l);
+	}
+
+	public void setSelectListener(ActionListener l) {
+		btnSelect.addActionListener(l);
+	}
+
+	public void setAddMealListener(ActionListener l) {
+		btnAddMeal.addActionListener(l);
+	}
+
+	public void setFilterListener(DocumentListener l){
+		tfSearch.getDocument().addDocumentListener(l);
+	}
+
+	public String getSearchText(){
+		return tfSearch.getText();
+	}
+
+	public void close(){
+		this.dispose();
+		this.setVisible(false);
+	}
+
+	public void setMealListData(List<MealModel> meals){
+		MealModel lastSelected = lstMeals.getSelectedValue();
+
+		DefaultListModel<MealModel> listModel = new DefaultListModel<>();
+		meals.stream().forEach(meal -> listModel.addElement(meal));
+		lstMeals.setModel(listModel);
+
+		if (meals.contains(lastSelected)) {
+			lstMeals.setSelectedValue(lastSelected, true);
+		}
+
 	}
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
-        private javax.swing.JButton jButton1;
-        private javax.swing.JButton jButton2;
-        private javax.swing.JButton jButton3;
-        private javax.swing.JLabel jLabel1;
-        private javax.swing.JLabel jLabel2;
-        private javax.swing.JList<String> jList1;
+        private javax.swing.JButton btnAddMeal;
+        private javax.swing.JButton btnCancel;
+        private javax.swing.JButton btnSelect;
         private javax.swing.JScrollPane jScrollPane1;
-        private javax.swing.JTextField jTextField1;
+        private javax.swing.JLabel lblSearch;
+        private javax.swing.JLabel lblTitle;
+        private javax.swing.JList<MealModel> lstMeals;
+        private javax.swing.JTextField tfSearch;
         // End of variables declaration//GEN-END:variables
 }

@@ -7,6 +7,7 @@ package Controller;
 import Model.DayPlanModel;
 import Model.MealPlanViewModel;
 import Model.PlannedMealModel;
+import Repository.Meal.IMealRepository;
 import View.DayPlanView;
 import View.MealPlanPageView;
 import java.awt.event.ActionEvent;
@@ -25,6 +26,7 @@ import javax.swing.event.ListSelectionListener;
 public class MealPlanPageController {
 	final private MealPlanPageView view;
 	final private MealPlanViewModel model;
+	final private IMealRepository mealRepository;
 
 	private DayPlanController sundayController;
 	private DayPlanController mondayController;
@@ -34,7 +36,8 @@ public class MealPlanPageController {
 	private DayPlanController fridayController;
 	private DayPlanController saturdayController;
 
-	public MealPlanPageController(MealPlanViewModel model, MealPlanPageView view){
+	public MealPlanPageController(IMealRepository mealRepository, MealPlanViewModel model, MealPlanPageView view){
+		this.mealRepository = mealRepository;
 		this.view = view;
 		this.model = model;
 
@@ -57,13 +60,13 @@ public class MealPlanPageController {
 		LocalDate day6 = model.getStartDayDate().plusDays(5);
 		LocalDate day7 = model.getStartDayDate().plusDays(6);
 
-		sundayController = new DayPlanController(new DayPlanModel(day1, model.getPlannedMealsForDay(day1)), view.getSundayPlanView());
-		mondayController = new DayPlanController(new DayPlanModel(day2, model.getPlannedMealsForDay(day2)), view.getMondayPlanView());
-		tuesdayController = new DayPlanController(new DayPlanModel(day3, model.getPlannedMealsForDay(day3)), view.getTuesdayPlanView());
-		wednesdayController = new DayPlanController(new DayPlanModel(day4, model.getPlannedMealsForDay(day4)), view.getWednesdayPlanView());
-		thursdayController = new DayPlanController(new DayPlanModel(day5, model.getPlannedMealsForDay(day5)), view.getThursdayPlanView());
-		fridayController = new DayPlanController(new DayPlanModel(day6, model.getPlannedMealsForDay(day6)), view.getFridayPlanView());
-		saturdayController = new DayPlanController(new DayPlanModel(day7, model.getPlannedMealsForDay(day7)), view.getSaturdayPlanView());
+		sundayController = new DayPlanController(mealRepository, new DayPlanModel(day1, model.getPlannedMealsForDay(day1)), view.getSundayPlanView());
+		mondayController = new DayPlanController(mealRepository, new DayPlanModel(day2, model.getPlannedMealsForDay(day2)), view.getMondayPlanView());
+		tuesdayController = new DayPlanController(mealRepository, new DayPlanModel(day3, model.getPlannedMealsForDay(day3)), view.getTuesdayPlanView());
+		wednesdayController = new DayPlanController(mealRepository, new DayPlanModel(day4, model.getPlannedMealsForDay(day4)), view.getWednesdayPlanView());
+		thursdayController = new DayPlanController(mealRepository, new DayPlanModel(day5, model.getPlannedMealsForDay(day5)), view.getThursdayPlanView());
+		fridayController = new DayPlanController(mealRepository, new DayPlanModel(day6, model.getPlannedMealsForDay(day6)), view.getFridayPlanView());
+		saturdayController = new DayPlanController(mealRepository, new DayPlanModel(day7, model.getPlannedMealsForDay(day7)), view.getSaturdayPlanView());
 
 		sundayController.setMealSelectedListener(new MealSelectedListener());
 		mondayController.setMealSelectedListener(new MealSelectedListener());
