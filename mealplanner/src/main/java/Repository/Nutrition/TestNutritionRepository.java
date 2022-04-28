@@ -35,5 +35,14 @@ public class TestNutritionRepository implements INutritionRepository {
 	public NutritionModel getNutritionForItemId(int ID) {
 		return nutritions.stream().filter(n -> n.getID() == ID).findFirst().orElse(null);
 	}
+
+	@Override
+	public NutritionModel createNutrition(NutritionModel nutritionModel) {
+		if (nutritionModel == null) return null;
+
+		nutritions.add(nutritionModel);
+
+		return nutritionModel;
+	}
 	
 }

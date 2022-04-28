@@ -134,20 +134,26 @@ public class TestItemRepository implements IItemRepository {
 
 	@Override
 	public ItemModel createItem(ItemModel item) {
-		ItemModel realCreatedItem = new ItemModel(
-			new Random().nextInt(Integer.MAX_VALUE),
-			item.getGroup(),
-			item.getName(),
-			item.getNutrition()
-		);
-		int generatedID = realCreatedItem.getID();
-		NutritionModel newNutrition = realCreatedItem.getNutrition().copyWithNewId(generatedID);
-		
-		realCreatedItem.setNutrition(newNutrition);
+		try {
+			ItemModel realCreatedItem = new ItemModel(
+				new Random().nextInt(Integer.MAX_VALUE),
+				item.getGroup(),
+				item.getName(),
+				item.getNutrition()
+			);
+			int generatedID = realCreatedItem.getID();
+			NutritionModel newNutrition = nutritionRepo.createNutrition(realCreatedItem.getNutrition().copyWithNewId(generatedID));
 
-		items.add(realCreatedItem);
+			realCreatedItem.setNutrition(newNutrition);
 
-		return realCreatedItem;
+			items.add(realCreatedItem);
+
+			return realCreatedItem;
+		} catch (Exception e) {
+			return null;
+		}
+
+
 	}
 	
 }

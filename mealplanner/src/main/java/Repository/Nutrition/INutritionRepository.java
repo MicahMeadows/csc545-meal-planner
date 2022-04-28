@@ -13,4 +13,5 @@ import java.util.List;
  */
 public interface INutritionRepository {
 	NutritionModel getNutritionForItemId(int ID);
+	NutritionModel createNutrition(NutritionModel nutritionModel);
 }

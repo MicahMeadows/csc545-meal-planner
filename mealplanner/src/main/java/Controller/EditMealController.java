@@ -102,6 +102,8 @@ public class EditMealController {
 			updateModel();
 			MealModel newMeal = model.getNewMealModel();
 
+			
+
 			if (newMeal == null) {
 				view.displayError("Invalid meal options.");
 				return;

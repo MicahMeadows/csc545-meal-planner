@@ -49,8 +49,14 @@ public class TestMealRepository implements IMealRepository {
 	}
 
 	@Override
-	public MealModel createMeal(String name, List<RecipeModel> recipes) {
-		return new MealModel(new Random().nextInt(Integer.MAX_VALUE), name, recipes);
+	public MealModel createMeal(MealModel meal) {
+		try {
+			MealModel newMeal = new MealModel(new Random().nextInt(Integer.MAX_VALUE), meal.getName(), meal.getRecipes());
+			meals.add(newMeal);
+			return newMeal;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 	
 }

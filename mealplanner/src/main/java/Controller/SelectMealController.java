@@ -70,10 +70,12 @@ public class SelectMealController {
 		public void actionPerformed(ActionEvent ae) {
 			view.setVisible(false);
 			new EditMealController(mealRepository, recipeRepository, frame, (newMeal) -> {
+				view.close();
 				if (newMeal != null) {
 					onSubmit.accept(newMeal);
+				} else {
+					view.setVisible(true);
 				}
-				view.setVisible(true);
 			}).show();
 		}
 

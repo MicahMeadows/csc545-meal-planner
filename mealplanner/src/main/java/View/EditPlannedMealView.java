@@ -58,7 +58,7 @@ public class EditPlannedMealView extends javax.swing.JDialog {
                 lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                 lblTitle.setText("Edit Planned Meal");
 
-                cbTime.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "12:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00" }));
+                cbTime.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00" }));
 
                 lblMealName.setText("None Selected");
 
@@ -185,7 +185,7 @@ public class EditPlannedMealView extends javax.swing.JDialog {
 	}
 
 	public void showError(String message){
-		JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
 	}
 
 	public void setCancelListener(ActionListener l){

@@ -29,7 +29,7 @@ public class EditMealViewModel {
 	public MealModel getNewMealModel(){
 		try {
 			if (mealName.trim().isEmpty()) throw new Exception("Cant have empty name");
-			return mealRepository.createMeal(mealName, mealRecipes);
+			return mealRepository.createMeal(new MealModel(-1, mealName, mealRecipes));
 		} catch (Exception e){
 			return null;
 		}
