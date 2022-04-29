@@ -12,12 +12,15 @@ import Model.PlannedMealModel;
 import Repository.Meal.IMealRepository;
 import Repository.PlannedMeal.IPlannedMealRepository;
 import Repository.Recipe.IRecipeRepository;
+import View.DayPlanView;
 import View.MealPlanView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.SwingUtilities;
@@ -29,17 +32,10 @@ import javax.swing.event.ListSelectionListener;
  * @author micah
  */
 public class MealPlanController {
-	final private MealPlanView view;
-	final private MealPlanViewModel model;
 	final private DependencyContainer dependencyContainer;
+	final private MealPlanViewModel model;
+	final private MealPlanView view;
 
-	private DayPlanController sundayController;
-	private DayPlanController mondayController;
-	private DayPlanController tuesdayController;
-	private DayPlanController wednesdayController;
-	private DayPlanController thursdayController;
-	private DayPlanController fridayController;
-	private DayPlanController saturdayController;
 
 	public MealPlanController(DependencyContainer dependencyContainer, MealPlanViewModel model, MealPlanView view){
 		this.dependencyContainer = dependencyContainer;
@@ -59,57 +55,32 @@ public class MealPlanController {
 		setupDayPlans();
 	}
 
-	private void setupDayPlans(){
-		LocalDate day1 = model.getStartDayDate();
-		LocalDate day2 = model.getStartDayDate().plusDays(1);
-		LocalDate day3 = model.getStartDayDate().plusDays(2);
-		LocalDate day4 = model.getStartDayDate().plusDays(3);
-		LocalDate day5 = model.getStartDayDate().plusDays(4);
-		LocalDate day6 = model.getStartDayDate().plusDays(5);
-		LocalDate day7 = model.getStartDayDate().plusDays(6);
-
-//		sundayController = new DayPlanController(dependencyContainer, new DayPlanViewModel(dependencyContainer, day1), view.getSundayPlanView());
-//		mondayController = new DayPlanController(dependencyContainer, new DayPlanViewModel(dependencyContainer, day2), view.getMondayPlanView());
-//		tuesdayController = new DayPlanController(dependencyContainer, new DayPlanViewModel(dependencyContainer, day3), view.getTuesdayPlanView());
-//		wednesdayController = new DayPlanController(dependencyContainer, new DayPlanViewModel(dependencyContainer, day4), view.getWednesdayPlanView());
-//		thursdayController = new DayPlanController(dependencyContainer, new DayPlanViewModel(dependencyContainer, day5), view.getThursdayPlanView());
-//		fridayController = new DayPlanController(dependencyContainer, new DayPlanViewModel(dependencyContainer, day6), view.getFridayPlanView());
-//		saturdayController = new DayPlanController(dependencyContainer, new DayPlanViewModel(dependencyContainer, day7), view.getSaturdayPlanView());
-		
-		sundayController = dependencyContainer.getComponentFactory().createDayPlanController(day1);
-		mondayController = dependencyContainer.getComponentFactory().createDayPlanController(day1);
-		tuesdayController = dependencyContainer.getComponentFactory().createDayPlanController(day1);
-		wednesdayController = dependencyContainer.getComponentFactory().createDayPlanController(day1);
-		thursdayController = dependencyContainer.getComponentFactory().createDayPlanController(day1);
-		fridayController = dependencyContainer.getComponentFactory().createDayPlanController(day1);
-		saturdayController = dependencyContainer.getComponentFactory().createDayPlanController(day1);
-
-		sundayController.setMealSelectedListener(new MealSelectedListener());
-		mondayController.setMealSelectedListener(new MealSelectedListener());
-		tuesdayController.setMealSelectedListener(new MealSelectedListener());
-		wednesdayController.setMealSelectedListener(new MealSelectedListener());
-		thursdayController.setMealSelectedListener(new MealSelectedListener());
-		fridayController.setMealSelectedListener(new MealSelectedListener());
-		saturdayController.setMealSelectedListener(new MealSelectedListener());
+	private DayPlanController createDayPlanController(int offset){
+		LocalDate date = model.getStartDayDate().plusDays(offset);
+		DayPlanController controller = dependencyContainer.getComponentFactory().createDayPlanController(date);
+		controller.setMealSelectedListener(new MealSelectedListener());
+		return controller;
 	}
 
+	private void setupDayPlans(){
+		List<DayPlanController> weekPlanControllers = new ArrayList<>();
+		for (int i = 0; i < 7; i++){
+			weekPlanControllers.add(createDayPlanController(i));
+		}
+		model.setDayPlanControllers(weekPlanControllers);
 
-
+		List<DayPlanView> weekPlanViews = weekPlanControllers.stream().map(DayPlanController::getView).collect(Collectors.toList());
+		view.setupWeekView(weekPlanViews);
+		
+		
+	}
 
 	private void changeSelectedWeek(int offset){
 		model.addToWeekOffset(offset);
 		setupDayPlans();
 	}
 
-	private void clearSelectedItems(){
-		sundayController.clearSelectedItem();
-		mondayController.clearSelectedItem();
-		tuesdayController.clearSelectedItem();
-		wednesdayController.clearSelectedItem();
-		thursdayController.clearSelectedItem();
-		fridayController.clearSelectedItem();
-		saturdayController.clearSelectedItem();
-	}
+
 
 	private class MealSelectedListener implements ListSelectionListener {
 		@Override
@@ -122,7 +93,7 @@ public class MealPlanController {
 
 			if (tappedMeal == null) return;
 
-			clearSelectedItems();
+			model.clearSelected();
 
 			model.setSelectedPlannedMeal(tappedMeal);
 			view.setSelectedPlannedMeal(model.getSelectedPlannedMeal());
@@ -133,7 +104,7 @@ public class MealPlanController {
 
 		@Override
 		public void actionPerformed(ActionEvent ae) {
-			List<ItemModel> shoppingListItems = model.generateShoppingListItems();
+			List<ItemModel> shoppingListItems = model.generateShoppingListItems(model.getStartDayDate(), model.getStartDayDate().plusDays(6));
 			JFrame frame = (JFrame)SwingUtilities.getRoot(view);
 			String formattedStartDate = model.getStartDayDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 			new ShoppingListController(frame).showList(shoppingListItems, formattedStartDate);

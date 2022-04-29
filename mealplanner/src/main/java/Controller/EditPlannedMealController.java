@@ -38,14 +38,19 @@ public class EditPlannedMealController {
 	private final JFrame frame;
 	private final Consumer<PlannedMealModel> onSubmit;
 	
-	public EditPlannedMealController(DependencyContainer dependencyContainer, JFrame frame, LocalDate planDate, Consumer<PlannedMealModel> onSubmit){
+	public EditPlannedMealController(
+		DependencyContainer dependencyContainer,
+		JFrame frame,
+		LocalDate date,
+		Consumer<PlannedMealModel> onSubmit,
+		EditPlannedMealView view,
+		EditPlannedMealViewModel model
+	){
 		this.dependencyContainer = dependencyContainer;
-		
 		this.onSubmit = onSubmit;
 		this.frame = frame;
-
-		this.model = new EditPlannedMealViewModel(planDate);
-		this.view = new EditPlannedMealView(frame, true);
+		this.model = model;
+		this.view = view;
 
 		initialize();
 	}

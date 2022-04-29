@@ -6,15 +6,11 @@ package Controller;
 
 import MealPlanner.DependencyContainer;
 import Model.DayPlanViewModel;
-import Repository.Meal.IMealRepository;
-import Repository.Recipe.IRecipeRepository;
 import View.DayPlanView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
-import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 /**
@@ -23,8 +19,8 @@ import javax.swing.event.ListSelectionListener;
  */
 public class DayPlanController {
 	private final DependencyContainer dependencyContainer;
-	private final DayPlanView view;
-	private final DayPlanViewModel model;
+	private DayPlanView view;
+	private DayPlanViewModel model;
 
 	public DayPlanController(DependencyContainer dependencyContainer, DayPlanViewModel model, DayPlanView view){
 		this.view = view;
@@ -33,12 +29,20 @@ public class DayPlanController {
 		initialize();
 	}
 
+	public void setView(DayPlanView view){
+		this.view = view;
+	}
+
 	public void setMealSelectedListener(ListSelectionListener listener){
 		view.setMealSelectedListener(listener);
 	}
 
 	public void clearSelectedItem(){
 		this.view.clearSelected();
+	}
+
+	public DayPlanView getView(){
+		return this.view;
 	}
 
 	private void initialize(){
@@ -60,10 +64,11 @@ public class DayPlanController {
 	private class AddMealListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent ae) {
-			new EditPlannedMealController(dependencyContainer, (JFrame) SwingUtilities.getRoot(view), model.getDate(), (newPlan) -> {
+			JFrame viewFrame = (JFrame)SwingUtilities.getRoot(view);
+			dependencyContainer.getComponentFactory().showEditPlannedMealDialog(viewFrame, model.getDate(), (newPlan) -> {
 				model.addPlannedMeal(newPlan);
 				updatePlannedMealsList();
-			}).show();
+			});
 		}
 	}
 

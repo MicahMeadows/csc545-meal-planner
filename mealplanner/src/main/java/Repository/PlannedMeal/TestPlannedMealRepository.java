@@ -80,5 +80,15 @@ public class TestPlannedMealRepository implements IPlannedMealRepository {
 		}
 
 	}
-	
+
+	@Override
+	public List<PlannedMealModel> getPlannedMealsForRange(LocalDate startDate, LocalDate endDate) {
+		List<PlannedMealModel> plannedMeals = new ArrayList<>();
+		LocalDate movingDate = startDate;
+		while (!movingDate.isAfter(endDate)) {
+			plannedMeals.addAll(getPlannedMealsForDay(movingDate));
+			movingDate.plusDays(1);
+		}
+		return plannedMeals;
+	}
 }

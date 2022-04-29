@@ -4,7 +4,9 @@
  */
 package Model;
 
+import Controller.DayPlanController;
 import MealPlanner.DependencyContainer;
+import Repository.Item.IItemRepository;
 import Repository.PlannedMeal.IPlannedMealRepository;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -22,22 +24,51 @@ public class MealPlanViewModel {
 	private final LocalDate todaysDate;
 	private final DayOfWeek firstDayOfWeek;
 	private final IPlannedMealRepository plannedMealRepository;
+	private final IItemRepository itemRepository;
 
 	private int weekOffset = 0;
 	private PlannedMealModel selectedPlannedMeal;
 
+	private	List<DayPlanController> dayPlanControllers;
+
 	public MealPlanViewModel(DependencyContainer dependencyContainer){
-		this.todaysDate = LocalDate.now();
 		this.plannedMealRepository = dependencyContainer.getRepositoryFactory().getPlannedMealRepository();
+		this.itemRepository = dependencyContainer.getRepositoryFactory().getItemRepository();
+
 		this.firstDayOfWeek = WeekFields.of(Locale.US).getFirstDayOfWeek();
+		this.todaysDate = LocalDate.now();
 	}
 
-	public List<ItemModel> generateShoppingListItems(){
+	public void clearDayPlanControllers(){
+		this.dayPlanControllers = new ArrayList<>();
+	}
+
+	public void setDayPlanControllers(List<DayPlanController> dayPlanControllers){
+		this.dayPlanControllers = dayPlanControllers;
+	}
+
+	public void clearSelected(){
+		this.dayPlanControllers.stream().forEach(dayPlan -> dayPlan.clearSelectedItem());
+	}
+
+	public List<ItemModel> generateShoppingListItems(LocalDate startDate, LocalDate endDate){
 		// get fridge items
+		List<ItemModel> fridgeItems = itemRepository.getFridgeItems(0);
+
 		// get plannedMeals in range
-		// get items for recipes
-		// get items in recipe not in fridge
-		return new ArrayList<ItemModel>();
+		List<PlannedMealModel> plannedMeals = plannedMealRepository.getPlannedMealsForDay(todaysDate);
+
+		// get recipes
+		List<RecipeModel> recipes = new ArrayList<>();
+		plannedMeals.forEach(meal -> recipes.addAll(meal.getRecipes()));
+
+		// get recipe items
+		List<ItemModel> itemsForRecipes = new ArrayList<>();
+		recipes.forEach(recipe -> itemsForRecipes.addAll(recipe.getIngredients()));
+
+		itemsForRecipes.removeAll(fridgeItems);
+
+		return itemsForRecipes;
 	}
 
 	public List<PlannedMealModel> getPlannedMealsForDay(LocalDate date){

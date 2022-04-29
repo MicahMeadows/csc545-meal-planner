@@ -8,6 +8,7 @@ import Model.PlannedMealModel;
 import Model.RecipeModel;
 import java.awt.event.ActionListener;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import javax.swing.DefaultListModel;
 
 /**
@@ -59,7 +60,7 @@ public class MealPlanView extends javax.swing.JPanel {
                 btnGenerateShoppingList = new javax.swing.JButton();
                 jSeparator2 = new javax.swing.JSeparator();
 
-                pnlWeekPlans.setLayout(new java.awt.GridLayout(1, 0));
+                pnlWeekPlans.setLayout(new java.awt.GridLayout());
                 pnlWeekPlans.add(dayPlanSunday);
                 pnlWeekPlans.add(dayPlanMonday);
                 pnlWeekPlans.add(dayPlanTuesday);
@@ -205,26 +206,11 @@ public class MealPlanView extends javax.swing.JPanel {
                 );
         }// </editor-fold>//GEN-END:initComponents
 
-	public DayPlanView getSundayPlanView(){
-		return dayPlanSunday;
-	}
-	public DayPlanView getMondayPlanView(){
-		return dayPlanMonday;
-	}
-	public DayPlanView getTuesdayPlanView(){
-		return dayPlanTuesday;
-	}
-	public DayPlanView getWednesdayPlanView(){
-		return dayPlanWednesday;
-	}
-	public DayPlanView getThursdayPlanView(){
-		return dayPlanThursday;
-	}
-	public DayPlanView getFridayPlanView(){
-		return dayPlanFriday;
-	}
-	public DayPlanView getSaturdayPlanView(){
-		return dayPlanSaturday;
+	public void setupWeekView(List<DayPlanView> dayPlanViews) {
+		pnlWeekPlans.removeAll();
+		dayPlanViews.stream().forEach(view -> pnlWeekPlans.add(view));
+		revalidate();
+		repaint();
 	}
 
 	public void setSelectedPlannedMeal(PlannedMealModel plannedMeal){
