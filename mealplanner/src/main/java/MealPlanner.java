@@ -1,22 +1,13 @@
+package MealPlanner;
 
 import Controller.FridgePageController;
-import Controller.MealPlanPageController;
+import Controller.MealPlanController;
 import Controller.RecipePageController;
 import Model.FridgeViewModel;
 import Model.MealPlanViewModel;
 import Model.RecipeViewModel;
-import Repository.Item.IItemRepository;
-import Repository.Item.TestItemRepository;
-import Repository.Meal.IMealRepository;
-import Repository.Meal.TestMealRepository;
-import Repository.Nutrition.INutritionRepository;
-import Repository.Nutrition.TestNutritionRepository;
-import Repository.PlannedMeal.IPlannedMealRepository;
-import Repository.PlannedMeal.TestPlannedMealRepository;
-import Repository.Recipe.IRecipeRepository;
-import Repository.Recipe.TestRecipeRepository;
 import View.FridgePageView;
-import View.MealPlanPageView;
+import View.MealPlanView;
 import View.MealPlannerNavigationView;
 import View.RecipePageView;
 
@@ -33,28 +24,23 @@ public class MealPlanner {
 
 	public static void main(String[] args){
 
-		// setup repositories
-		final INutritionRepository nutritionRepository = new TestNutritionRepository();
-		final IItemRepository itemRepository = new TestItemRepository(nutritionRepository);
-		final IRecipeRepository recipeRepository = new TestRecipeRepository(itemRepository);
-		final IMealRepository mealRepository = new TestMealRepository(recipeRepository);
-		final IPlannedMealRepository plannedMealRepository = new TestPlannedMealRepository(recipeRepository, mealRepository);
+		DependencyContainer dependencyContainer = new DependencyContainer();
 		
 		// Models
-		RecipeViewModel recipePageModel = new RecipeViewModel(recipeRepository);
-		FridgeViewModel fridgePageModel = new FridgeViewModel(itemRepository, 0); // default 0 fridge value for testing
-		MealPlanViewModel mealPlanPageModel = new MealPlanViewModel(plannedMealRepository);
+		RecipeViewModel recipePageModel = new RecipeViewModel(dependencyContainer);
+		FridgeViewModel fridgePageModel = new FridgeViewModel(dependencyContainer, 0); // default 0 fridge value for testing
+		MealPlanViewModel mealPlanPageModel = new MealPlanViewModel(dependencyContainer);
 
 		// Views
 		MealPlannerNavigationView navigation = new MealPlannerNavigationView();
 		RecipePageView recipePage = new RecipePageView();
 		FridgePageView fridgePage = new FridgePageView();
-		MealPlanPageView mealPlanPage = new MealPlanPageView();
+		MealPlanView mealPlanPage = new MealPlanView();
 
 		// Controllers
 		RecipePageController recipePageController = new RecipePageController(recipePageModel, recipePage);
 		FridgePageController fridgePageController = new FridgePageController(fridgePageModel, fridgePage);
-		MealPlanPageController mealPlanPageController = new MealPlanPageController(plannedMealRepository, recipeRepository, mealRepository, mealPlanPageModel, mealPlanPage);
+		MealPlanController mealPlanPageController = new MealPlanController(dependencyContainer, mealPlanPageModel, mealPlanPage);
 
 		// Add Tabs to navigation in order
 		navigation.setRecipePageView(recipePage); 	// Tab1

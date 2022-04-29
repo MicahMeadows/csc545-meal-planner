@@ -4,11 +4,13 @@
  */
 package Model;
 
+import MealPlanner.DependencyContainer;
 import Repository.PlannedMeal.IPlannedMealRepository;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 import java.time.temporal.WeekFields;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -24,10 +26,18 @@ public class MealPlanViewModel {
 	private int weekOffset = 0;
 	private PlannedMealModel selectedPlannedMeal;
 
-	public MealPlanViewModel(IPlannedMealRepository plannedMealRepository){
+	public MealPlanViewModel(DependencyContainer dependencyContainer){
 		this.todaysDate = LocalDate.now();
-		this.plannedMealRepository = plannedMealRepository;
+		this.plannedMealRepository = dependencyContainer.getPlannedMealRepository();
 		this.firstDayOfWeek = WeekFields.of(Locale.US).getFirstDayOfWeek();
+	}
+
+	public List<ItemModel> generateShoppingListItems(){
+		// get fridge items
+		// get plannedMeals in range
+		// get items for recipes
+		// get items in recipe not in fridge
+		return new ArrayList<ItemModel>();
 	}
 
 	public List<PlannedMealModel> getPlannedMealsForDay(LocalDate date){

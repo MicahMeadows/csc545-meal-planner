@@ -4,6 +4,7 @@
  */
 package Model;
 
+import MealPlanner.DependencyContainer;
 import Repository.Meal.IMealRepository;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,8 +17,8 @@ public class SelectMealViewModel {
 	private final IMealRepository mealRepository;
 	private List<MealModel> meals;
 
-	public SelectMealViewModel(IMealRepository mealRepository){
-		this.mealRepository = mealRepository;
+	public SelectMealViewModel(DependencyContainer dependencyContainer){
+		this.mealRepository = dependencyContainer.getMealRepository();
 	}
 
 	public void updateMealList(){

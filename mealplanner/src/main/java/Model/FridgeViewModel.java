@@ -4,6 +4,7 @@
  */
 package Model;
 
+import MealPlanner.DependencyContainer;
 import Repository.Item.IItemRepository;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,8 +23,8 @@ public class FridgeViewModel {
 	private ItemModel selectedItem = null;
 	private String selectedGroup = defaultGroupText;
 
-	public FridgeViewModel(IItemRepository itemRepository, int fridgeID){
-		this.itemRepository = itemRepository;
+	public FridgeViewModel(DependencyContainer dependencyContainer, int fridgeID){
+		this.itemRepository = dependencyContainer.getItemRepository();
 		this.fridgeID = fridgeID;
 	}
 

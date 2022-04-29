@@ -4,18 +4,20 @@
  */
 package Controller;
 
-import Model.DayPlanModel;
+import MealPlanner.DependencyContainer;
+import Model.DayPlanViewModel;
+import Model.ItemModel;
 import Model.MealPlanViewModel;
 import Model.PlannedMealModel;
 import Repository.Meal.IMealRepository;
 import Repository.PlannedMeal.IPlannedMealRepository;
 import Repository.Recipe.IRecipeRepository;
-import View.DayPlanView;
-import View.MealPlanPageView;
+import View.MealPlanView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.SwingUtilities;
@@ -26,12 +28,10 @@ import javax.swing.event.ListSelectionListener;
  *
  * @author micah
  */
-public class MealPlanPageController {
-	final private MealPlanPageView view;
+public class MealPlanController {
+	final private MealPlanView view;
 	final private MealPlanViewModel model;
-	final private IMealRepository mealRepository;
-	final private IRecipeRepository recipeRepository;
-	final private IPlannedMealRepository plannedMealRepository;
+	final private DependencyContainer dependencyContainer;
 
 	private DayPlanController sundayController;
 	private DayPlanController mondayController;
@@ -41,10 +41,8 @@ public class MealPlanPageController {
 	private DayPlanController fridayController;
 	private DayPlanController saturdayController;
 
-	public MealPlanPageController(IPlannedMealRepository plannedMealRepository, IRecipeRepository recipeRepository, IMealRepository mealRepository, MealPlanViewModel model, MealPlanPageView view){
-		this.mealRepository = mealRepository;
-		this.recipeRepository = recipeRepository;
-		this.plannedMealRepository = plannedMealRepository;
+	public MealPlanController(DependencyContainer dependencyContainer, MealPlanViewModel model, MealPlanView view){
+		this.dependencyContainer = dependencyContainer;
 
 		this.view = view;
 		this.model = model;
@@ -56,6 +54,7 @@ public class MealPlanPageController {
 		view.setBackListener(new BackListener());
 		view.setNextListener(new NextListener());
 		view.setDeleteListener(new DeleteListener());
+		view.setGenerateShoppingListListener(new GenerateShoppingListListener());
 
 		setupDayPlans();
 	}
@@ -69,13 +68,13 @@ public class MealPlanPageController {
 		LocalDate day6 = model.getStartDayDate().plusDays(5);
 		LocalDate day7 = model.getStartDayDate().plusDays(6);
 
-		sundayController = new DayPlanController(recipeRepository, mealRepository, new DayPlanModel(plannedMealRepository, day1), view.getSundayPlanView());
-		mondayController = new DayPlanController(recipeRepository, mealRepository, new DayPlanModel(plannedMealRepository, day2), view.getMondayPlanView());
-		tuesdayController = new DayPlanController(recipeRepository, mealRepository, new DayPlanModel(plannedMealRepository, day3), view.getTuesdayPlanView());
-		wednesdayController = new DayPlanController(recipeRepository, mealRepository, new DayPlanModel(plannedMealRepository, day4), view.getWednesdayPlanView());
-		thursdayController = new DayPlanController(recipeRepository, mealRepository, new DayPlanModel(plannedMealRepository, day5), view.getThursdayPlanView());
-		fridayController = new DayPlanController(recipeRepository, mealRepository, new DayPlanModel(plannedMealRepository, day6), view.getFridayPlanView());
-		saturdayController = new DayPlanController(recipeRepository, mealRepository, new DayPlanModel(plannedMealRepository, day7), view.getSaturdayPlanView());
+		sundayController = new DayPlanController(dependencyContainer, new DayPlanViewModel(dependencyContainer, day1), view.getSundayPlanView());
+		mondayController = new DayPlanController(dependencyContainer, new DayPlanViewModel(dependencyContainer, day2), view.getMondayPlanView());
+		tuesdayController = new DayPlanController(dependencyContainer, new DayPlanViewModel(dependencyContainer, day3), view.getTuesdayPlanView());
+		wednesdayController = new DayPlanController(dependencyContainer, new DayPlanViewModel(dependencyContainer, day4), view.getWednesdayPlanView());
+		thursdayController = new DayPlanController(dependencyContainer, new DayPlanViewModel(dependencyContainer, day5), view.getThursdayPlanView());
+		fridayController = new DayPlanController(dependencyContainer, new DayPlanViewModel(dependencyContainer, day6), view.getFridayPlanView());
+		saturdayController = new DayPlanController(dependencyContainer, new DayPlanViewModel(dependencyContainer, day7), view.getSaturdayPlanView());
 
 		sundayController.setMealSelectedListener(new MealSelectedListener());
 		mondayController.setMealSelectedListener(new MealSelectedListener());
@@ -85,6 +84,9 @@ public class MealPlanPageController {
 		fridayController.setMealSelectedListener(new MealSelectedListener());
 		saturdayController.setMealSelectedListener(new MealSelectedListener());
 	}
+
+
+
 
 	private void changeSelectedWeek(int offset){
 		model.addToWeekOffset(offset);
@@ -117,6 +119,18 @@ public class MealPlanPageController {
 			model.setSelectedPlannedMeal(tappedMeal);
 			view.setSelectedPlannedMeal(model.getSelectedPlannedMeal());
 		}
+	}
+
+	private class GenerateShoppingListListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent ae) {
+			List<ItemModel> shoppingListItems = model.generateShoppingListItems();
+			JFrame frame = (JFrame)SwingUtilities.getRoot(view);
+			String formattedStartDate = model.getStartDayDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+			new ShoppingListController(frame).showList(shoppingListItems, formattedStartDate);
+		}
+
 	}
 
 	private class BackListener implements ActionListener {

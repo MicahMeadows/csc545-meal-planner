@@ -4,6 +4,7 @@
  */
 package Model;
 
+import MealPlanner.DependencyContainer;
 import Repository.Recipe.IRecipeRepository;
 import Repository.Meal.IMealRepository;
 import java.util.ArrayList;
@@ -21,9 +22,9 @@ public class EditMealViewModel {
 	private List<RecipeModel> allRecipes;
 	private String mealName;
 
-	public EditMealViewModel(IMealRepository mealRepository, IRecipeRepository recipeRepository){
-		this.recipeRepository = recipeRepository;
-		this.mealRepository = mealRepository;
+	public EditMealViewModel(DependencyContainer dependencyContainer){
+		this.recipeRepository = dependencyContainer.getRecipeRepository();
+		this.mealRepository = dependencyContainer.getMealRepository();
 	}
 
 	public MealModel getNewMealModel(){

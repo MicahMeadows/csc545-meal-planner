@@ -14,12 +14,12 @@ import javax.swing.DefaultListModel;
  *
  * @author micah
  */
-public class MealPlanPageView extends javax.swing.JPanel {
+public class MealPlanView extends javax.swing.JPanel {
 
 	/**
 	 * Creates new form MealPlanView
 	 */
-	public MealPlanPageView() {
+	public MealPlanView() {
 		initComponents();
 	}
 
@@ -56,6 +56,7 @@ public class MealPlanPageView extends javax.swing.JPanel {
                 jPanel3 = new javax.swing.JPanel();
                 btnBack = new javax.swing.JButton();
                 btnNext = new javax.swing.JButton();
+                btnGenerateShoppingList = new javax.swing.JButton();
                 jSeparator2 = new javax.swing.JSeparator();
 
                 pnlWeekPlans.setLayout(new java.awt.GridLayout(1, 0));
@@ -145,6 +146,8 @@ public class MealPlanPageView extends javax.swing.JPanel {
                 gridBagConstraints.insets = new java.awt.Insets(6, 18, 6, 6);
                 jPanel3.add(btnNext, gridBagConstraints);
 
+                btnGenerateShoppingList.setText("Generate Shopping List");
+
                 javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
                 jPanel2.setLayout(jPanel2Layout);
                 jPanel2Layout.setHorizontalGroup(
@@ -153,14 +156,19 @@ public class MealPlanPageView extends javax.swing.JPanel {
                                 .addContainerGap()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(btnGenerateShoppingList)))
                                 .addContainerGap())
                 );
                 jPanel2Layout.setVerticalGroup(
                         jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(lblTitle)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(lblTitle)
+                                        .addComponent(btnGenerateShoppingList))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
@@ -191,7 +199,7 @@ public class MealPlanPageView extends javax.swing.JPanel {
                                 .addComponent(pnlWeekPlans, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
                 );
@@ -247,11 +255,16 @@ public class MealPlanPageView extends javax.swing.JPanel {
 		btnDeletePlannedMeal.addActionListener(l);
 	}
 
+	public void setGenerateShoppingListListener(ActionListener l){
+		btnGenerateShoppingList.addActionListener(l);
+	}
+
 
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
         private javax.swing.JButton btnBack;
         private javax.swing.JButton btnDeletePlannedMeal;
+        private javax.swing.JButton btnGenerateShoppingList;
         private javax.swing.JButton btnNext;
         private View.DayPlanView dayPlanFriday;
         private View.DayPlanView dayPlanMonday;

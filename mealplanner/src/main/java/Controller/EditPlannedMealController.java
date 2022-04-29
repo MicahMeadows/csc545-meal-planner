@@ -1,6 +1,7 @@
 package Controller;
 
 
+import MealPlanner.DependencyContainer;
 import Model.EditPlannedMealViewModel;
 import Model.MealModel;
 import Model.PlannedMealModel;
@@ -29,8 +30,7 @@ import javax.swing.event.ChangeEvent;
  * @author micah
  */
 public class EditPlannedMealController {
-	private final IMealRepository mealRepository;
-	private final IRecipeRepository recipeRepository; 
+	private final DependencyContainer dependencyContainer;
 
 	private final EditPlannedMealViewModel model;
 	private final EditPlannedMealView view;
@@ -38,9 +38,9 @@ public class EditPlannedMealController {
 	private final JFrame frame;
 	private final Consumer<PlannedMealModel> onSubmit;
 	
-	public EditPlannedMealController(IRecipeRepository recipeRepository, IMealRepository mealRepository, JFrame frame, LocalDate planDate, Consumer<PlannedMealModel> onSubmit){
-		this.mealRepository = mealRepository;
-		this.recipeRepository = recipeRepository;
+	public EditPlannedMealController(DependencyContainer dependencyContainer, JFrame frame, LocalDate planDate, Consumer<PlannedMealModel> onSubmit){
+		this.dependencyContainer = dependencyContainer;
+		
 		this.onSubmit = onSubmit;
 		this.frame = frame;
 
@@ -67,7 +67,7 @@ public class EditPlannedMealController {
 		@Override
 		public void actionPerformed(ActionEvent ae) {
 			view.setVisible(false);
-			new SelectMealController(recipeRepository, mealRepository, frame, (meal) -> {
+			new SelectMealController(dependencyContainer, frame, (meal) -> {
 				if (meal != null) {
 					model.setSelectedMeal(meal);
 					updateView();

@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import MealPlanner.DependencyContainer;
 import Model.MealModel;
 import Model.SelectMealViewModel;
 import Repository.Meal.IMealRepository;
@@ -21,21 +22,18 @@ import javax.swing.event.DocumentListener;
  * @author micah
  */
 public class SelectMealController {
-	private final IMealRepository mealRepository;
-	private final IRecipeRepository recipeRepository;
+	private final DependencyContainer dependencyContainer;
 	private final SelectMealViewModel model;
 	private final SelectMealView view;
 	private final JFrame frame;
 	private final Consumer<MealModel> onSubmit;
 
-	public SelectMealController(IRecipeRepository recipeRepository, IMealRepository mealRepository, JFrame frame, Consumer<MealModel> onSubmit){
-		this.mealRepository = mealRepository;
-		this.recipeRepository = recipeRepository;
-
+	public SelectMealController(DependencyContainer dependencyContainer, JFrame frame, Consumer<MealModel> onSubmit){
+		this.dependencyContainer = dependencyContainer;
 		this.frame = frame;
 		this.onSubmit = onSubmit;
 
-		model = new SelectMealViewModel(mealRepository);
+		model = new SelectMealViewModel(dependencyContainer);
 		view = new SelectMealView(frame, true);
 
 		setupListeners();
@@ -69,7 +67,7 @@ public class SelectMealController {
 		@Override
 		public void actionPerformed(ActionEvent ae) {
 			view.setVisible(false);
-			new EditMealController(mealRepository, recipeRepository, frame, (newMeal) -> {
+			new EditMealController(dependencyContainer, frame, (newMeal) -> {
 				view.close();
 				if (newMeal != null) {
 					onSubmit.accept(newMeal);

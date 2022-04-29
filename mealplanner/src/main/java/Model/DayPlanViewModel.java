@@ -4,6 +4,7 @@
  */
 package Model;
 
+import MealPlanner.DependencyContainer;
 import Repository.PlannedMeal.IPlannedMealRepository;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -15,12 +16,12 @@ import java.util.Locale;
  *
  * @author micah
  */
-public class DayPlanModel {
+public class DayPlanViewModel {
 	final private IPlannedMealRepository plannedMealRepository;
 	final private LocalDate date;
 
-	public DayPlanModel(IPlannedMealRepository plannedMealRepository, LocalDate date){
-		this.plannedMealRepository = plannedMealRepository;
+	public DayPlanViewModel(DependencyContainer dependencyContainer, LocalDate date){
+		this.plannedMealRepository = dependencyContainer.getPlannedMealRepository();
 		this.date = date;
 	}
 

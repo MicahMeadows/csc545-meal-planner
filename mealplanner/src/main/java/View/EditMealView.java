@@ -45,7 +45,6 @@ public class EditMealView extends javax.swing.JDialog {
                 lstMealRecipes = new javax.swing.JList<>();
                 btnMoveRight = new javax.swing.JButton();
                 btnMoveLeft = new javax.swing.JButton();
-                btnAddRecipe = new javax.swing.JButton();
                 lblMealRecipes = new javax.swing.JLabel();
                 lblAllRecipes = new javax.swing.JLabel();
                 btnSubmit = new javax.swing.JButton();
@@ -65,8 +64,6 @@ public class EditMealView extends javax.swing.JDialog {
 
                 btnMoveLeft.setText("<");
 
-                btnAddRecipe.setText("+");
-
                 lblMealRecipes.setText("Meal Recipes");
 
                 lblAllRecipes.setText("All Recipes");
@@ -80,7 +77,7 @@ public class EditMealView extends javax.swing.JDialog {
                 layout.setHorizontalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap(193, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                                 .addComponent(btnSubmit)
@@ -98,11 +95,8 @@ public class EditMealView extends javax.swing.JDialog {
                                                         .addComponent(lblAllRecipes)
                                                         .addGroup(layout.createSequentialGroup()
                                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addGroup(layout.createSequentialGroup()
-                                                                                .addComponent(tfRecipeFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                .addComponent(btnAddRecipe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                                                                        .addComponent(tfRecipeFilter))
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                                         .addComponent(btnMoveRight, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -138,7 +132,6 @@ public class EditMealView extends javax.swing.JDialog {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                         .addComponent(tfRecipeFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(btnAddRecipe)
                                                         .addComponent(lblMealRecipes))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,10 +162,6 @@ public class EditMealView extends javax.swing.JDialog {
 
 	public void setCloseListener(ActionListener l){
 		btnCancel.addActionListener(l);
-	}
-
-	public void setAddRecipeListener(ActionListener l){
-		btnAddRecipe.addActionListener(l);
 	}
 
 	public void setSubmitListener(ActionListener l){
@@ -216,7 +205,6 @@ public class EditMealView extends javax.swing.JDialog {
 	}
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
-        private javax.swing.JButton btnAddRecipe;
         private javax.swing.JButton btnCancel;
         private javax.swing.JButton btnMoveLeft;
         private javax.swing.JButton btnMoveRight;

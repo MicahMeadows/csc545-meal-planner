@@ -1,6 +1,7 @@
 
 package Model;
 
+import MealPlanner.DependencyContainer;
 import Repository.Recipe.IRecipeRepository;
 import java.util.List;
 import java.util.ArrayList;
@@ -10,8 +11,8 @@ import java.util.ArrayList;
 public class RecipeViewModel {
 	final private IRecipeRepository recipeRepository;
 
-	public RecipeViewModel(IRecipeRepository recipeRepository){
-		this.recipeRepository = recipeRepository;
+	public RecipeViewModel(DependencyContainer dependencyContainer){
+		this.recipeRepository = dependencyContainer.getRecipeRepository();
 		this.updateRecipes();
 	}
 

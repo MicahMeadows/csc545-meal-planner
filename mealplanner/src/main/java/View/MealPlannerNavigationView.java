@@ -94,7 +94,7 @@ public class MealPlannerNavigationView extends javax.swing.JFrame {
 		this.tabPanel.addTab("Fridge", fridgePage);
 	}
 
-	public void setMealPlanPageView(MealPlanPageView mealPlanPage){
+	public void setMealPlanPageView(MealPlanView mealPlanPage){
 		this.tabPanel.addTab("Meal Plan", mealPlanPage);
 	}
 

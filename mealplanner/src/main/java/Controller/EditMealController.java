@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import MealPlanner.DependencyContainer;
 import Model.EditMealViewModel;
 import Model.MealModel;
 import Model.RecipeModel;
@@ -28,17 +29,16 @@ public class EditMealController {
 	private final EditMealViewModel model;
 	private final EditMealView view;
 
-	public EditMealController(IMealRepository mealRepository, IRecipeRepository recipeRepository, JFrame frame, Consumer<MealModel> onSubmit){
+	public EditMealController(DependencyContainer dependencyContainer, JFrame frame, Consumer<MealModel> onSubmit){
 		this.onSubmit = onSubmit;
 		this.frame = frame;
 		this.view = new EditMealView(frame, true);
-		this.model = new EditMealViewModel(mealRepository, recipeRepository);
+		this.model = new EditMealViewModel(dependencyContainer);
 		setupListeners();
 		initialize();
 	}
 
 	private void setupListeners(){
-		view.setAddRecipeListener(new AddRecipeListener());
 		view.setCloseListener(new CancelListener());
 		view.setSubmitListener(new SubmitListener());
 		view.setMoveLeftListener(new LeftListener());
@@ -58,15 +58,6 @@ public class EditMealController {
 
 	private void updateModel() {
 		model.setMealName(view.getMealNameText());
-	}
-
-	private class AddRecipeListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent ae) {
-			throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-		}
-
 	}
 
 	private class LeftListener implements ActionListener {
