@@ -18,7 +18,7 @@ public class SelectMealViewModel {
 	private List<MealModel> meals;
 
 	public SelectMealViewModel(DependencyContainer dependencyContainer){
-		this.mealRepository = dependencyContainer.getMealRepository();
+		this.mealRepository = dependencyContainer.getRepositoryFactory().getMealRepository();
 	}
 
 	public void updateMealList(){

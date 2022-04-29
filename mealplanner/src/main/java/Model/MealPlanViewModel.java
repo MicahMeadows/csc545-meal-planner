@@ -28,7 +28,7 @@ public class MealPlanViewModel {
 
 	public MealPlanViewModel(DependencyContainer dependencyContainer){
 		this.todaysDate = LocalDate.now();
-		this.plannedMealRepository = dependencyContainer.getPlannedMealRepository();
+		this.plannedMealRepository = dependencyContainer.getRepositoryFactory().getPlannedMealRepository();
 		this.firstDayOfWeek = WeekFields.of(Locale.US).getFirstDayOfWeek();
 	}
 

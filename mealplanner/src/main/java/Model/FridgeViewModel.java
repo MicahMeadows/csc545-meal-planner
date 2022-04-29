@@ -24,7 +24,7 @@ public class FridgeViewModel {
 	private String selectedGroup = defaultGroupText;
 
 	public FridgeViewModel(DependencyContainer dependencyContainer, int fridgeID){
-		this.itemRepository = dependencyContainer.getItemRepository();
+		this.itemRepository = dependencyContainer.getRepositoryFactory().getItemRepository();
 		this.fridgeID = fridgeID;
 	}
 

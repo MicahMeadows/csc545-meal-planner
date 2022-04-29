@@ -21,7 +21,7 @@ public class DayPlanViewModel {
 	final private LocalDate date;
 
 	public DayPlanViewModel(DependencyContainer dependencyContainer, LocalDate date){
-		this.plannedMealRepository = dependencyContainer.getPlannedMealRepository();
+		this.plannedMealRepository = dependencyContainer.getRepositoryFactory().getPlannedMealRepository();
 		this.date = date;
 	}
 

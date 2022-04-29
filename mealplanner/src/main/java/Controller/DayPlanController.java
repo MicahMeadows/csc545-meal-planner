@@ -23,16 +23,13 @@ import javax.swing.event.ListSelectionListener;
  */
 public class DayPlanController {
 	private final DependencyContainer dependencyContainer;
-
 	private final DayPlanView view;
 	private final DayPlanViewModel model;
 
 	public DayPlanController(DependencyContainer dependencyContainer, DayPlanViewModel model, DayPlanView view){
-		this.dependencyContainer = dependencyContainer;
-
 		this.view = view;
 		this.model = model;
-		
+		this.dependencyContainer = dependencyContainer;
 		initialize();
 	}
 

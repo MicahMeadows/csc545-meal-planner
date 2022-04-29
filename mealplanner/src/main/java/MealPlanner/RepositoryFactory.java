@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package MealPlanner;
 
 import Repository.Item.IItemRepository;
@@ -11,22 +15,23 @@ import Repository.PlannedMeal.TestPlannedMealRepository;
 import Repository.Recipe.IRecipeRepository;
 import Repository.Recipe.TestRecipeRepository;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 /**
  *
  * @author micah
  */
-public class DependencyContainer {
+public class RepositoryFactory {
+	private final DependencyContainer dependencyContainer;
+
 	private IItemRepository itemRepository;
 	private IMealRepository mealRepository;
 	private INutritionRepository nutritionRepository;
 	private IPlannedMealRepository plannedMealRepository;
 	private IRecipeRepository recipeRepository;
 
+	public RepositoryFactory(DependencyContainer dependencyContainer){
+		this.dependencyContainer = dependencyContainer;
+	}
+	
 	public IItemRepository getItemRepository(){
 		if (itemRepository == null){
 			itemRepository = new TestItemRepository(getNutritionRepository());
@@ -61,5 +66,4 @@ public class DependencyContainer {
 		}
 		return recipeRepository;
 	}
-
 }

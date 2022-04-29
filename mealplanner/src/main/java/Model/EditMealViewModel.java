@@ -23,8 +23,8 @@ public class EditMealViewModel {
 	private String mealName;
 
 	public EditMealViewModel(DependencyContainer dependencyContainer){
-		this.recipeRepository = dependencyContainer.getRecipeRepository();
-		this.mealRepository = dependencyContainer.getMealRepository();
+		this.recipeRepository = dependencyContainer.getRepositoryFactory().getRecipeRepository();
+		this.mealRepository = dependencyContainer.getRepositoryFactory().getMealRepository();
 	}
 
 	public MealModel getNewMealModel(){

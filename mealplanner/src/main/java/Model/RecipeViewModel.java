@@ -12,7 +12,7 @@ public class RecipeViewModel {
 	final private IRecipeRepository recipeRepository;
 
 	public RecipeViewModel(DependencyContainer dependencyContainer){
-		this.recipeRepository = dependencyContainer.getRecipeRepository();
+		this.recipeRepository = dependencyContainer.getRepositoryFactory().getRecipeRepository();
 		this.updateRecipes();
 	}
 

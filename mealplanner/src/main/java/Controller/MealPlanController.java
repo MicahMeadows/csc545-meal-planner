@@ -68,13 +68,21 @@ public class MealPlanController {
 		LocalDate day6 = model.getStartDayDate().plusDays(5);
 		LocalDate day7 = model.getStartDayDate().plusDays(6);
 
-		sundayController = new DayPlanController(dependencyContainer, new DayPlanViewModel(dependencyContainer, day1), view.getSundayPlanView());
-		mondayController = new DayPlanController(dependencyContainer, new DayPlanViewModel(dependencyContainer, day2), view.getMondayPlanView());
-		tuesdayController = new DayPlanController(dependencyContainer, new DayPlanViewModel(dependencyContainer, day3), view.getTuesdayPlanView());
-		wednesdayController = new DayPlanController(dependencyContainer, new DayPlanViewModel(dependencyContainer, day4), view.getWednesdayPlanView());
-		thursdayController = new DayPlanController(dependencyContainer, new DayPlanViewModel(dependencyContainer, day5), view.getThursdayPlanView());
-		fridayController = new DayPlanController(dependencyContainer, new DayPlanViewModel(dependencyContainer, day6), view.getFridayPlanView());
-		saturdayController = new DayPlanController(dependencyContainer, new DayPlanViewModel(dependencyContainer, day7), view.getSaturdayPlanView());
+//		sundayController = new DayPlanController(dependencyContainer, new DayPlanViewModel(dependencyContainer, day1), view.getSundayPlanView());
+//		mondayController = new DayPlanController(dependencyContainer, new DayPlanViewModel(dependencyContainer, day2), view.getMondayPlanView());
+//		tuesdayController = new DayPlanController(dependencyContainer, new DayPlanViewModel(dependencyContainer, day3), view.getTuesdayPlanView());
+//		wednesdayController = new DayPlanController(dependencyContainer, new DayPlanViewModel(dependencyContainer, day4), view.getWednesdayPlanView());
+//		thursdayController = new DayPlanController(dependencyContainer, new DayPlanViewModel(dependencyContainer, day5), view.getThursdayPlanView());
+//		fridayController = new DayPlanController(dependencyContainer, new DayPlanViewModel(dependencyContainer, day6), view.getFridayPlanView());
+//		saturdayController = new DayPlanController(dependencyContainer, new DayPlanViewModel(dependencyContainer, day7), view.getSaturdayPlanView());
+		
+		sundayController = dependencyContainer.getComponentFactory().createDayPlanController(day1);
+		mondayController = dependencyContainer.getComponentFactory().createDayPlanController(day1);
+		tuesdayController = dependencyContainer.getComponentFactory().createDayPlanController(day1);
+		wednesdayController = dependencyContainer.getComponentFactory().createDayPlanController(day1);
+		thursdayController = dependencyContainer.getComponentFactory().createDayPlanController(day1);
+		fridayController = dependencyContainer.getComponentFactory().createDayPlanController(day1);
+		saturdayController = dependencyContainer.getComponentFactory().createDayPlanController(day1);
 
 		sundayController.setMealSelectedListener(new MealSelectedListener());
 		mondayController.setMealSelectedListener(new MealSelectedListener());
