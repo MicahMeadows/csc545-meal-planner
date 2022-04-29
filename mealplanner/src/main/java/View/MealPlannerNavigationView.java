@@ -4,6 +4,10 @@
  */
 package View;
 
+import View.Page.FridgePageView;
+import View.Page.MealPlan.MealPlanView;
+import View.Page.RecipePageView;
+
 /**
  *
  * @author micah

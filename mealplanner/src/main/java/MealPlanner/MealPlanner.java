@@ -6,10 +6,10 @@ import Controller.RecipePageController;
 import Model.FridgeViewModel;
 import Model.MealPlanViewModel;
 import Model.RecipeViewModel;
-import View.FridgePageView;
-import View.MealPlanView;
+import View.Page.FridgePageView;
+import View.Page.MealPlan.MealPlanView;
 import View.MealPlannerNavigationView;
-import View.RecipePageView;
+import View.Page.RecipePageView;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license

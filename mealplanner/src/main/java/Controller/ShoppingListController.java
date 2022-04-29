@@ -5,7 +5,7 @@
 package Controller;
 
 import Model.ItemModel;
-import View.ShoppingListView;
+import View.Dialog.ShoppingListView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;

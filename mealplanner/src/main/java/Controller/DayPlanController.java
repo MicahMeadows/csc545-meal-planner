@@ -6,7 +6,7 @@ package Controller;
 
 import MealPlanner.DependencyContainer;
 import Model.DayPlanViewModel;
-import View.DayPlanView;
+import View.Page.MealPlan.DayPlanView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;

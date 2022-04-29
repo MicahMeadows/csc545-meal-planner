@@ -1,4 +1,4 @@
-package View;
+package View.Page.MealPlan;
 
 import Model.PlannedMealModel;
 import java.awt.event.ActionListener;

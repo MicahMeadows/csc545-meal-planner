@@ -10,7 +10,7 @@ import Model.MealModel;
 import Model.RecipeModel;
 import Repository.Meal.IMealRepository;
 import Repository.Recipe.IRecipeRepository;
-import View.EditMealView;
+import View.Dialog.EditMealView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;

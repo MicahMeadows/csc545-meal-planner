@@ -2,10 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package View;
+package View.Page.MealPlan;
 
 import Model.PlannedMealModel;
 import Model.RecipeModel;
+import View.Page.MealPlan.DayPlanView;
 import java.awt.event.ActionListener;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -36,13 +37,13 @@ public class MealPlanView extends javax.swing.JPanel {
 
                 jProgressBar1 = new javax.swing.JProgressBar();
                 pnlWeekPlans = new javax.swing.JPanel();
-                dayPlanSunday = new View.DayPlanView();
-                dayPlanMonday = new View.DayPlanView();
-                dayPlanTuesday = new View.DayPlanView();
-                dayPlanWednesday = new View.DayPlanView();
-                dayPlanThursday = new View.DayPlanView();
-                dayPlanFriday = new View.DayPlanView();
-                dayPlanSaturday = new View.DayPlanView();
+                dayPlanSunday = new View.Page.MealPlan.DayPlanView();
+                dayPlanMonday = new View.Page.MealPlan.DayPlanView();
+                dayPlanTuesday = new View.Page.MealPlan.DayPlanView();
+                dayPlanWednesday = new View.Page.MealPlan.DayPlanView();
+                dayPlanThursday = new View.Page.MealPlan.DayPlanView();
+                dayPlanFriday = new View.Page.MealPlan.DayPlanView();
+                dayPlanSaturday = new View.Page.MealPlan.DayPlanView();
                 jPanel1 = new javax.swing.JPanel();
                 sPaneRecipes = new javax.swing.JScrollPane();
                 lstRecipes = new javax.swing.JList<>();
@@ -60,7 +61,7 @@ public class MealPlanView extends javax.swing.JPanel {
                 btnGenerateShoppingList = new javax.swing.JButton();
                 jSeparator2 = new javax.swing.JSeparator();
 
-                pnlWeekPlans.setLayout(new java.awt.GridLayout());
+                pnlWeekPlans.setLayout(new java.awt.GridLayout(1, 0));
                 pnlWeekPlans.add(dayPlanSunday);
                 pnlWeekPlans.add(dayPlanMonday);
                 pnlWeekPlans.add(dayPlanTuesday);
@@ -252,13 +253,13 @@ public class MealPlanView extends javax.swing.JPanel {
         private javax.swing.JButton btnDeletePlannedMeal;
         private javax.swing.JButton btnGenerateShoppingList;
         private javax.swing.JButton btnNext;
-        private View.DayPlanView dayPlanFriday;
-        private View.DayPlanView dayPlanMonday;
-        private View.DayPlanView dayPlanSaturday;
-        private View.DayPlanView dayPlanSunday;
-        private View.DayPlanView dayPlanThursday;
-        private View.DayPlanView dayPlanTuesday;
-        private View.DayPlanView dayPlanWednesday;
+        private View.Page.MealPlan.DayPlanView dayPlanFriday;
+        private View.Page.MealPlan.DayPlanView dayPlanMonday;
+        private View.Page.MealPlan.DayPlanView dayPlanSaturday;
+        private View.Page.MealPlan.DayPlanView dayPlanSunday;
+        private View.Page.MealPlan.DayPlanView dayPlanThursday;
+        private View.Page.MealPlan.DayPlanView dayPlanTuesday;
+        private View.Page.MealPlan.DayPlanView dayPlanWednesday;
         private javax.swing.JPanel jPanel1;
         private javax.swing.JPanel jPanel2;
         private javax.swing.JPanel jPanel3;

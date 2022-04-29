@@ -9,7 +9,7 @@ import Model.MealModel;
 import Model.SelectMealViewModel;
 import Repository.Meal.IMealRepository;
 import Repository.Recipe.IRecipeRepository;
-import View.SelectMealView;
+import View.Dialog.SelectMealView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.function.Consumer;

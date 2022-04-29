@@ -5,7 +5,7 @@
 package Controller;
 
 import Model.ItemModel;
-import View.ItemDetailsView;
+import View.Dialog.ItemDetailsView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.function.Function;

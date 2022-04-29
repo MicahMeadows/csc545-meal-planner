@@ -59,19 +59,19 @@
         <Property name="rows" type="int" value="1"/>
       </Layout>
       <SubComponents>
-        <Component class="View.DayPlanView" name="dayPlanSunday">
+        <Component class="View.Page.MealPlan.DayPlanView" name="dayPlanSunday">
         </Component>
-        <Component class="View.DayPlanView" name="dayPlanMonday">
+        <Component class="View.Page.MealPlan.DayPlanView" name="dayPlanMonday">
         </Component>
-        <Component class="View.DayPlanView" name="dayPlanTuesday">
+        <Component class="View.Page.MealPlan.DayPlanView" name="dayPlanTuesday">
         </Component>
-        <Component class="View.DayPlanView" name="dayPlanWednesday">
+        <Component class="View.Page.MealPlan.DayPlanView" name="dayPlanWednesday">
         </Component>
-        <Component class="View.DayPlanView" name="dayPlanThursday">
+        <Component class="View.Page.MealPlan.DayPlanView" name="dayPlanThursday">
         </Component>
-        <Component class="View.DayPlanView" name="dayPlanFriday">
+        <Component class="View.Page.MealPlan.DayPlanView" name="dayPlanFriday">
         </Component>
-        <Component class="View.DayPlanView" name="dayPlanSaturday">
+        <Component class="View.Page.MealPlan.DayPlanView" name="dayPlanSaturday">
         </Component>
       </SubComponents>
     </Container>
