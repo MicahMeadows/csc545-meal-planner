@@ -6,7 +6,7 @@ package Controller;
 
 import MealPlanner.DependencyContainer;
 import Model.MealModel;
-import Model.SelectMealViewModel;
+import Model.ViewModel.SelectMealViewModel;
 import Repository.Meal.IMealRepository;
 import Repository.Recipe.IRecipeRepository;
 import View.Dialog.SelectMealView;

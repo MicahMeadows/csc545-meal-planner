@@ -4,7 +4,7 @@
  */
 package Controller;
 
-import Model.FridgeViewModel;
+import Model.ViewModel.FridgeViewModel;
 import Model.ItemModel;
 import View.Page.FridgePageView;
 import java.awt.event.ActionEvent;

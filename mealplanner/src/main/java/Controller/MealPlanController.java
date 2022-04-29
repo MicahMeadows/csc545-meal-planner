@@ -5,9 +5,9 @@
 package Controller;
 
 import MealPlanner.DependencyContainer;
-import Model.DayPlanViewModel;
+import Model.ViewModel.DayPlanViewModel;
 import Model.ItemModel;
-import Model.MealPlanViewModel;
+import Model.ViewModel.MealPlanViewModel;
 import Model.PlannedMealModel;
 import Repository.Meal.IMealRepository;
 import Repository.PlannedMeal.IPlannedMealRepository;

@@ -5,7 +5,7 @@
 package Controller;
 
 import MealPlanner.DependencyContainer;
-import Model.EditMealViewModel;
+import Model.ViewModel.EditMealViewModel;
 import Model.MealModel;
 import Model.RecipeModel;
 import Repository.Meal.IMealRepository;

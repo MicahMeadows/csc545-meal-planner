@@ -1,7 +1,10 @@
 
-package Model;
+package Model.ViewModel;
 
 import MealPlanner.DependencyContainer;
+import Model.ItemModel;
+import Model.NutritionModel;
+import Model.RecipeModel;
 import Repository.Recipe.IRecipeRepository;
 import java.util.List;
 import java.util.ArrayList;

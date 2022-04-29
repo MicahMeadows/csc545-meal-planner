@@ -2,8 +2,8 @@ package MealPlanner;
 
 import Controller.DayPlanController;
 import Controller.EditPlannedMealController;
-import Model.DayPlanViewModel;
-import Model.EditPlannedMealViewModel;
+import Model.ViewModel.DayPlanViewModel;
+import Model.ViewModel.EditPlannedMealViewModel;
 import Model.PlannedMealModel;
 import View.Page.MealPlan.DayPlanView;
 import View.Dialog.EditPlannedMealView;

@@ -3,7 +3,7 @@ package Controller;
 import Model.ItemModel;
 import Model.NutritionModel;
 import Model.RecipeModel;
-import Model.RecipeViewModel;
+import Model.ViewModel.RecipeViewModel;
 import View.Dialog.ItemDetailsView;
 import View.Page.RecipePageView;
 import java.awt.event.ActionEvent;
