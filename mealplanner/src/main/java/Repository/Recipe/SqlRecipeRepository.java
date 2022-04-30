@@ -10,6 +10,7 @@ import Model.NutritionModel;
 import Model.RecipeModel;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import oracle.jdbc.OraclePreparedStatement;
@@ -21,6 +22,8 @@ import oracle.jdbc.OracleResultSet;
  */
 public class SqlRecipeRepository implements IRecipeRepository {
 
+	List<RecipeModel> cachedRecipes;
+	
 	@Override
 	public List<RecipeModel> getAllRecipes() {
 		Connection connection = null;
@@ -85,6 +88,7 @@ public class SqlRecipeRepository implements IRecipeRepository {
 					currentRecipe.getIngredients().add(newIngredient);
 				}				
 			}
+			cachedRecipes = new ArrayList<>(recipes);
 			return recipes;
 		}
 		catch (Exception e){
@@ -98,13 +102,40 @@ public class SqlRecipeRepository implements IRecipeRepository {
 	}
 
 	@Override
-	public RecipeModel getRecipeWithID(int ID) {
-		return null;
+	public List<RecipeModel> getFilteredRecipes(String name, String group, String ingredients) {
+		if (cachedRecipes == null) {
+			getAllRecipes();
+		}
+		return cachedRecipes.stream().filter(recipe -> {
+			boolean nameMatches = recipe.getName().toLowerCase().contains(name.toLowerCase()) || name.isBlank();
+			boolean groupMatches = recipe.getCategory().toLowerCase().contains(group.toLowerCase()) || group.isBlank();
+			
+			String[] splitIngredients = ingredients.replace(" ", "").split(",");
+			List<String> filterIngredients = new ArrayList<>(Arrays.asList(splitIngredients));
+			List<String> recipeIngredients = recipe.getIngredients().stream().map(ingredient -> ingredient.getName()).collect(Collectors.toList());
+			
+
+			boolean ingredientMatch = recipeMatchesIngredients(recipeIngredients, filterIngredients) || ingredients.isEmpty();
+			
+			return nameMatches && groupMatches && ingredientMatch;
+		}).collect(Collectors.toList());
+	}
+	
+	private boolean recipeMatchesIngredients(List<String> recipeIngredients, List<String> filterIngredients){
+		for(String ingredient : filterIngredients){
+			if(!checkIngredientExists(recipeIngredients, ingredient))
+				return false;
+		}
+		return true;
 	}
 
-	@Override
-	public List<RecipeModel> getFilteredRecipes(String name, String group, String ingredients) {
-		return null;
+	private boolean checkIngredientExists(List<String> recipeIngredients, String ingredientToCheck){
+		for(String ingredient : recipeIngredients){
+			if(ingredient.toLowerCase().contains(ingredientToCheck.toLowerCase())){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override

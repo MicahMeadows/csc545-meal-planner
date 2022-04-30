@@ -50,11 +50,6 @@ public class TestRecipeRepository implements IRecipeRepository {
 	}
 
 	@Override
-	public RecipeModel getRecipeWithID(int ID) {
-		return (RecipeModel) (List<RecipeModel>) recipes.stream().filter(r -> r.getID() == ID).findFirst().orElse(null);
-	}
-
-	@Override
 	public List<RecipeModel> getFilteredRecipes(String name, String group, String ingredients) {
 		return recipes.stream().filter(recipe -> {
 			boolean nameMatch = recipe.getName().toLowerCase().contains(name.toLowerCase());

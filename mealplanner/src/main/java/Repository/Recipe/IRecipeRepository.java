@@ -15,8 +15,6 @@ import java.util.List;
  */
 public interface IRecipeRepository {
 	List<RecipeModel> getAllRecipes();
-	RecipeModel getRecipeWithID(int ID);
 	List<RecipeModel> getFilteredRecipes(String name, String group, String ingredients);
 	List<RecipeModel> getRecipesForMealID(int mealID);
-
 }

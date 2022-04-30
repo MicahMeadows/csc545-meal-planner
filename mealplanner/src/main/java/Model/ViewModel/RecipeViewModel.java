@@ -21,10 +21,6 @@ public class RecipeViewModel {
 
 	private List<RecipeModel> recipes = new ArrayList<RecipeModel>();
 
-	public RecipeModel getRecipeWithID(int ID){
-		return recipeRepository.getRecipeWithID(ID);
-	}
-
 	public List<RecipeModel> getAllRecipes(){
 //		return this.recipes;
 		return recipeRepository.getAllRecipes();
