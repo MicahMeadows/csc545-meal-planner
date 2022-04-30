@@ -86,7 +86,7 @@ public class FridgeViewModel {
 	}
 
 	public void deleteItem(int itemID){
-		itemRepository.deleteFridgeItem(fridgeID, itemID);
+		itemRepository.removeFridgeItem(fridgeID, itemID);
 		updateFridgeItems();
 		updateSelectedGroup();
 

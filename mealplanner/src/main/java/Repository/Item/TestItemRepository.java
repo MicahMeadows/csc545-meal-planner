@@ -116,7 +116,7 @@ public class TestItemRepository implements IItemRepository {
 	}
 
 	@Override
-	public void deleteFridgeItem(int fridgeID, int itemID) {
+	public void removeFridgeItem(int fridgeID, int itemID) {
 		FridgeItemModel item = this.fridgeItems.stream()
 			.filter(i -> i.getFridgeID() == fridgeID && i.getItemID() == itemID)
 			.findFirst()
@@ -128,8 +128,10 @@ public class TestItemRepository implements IItemRepository {
 	}
 
 	@Override
-	public void addFridgeItem(int fridgeID, int itemID) {
-		this.fridgeItems.add(new FridgeItemModel(fridgeID, itemID));
+	public FridgeItemModel addFridgeItem(int fridgeID, int itemID) {
+		FridgeItemModel newFridgeItem = new FridgeItemModel(fridgeID, itemID);
+		this.fridgeItems.add(newFridgeItem);
+		return newFridgeItem;
 	}
 
 	@Override

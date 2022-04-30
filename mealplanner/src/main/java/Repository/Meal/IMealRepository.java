@@ -13,7 +13,7 @@ import java.util.List;
  * @author micah
  */
 public interface IMealRepository {
-	public List<MealModel> getAllMeals();
-	public MealModel getMealForID(int ID);
-	public MealModel createMeal(MealModel meal);
+	List<MealModel> getAllMeals();
+	MealModel getMealForID(int ID);
+	MealModel createMeal(MealModel meal);
 }

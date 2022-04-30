@@ -59,7 +59,7 @@ public class MealPlanViewModel {
 		List<ItemModel> fridgeItems = itemRepository.getFridgeItems(0);
 
 		// get plannedMeals in range
-		List<PlannedMealModel> plannedMeals = plannedMealRepository.getPlannedMealsForDay(todaysDate);
+		List<PlannedMealModel> plannedMeals = plannedMealRepository.getPlannedMealsForRange(startDate, endDate);
 
 		// get recipes
 		List<RecipeModel> recipes = new ArrayList<>();
