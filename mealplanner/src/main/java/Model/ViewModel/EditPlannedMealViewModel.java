@@ -49,7 +49,7 @@ public class EditPlannedMealViewModel {
 			if (type.trim().isEmpty()) throw new Exception();
 
 			LocalDateTime planTime = LocalDateTime.of(plannedDate, plannedTime);
-			PlannedMealModel newPlannedMeal = new PlannedMealModel(-1, planTime, selectedMeal.getID(), type, selectedMeal, selectedMeal.getRecipes());
+			PlannedMealModel newPlannedMeal = new PlannedMealModel(-1, planTime, selectedMeal.getID(), type, selectedMeal);
 
 			return newPlannedMeal;
 

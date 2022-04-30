@@ -7,6 +7,10 @@ package MealPlanner;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
 import oracle.jdbc.OraclePreparedStatement;
 import oracle.jdbc.OracleResultSet;
 public class ConnectDB {
@@ -87,4 +91,25 @@ public class ConnectDB {
             {}
         }
     }
+       
+	public static void runStatement(String sqlQueryString, Consumer<OracleResultSet> result){
+		Connection connection = null;
+		OraclePreparedStatement preparedStatement = null;
+		OracleResultSet resultSet = null;
+		
+		try {
+			connection = ConnectDB.setupConnection();
+			preparedStatement = (OraclePreparedStatement)connection.prepareStatement(sqlQueryString);
+			resultSet = (OracleResultSet)preparedStatement.executeQuery();
+			result.accept(resultSet);
+		}
+		catch (Exception e){
+			result.accept(null);
+		}
+		finally {
+			ConnectDB.close(connection);
+			ConnectDB.close(preparedStatement);
+			ConnectDB.close(resultSet);
+		}
+	}
 }

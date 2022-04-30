@@ -37,11 +37,11 @@ public class TestPlannedMealRepository implements IPlannedMealRepository {
 	
 	void initialize(){
 		this.plannedMeals = new ArrayList<>();
-		plannedMeals.add(new PlannedMealModel(0, LocalDateTime.now().minusDays(1), 0, "Dinner", mealRepository.getMealForID(0), recipeRepository.getRecipesForMealID(0)));
-		plannedMeals.add(new PlannedMealModel(1, LocalDateTime.now().minusDays(2), 1, "Lunch", mealRepository.getMealForID(1), recipeRepository.getRecipesForMealID(1)));
-		plannedMeals.add(new PlannedMealModel(2, LocalDateTime.now(), 2, "Lunch", mealRepository.getMealForID(2), recipeRepository.getRecipesForMealID(2)));
-		plannedMeals.add(new PlannedMealModel(3, LocalDateTime.now(), 3, "Dinner", mealRepository.getMealForID(3), recipeRepository.getRecipesForMealID(3)));
-		plannedMeals.add(new PlannedMealModel(4, LocalDateTime.now().plusDays(1), 4, "Lunch", mealRepository.getMealForID(4), recipeRepository.getRecipesForMealID(4)));
+		plannedMeals.add(new PlannedMealModel(0, LocalDateTime.now().minusDays(1), 0, "Dinner", mealRepository.getMealForID(0)));
+		plannedMeals.add(new PlannedMealModel(1, LocalDateTime.now().minusDays(2), 1, "Lunch", mealRepository.getMealForID(1)));
+		plannedMeals.add(new PlannedMealModel(2, LocalDateTime.now(), 2, "Lunch", mealRepository.getMealForID(2)));
+		plannedMeals.add(new PlannedMealModel(3, LocalDateTime.now(), 3, "Dinner", mealRepository.getMealForID(3)));
+		plannedMeals.add(new PlannedMealModel(4, LocalDateTime.now().plusDays(1), 4, "Lunch", mealRepository.getMealForID(4)));
 	}
 	
 	@Override
@@ -68,8 +68,7 @@ public class TestPlannedMealRepository implements IPlannedMealRepository {
 				plannedMeal.getPlannedTime(),
 				plannedMeal.getMealID(),
 				plannedMeal.getMealType(),
-				plannedMeal.getMeal(),
-				plannedMeal.getRecipes()
+				plannedMeal.getMeal()
 			);
 
 			plannedMeals.add(newPlannedMeal);

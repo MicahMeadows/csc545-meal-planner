@@ -11,6 +11,7 @@ import Repository.Meal.TestMealRepository;
 import Repository.Nutrition.INutritionRepository;
 import Repository.Nutrition.TestNutritionRepository;
 import Repository.PlannedMeal.IPlannedMealRepository;
+import Repository.PlannedMeal.SqlPlannedMealRepository;
 import Repository.PlannedMeal.TestPlannedMealRepository;
 import Repository.Recipe.IRecipeRepository;
 import Repository.Recipe.SqlRecipeRepository;
@@ -56,7 +57,8 @@ public class RepositoryFactory {
 
 	public IPlannedMealRepository getPlannedMealRepository(){
 		if (plannedMealRepository == null){
-			plannedMealRepository = new TestPlannedMealRepository(getRecipeRepository(), getMealRepository());
+//			plannedMealRepository = new TestPlannedMealRepository(getRecipeRepository(), getMealRepository());
+			plannedMealRepository = new SqlPlannedMealRepository();
 		}
 		return plannedMealRepository;
 	}
