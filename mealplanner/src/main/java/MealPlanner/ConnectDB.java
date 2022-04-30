@@ -49,7 +49,7 @@ public class ConnectDB {
         return null;
     }
     
-    static void close(Connection conn) 
+    public static void close(Connection conn) 
     {
         if(conn != null) 
         {
@@ -62,7 +62,7 @@ public class ConnectDB {
         }
     }
 
-    static void close(OraclePreparedStatement st)
+    public static void close(OraclePreparedStatement st)
     {
         if(st != null)
         {
@@ -75,7 +75,7 @@ public class ConnectDB {
         }
     }
 
-    static void close(OracleResultSet rs)
+    public static void close(OracleResultSet rs)
     {
         if(rs != null)
         {

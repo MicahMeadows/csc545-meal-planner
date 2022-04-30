@@ -13,6 +13,7 @@ import Repository.Nutrition.TestNutritionRepository;
 import Repository.PlannedMeal.IPlannedMealRepository;
 import Repository.PlannedMeal.TestPlannedMealRepository;
 import Repository.Recipe.IRecipeRepository;
+import Repository.Recipe.SqlRecipeRepository;
 import Repository.Recipe.TestRecipeRepository;
 
 /**
@@ -62,7 +63,8 @@ public class RepositoryFactory {
 
 	public IRecipeRepository getRecipeRepository(){
 		if (recipeRepository == null){
-			recipeRepository = new TestRecipeRepository(getItemRepository());
+//			recipeRepository = new TestRecipeRepository(getItemRepository());
+			recipeRepository = new SqlRecipeRepository();
 		}
 		return recipeRepository;
 	}
