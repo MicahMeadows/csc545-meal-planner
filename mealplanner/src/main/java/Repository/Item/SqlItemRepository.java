@@ -22,12 +22,13 @@ import java.util.stream.Collectors;
  * @author Micah
  */
 public class SqlItemRepository implements IItemRepository {
+
 	private final INutritionRepository nutritionRepository;
-	
-	public SqlItemRepository(DependencyContainer dependencyContainer){
+
+	public SqlItemRepository(DependencyContainer dependencyContainer) {
 		this.nutritionRepository = dependencyContainer.getRepositoryFactory().getNutritionRepository();
 	}
-	
+
 	List<ItemModel> cachedItems = new ArrayList<>();
 
 	@Override
@@ -54,16 +55,15 @@ public class SqlItemRepository implements IItemRepository {
 						int fat = result.getInt("FAT");
 						int sodium = result.getInt("SODIUM");
 						int protein = result.getInt("PROTEIN");
-						
-						NutritionModel itemNutrition = new NutritionModel
-							.Builder(itemId)
+
+						NutritionModel itemNutrition = new NutritionModel.Builder(itemId)
 							.calories(calories)
 							.fat(fat)
 							.sodium(sodium)
 							.sugar(sugar)
 							.protein(protein)
 							.build();
-						
+
 						ItemModel newItem = new ItemModel(itemId, group, name, itemNutrition);
 						items.add(newItem);
 					} catch (SQLException ex) {
@@ -103,8 +103,8 @@ public class SqlItemRepository implements IItemRepository {
 		});
 		List<ItemModel> items = new ArrayList<>();
 		List<Integer> ids = fridgeItems.stream().map(FridgeItemModel::getItemID).collect(Collectors.toList());
-		for (int id : ids){
-			
+		for (int id : ids) {
+
 			List<ItemModel> itemsWithId = getAllItems().stream().filter(item -> item.getID() == id).collect(Collectors.toList());
 			items.addAll(itemsWithId);
 		}
@@ -120,12 +120,14 @@ public class SqlItemRepository implements IItemRepository {
 				try {
 					statement.setInt(1, fridgeID);
 					statement.setInt(2, itemID);
+
 				} catch (SQLException ex) {
 					Logger.getLogger(SqlItemRepository.class.getName()).log(Level.SEVERE, null, ex);
 				}
+
 			},
 			result -> {
-				
+
 			}
 		);
 	}
@@ -136,17 +138,18 @@ public class SqlItemRepository implements IItemRepository {
 		ConnectDB.runPreparedStatement(
 			sqlQuery,
 			statement -> {
-			try {
-				statement.setInt(1, fridgeID);
-				statement.setInt(2, itemID);
-			} catch (SQLException ex) {
-				Logger.getLogger(SqlItemRepository.class.getName()).log(Level.SEVERE, null, ex);
-			}
+				try {
+					statement.setInt(1, fridgeID);
+					statement.setInt(2, itemID);
+				} catch (SQLException ex) {
+					Logger.getLogger(SqlItemRepository.class.getName()).log(Level.SEVERE, null, ex);
+				}
 			},
 			result -> {
-				
+
 			}
 		);
+		updateItems();
 		return new FridgeItemModel(fridgeID, itemID);
 	}
 
@@ -155,35 +158,37 @@ public class SqlItemRepository implements IItemRepository {
 		String sqlQuery = "INSERT INTO ITEM (ITEMGROUP, ITEMNAME) VALUES(?, ?)";
 
 		List<ItemModel> items = new ArrayList<>();
-		ConnectDB.runPreparedStatement(
-			sqlQuery,
-			statement -> {
-				try {
-					statement.setString(1, item.getGroup());
-					statement.setString(2, item.getName());
-				} catch (SQLException e){
-					System.out.println("failed to insert item");
-				}
-				
-			},
-			result -> {
-				try {
-					while (result.next()) {
-						ItemModel itemLike = getItemLike(item);
-						NutritionModel newNutrition = item.getNutrition().copyWithNewId(itemLike.getID());
-						nutritionRepository.createNutrition(newNutrition);
-
+		try {
+			ConnectDB.runPreparedStatement(
+				sqlQuery,
+				statement -> {
+					try {
+						statement.setString(1, item.getGroup());
+						statement.setString(2, item.getName());
+					} catch (SQLException e) {
+						System.out.println("failed to insert item");
 					}
-				} catch (SQLException ex) {
-					Logger.getLogger(SqlItemRepository.class.getName()).log(Level.SEVERE, null, ex);
+
+				},
+				result -> {
+					ItemModel itemLike = getItemLike(item);
+					NutritionModel newNutrition = item.getNutrition().copyWithNewId(itemLike.getID());
+					nutritionRepository.createNutrition(newNutrition);
+					itemLike.setNutrition(newNutrition);
+					items.add(itemLike);
 				}
-			}
-		);
-		if (items.isEmpty()) return null;
+			);
+		} catch (Exception e) {
+			return null;
+		}
+
+		if (items.isEmpty()) {
+			return null;
+		}
 		return items.get(0);
 	}
-	
-	private ItemModel getItemLike(ItemModel itemModel){
+
+	private ItemModel getItemLike(ItemModel itemModel) {
 		String sqlQuery = "SELECT * FROM ITEM WHERE ITEMGROUP = ? AND ITEMNAME = ?";
 
 		List<ItemModel> items = new ArrayList<>();
@@ -193,17 +198,17 @@ public class SqlItemRepository implements IItemRepository {
 				try {
 					statement.setString(1, itemModel.getGroup());
 					statement.setString(2, itemModel.getName());
-				} catch (Exception e){
+				} catch (SQLException e) {
 					System.out.println(" error setting up pre for getitemlike itemmodel");
 				}
-				
+
 			},
 			result -> {
 				try {
 					while (result.next()) {
 
 						int itemId = result.getInt("ID");
-						String groupName = result.getString("GROUPNAME");
+						String groupName = result.getString("ITEMGROUP");
 						String itemName = result.getString("ITEMNAME");
 
 						ItemModel newItem = new ItemModel(itemId, groupName, itemName, null);
@@ -215,7 +220,9 @@ public class SqlItemRepository implements IItemRepository {
 				}
 			}
 		);
-		if (items.isEmpty()) return null;
+		if (items.isEmpty()) {
+			return null;
+		}
 		return items.get(0);
 	}
 

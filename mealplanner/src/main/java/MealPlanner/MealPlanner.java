@@ -27,7 +27,7 @@ public class MealPlanner {
 
 		// Models
 		RecipeViewModel recipePageModel = new RecipeViewModel(dependencyContainer);
-		FridgeViewModel fridgePageModel = new FridgeViewModel(dependencyContainer, 0); // default 0 fridge value for testing
+		FridgeViewModel fridgePageModel = new FridgeViewModel(dependencyContainer, 1); // default 0 fridge value for testing
 		MealPlanViewModel mealPlanPageModel = new MealPlanViewModel(dependencyContainer);
 
 		// Views
