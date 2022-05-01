@@ -1,0 +1,18 @@
+
+# gets all recipes including their recipe ingredients and those ingredients nutritions
+SELECT ITEM.ID 
+    as "IngredientID", ITEM.ITEMGROUP 
+    as "IngredientGroup", ITEM.ITEMNAME 
+    as "IngredientName", 
+    CALORIES, 
+    SUGAR, 
+    PROTEIN, 
+    FAT, 
+    SODIUM, 
+    RECIPEID, 
+    RECIPENAME, 
+    INSTRUCTIONS, 
+    RECIPECATEGORY 
+FROM ITEM INNER JOIN NUTRITION ON ITEM.ID = NUTRITION.ITEMID 
+INNER JOIN RECIPEITEM ON RECIPEITEM.ITEMID = ITEM.ID 
+INNER JOIN RECIPE ON RECIPE.ID = RECIPEITEM.RECIPEID;

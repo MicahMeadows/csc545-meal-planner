@@ -8,11 +8,14 @@ import MealPlanner.ConnectDB;
 import Model.MealModel;
 import Model.PlannedMealModel;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import oracle.sql.TIMESTAMP;
 
 /**
@@ -71,24 +74,32 @@ public class SqlPlannedMealRepository implements IPlannedMealRepository {
 
 	@Override
 	public void removePlannedMeal(int ID) {
-		throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
 	}
 
 	@Override
 	public PlannedMealModel createPlannedMeal(PlannedMealModel plannedMeal) {
-		String sqlQuery = "insert into PlannedMeal (plannedTime, mealID, mealType)\n"
-			+ "values (TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'), 1, 'Brunch w/ GMA')";
+		String sqlQuery = "INSERT INTO PLANNEDMEAL (plannedTime, mealID, mealType) values (?, ?, ?)";
 
-		PlannedMealModel[] newPlannedMeal = { null };
-		ConnectDB.runStatement(sqlQuery, (result) -> {
-			try {
-				while (result.next()) {
-					System.out.println("asdf");
+
+		PlannedMealModel[] newPlannedMeal = {null};
+
+		ConnectDB.runPreparedStatement(
+			sqlQuery,
+			statement -> {
+				try {
+					statement.setTIMESTAMP(1, TIMESTAMP.of(LocalDateTime.now()));
+					statement.setInt(2, 1);
+					statement.setString(3, "obama time");
+				} catch (Exception ex) {
+					System.out.println("fail");
 				}
-			} catch (Exception e) {
-				newPlannedMeal[0] = null;
+			},
+			result -> {
+				System.out.println("");
 			}
-		});
+		);
+
 		return newPlannedMeal[0];
 	}
 }
