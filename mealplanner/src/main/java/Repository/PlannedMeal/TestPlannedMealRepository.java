@@ -61,7 +61,7 @@ public class TestPlannedMealRepository implements IPlannedMealRepository {
 	}
 
 	@Override
-	public PlannedMealModel createPlannedMeal(PlannedMealModel plannedMeal) {
+	public boolean createPlannedMeal(PlannedMealModel plannedMeal) {
 		try {
 			PlannedMealModel newPlannedMeal = new PlannedMealModel(
 				new Random().nextInt(Integer.MAX_VALUE),
@@ -72,12 +72,10 @@ public class TestPlannedMealRepository implements IPlannedMealRepository {
 			);
 
 			plannedMeals.add(newPlannedMeal);
-
-			return newPlannedMeal;
 		} catch (Exception e) {
-			return null;
+			return false;
 		}
-
+		return true;
 	}
 
 	@Override

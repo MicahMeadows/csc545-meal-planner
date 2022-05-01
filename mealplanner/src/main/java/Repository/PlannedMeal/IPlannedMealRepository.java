@@ -16,5 +16,5 @@ public interface IPlannedMealRepository {
 	List<PlannedMealModel> getPlannedMealsForDay(LocalDate date);
 	List<PlannedMealModel> getPlannedMealsForRange(LocalDate startDate, LocalDate endDate);
 	void removePlannedMeal(int ID);
-	PlannedMealModel createPlannedMeal(PlannedMealModel plannedMeal);
+	boolean createPlannedMeal(PlannedMealModel plannedMeal);
 }

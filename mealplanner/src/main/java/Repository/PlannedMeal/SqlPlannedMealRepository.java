@@ -74,32 +74,42 @@ public class SqlPlannedMealRepository implements IPlannedMealRepository {
 
 	@Override
 	public void removePlannedMeal(int ID) {
-
+		String sqlQuery = "DELETE FROM PLANNEDMEAL WHERE ID = ?";
+		
+		ConnectDB.runPreparedStatement(
+			sqlQuery,
+			(statement) -> {
+				try {
+					statement.setInt(1, ID);
+				} catch (Exception ex){
+					System.out.println("fail to remove");
+				}
+			},
+			result -> {}
+		);
 	}
 
 	@Override
-	public PlannedMealModel createPlannedMeal(PlannedMealModel plannedMeal) {
+	public boolean createPlannedMeal(PlannedMealModel plannedMeal) {
 		String sqlQuery = "INSERT INTO PLANNEDMEAL (plannedTime, mealID, mealType) values (?, ?, ?)";
 
-
-		PlannedMealModel[] newPlannedMeal = {null};
-
-		ConnectDB.runPreparedStatement(
+		try {
+			ConnectDB.runPreparedStatement(
 			sqlQuery,
 			statement -> {
 				try {
-					statement.setTIMESTAMP(1, TIMESTAMP.of(LocalDateTime.now()));
+					statement.setTIMESTAMP(1, TIMESTAMP.of(plannedMeal.getPlannedTime()));
 					statement.setInt(2, 1);
-					statement.setString(3, "obama time");
+					statement.setString(3, plannedMeal.getMealType());
 				} catch (Exception ex) {
 					System.out.println("fail");
 				}
 			},
-			result -> {
-				System.out.println("");
-			}
+			result -> {}
 		);
-
-		return newPlannedMeal[0];
+		} catch (Exception e){
+			return false;
+		}
+		return true;
 	}
 }

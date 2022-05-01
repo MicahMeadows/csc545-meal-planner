@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -96,6 +97,7 @@ public class ConnectDB {
 				prepareStatement.accept(preparedStatement);
 			}
 			resultSet = (OracleResultSet)preparedStatement.executeQuery();
+			
 			result.accept(resultSet);
 		} catch (SQLException e) {
 			result.accept(null);
