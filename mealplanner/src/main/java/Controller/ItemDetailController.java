@@ -13,6 +13,7 @@ import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 /**
@@ -23,27 +24,26 @@ public class ItemDetailController {
 	final private Runnable onClose;
 	final private JFrame frame;
 	final private ItemModel item;
+	final private ItemDetailsView view;
 
 	public ItemDetailController(JFrame frame, ItemModel item, Runnable onClose){
 		this.frame = frame;
 		this.item = item;
 		this.onClose = onClose;
+		view = new ItemDetailsView(item, frame, true);
 	}
 
 	public void show(){
-		ItemDetailsView itemDetailDialog = new ItemDetailsView(item, frame, true);
-		itemDetailDialog.setCloseDetailDialogListener(new CloseDetailDialogListener());
-		itemDetailDialog.setLocationRelativeTo(frame);
-		itemDetailDialog.setVisible(true);
+		view.setCloseDetailDialogListener(new CloseDetailDialogListener());
+		view.setLocationRelativeTo(frame);
+		view.setVisible(true);
 
 	}
 		
 	private class CloseDetailDialogListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent ae) {
-			JDialog dialog = (JDialog)SwingUtilities.getRoot((JButton)ae.getSource());
-			dialog.dispose();
-			dialog.setVisible(false);
+			view.close();
 			onClose.run();
 		}
 	}	

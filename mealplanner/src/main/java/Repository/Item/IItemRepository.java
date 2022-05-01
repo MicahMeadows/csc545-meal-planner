@@ -16,10 +16,10 @@ import java.util.List;
  */
 public interface IItemRepository {
 	List<ItemModel> getAllItems();
-	ItemModel getItemWithId(int ID);
 	List<ItemModel> getItemsForRecipeID(int recipeID);
 	List<ItemModel> getFridgeItems(int fridgeID);
 	void removeFridgeItem(int fridgeID, int itemID);
 	FridgeItemModel addFridgeItem(int fridgeID, int itemID);
 	ItemModel createItem(ItemModel item);
+	ItemModel getItemWithId(int id);
 }

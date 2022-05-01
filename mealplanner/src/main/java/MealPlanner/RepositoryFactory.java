@@ -5,10 +5,13 @@
 package MealPlanner;
 
 import Repository.Item.IItemRepository;
+import Repository.Item.SqlItemRepository;
 import Repository.Item.TestItemRepository;
 import Repository.Meal.IMealRepository;
+import Repository.Meal.SqlMealRepository;
 import Repository.Meal.TestMealRepository;
 import Repository.Nutrition.INutritionRepository;
+import Repository.Nutrition.SqlNutritionRepository;
 import Repository.Nutrition.TestNutritionRepository;
 import Repository.PlannedMeal.IPlannedMealRepository;
 import Repository.PlannedMeal.SqlPlannedMealRepository;
@@ -36,21 +39,23 @@ public class RepositoryFactory {
 	
 	public IItemRepository getItemRepository(){
 		if (itemRepository == null){
-			itemRepository = new TestItemRepository(getNutritionRepository());
+//			itemRepository = new TestItemRepository(getNutritionRepository());
+			itemRepository = new SqlItemRepository(dependencyContainer);
 		}
 		return itemRepository;
 	}
 
 	public IMealRepository getMealRepository(){
 		if (mealRepository == null){
-			mealRepository = new TestMealRepository(getRecipeRepository());
+//			mealRepository = new TestMealRepository(getRecipeRepository());
+			mealRepository = new SqlMealRepository(dependencyContainer);
 		}
 		return mealRepository;
 	}
 
 	public INutritionRepository getNutritionRepository(){
 		if (nutritionRepository == null){
-			nutritionRepository = new TestNutritionRepository();
+			nutritionRepository = new SqlNutritionRepository();
 		}
 		return nutritionRepository;
 	}
@@ -58,7 +63,7 @@ public class RepositoryFactory {
 	public IPlannedMealRepository getPlannedMealRepository(){
 		if (plannedMealRepository == null){
 //			plannedMealRepository = new TestPlannedMealRepository(getRecipeRepository(), getMealRepository());
-			plannedMealRepository = new SqlPlannedMealRepository();
+			plannedMealRepository = new SqlPlannedMealRepository(dependencyContainer);
 		}
 		return plannedMealRepository;
 	}
@@ -66,7 +71,7 @@ public class RepositoryFactory {
 	public IRecipeRepository getRecipeRepository(){
 		if (recipeRepository == null){
 //			recipeRepository = new TestRecipeRepository(getItemRepository());
-			recipeRepository = new SqlRecipeRepository();
+			recipeRepository = new SqlRecipeRepository(dependencyContainer);
 		}
 		return recipeRepository;
 	}

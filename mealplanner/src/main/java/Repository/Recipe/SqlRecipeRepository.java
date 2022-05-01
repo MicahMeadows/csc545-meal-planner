@@ -5,10 +5,13 @@
 package Repository.Recipe;
 
 import MealPlanner.ConnectDB;
+import MealPlanner.DependencyContainer;
 import Model.ItemModel;
+import Model.MealModel;
 import Model.MealRecipeModel;
 import Model.NutritionModel;
 import Model.RecipeModel;
+import Repository.Meal.IMealRepository;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,19 +25,19 @@ import oracle.jdbc.OracleResultSet;
  * @author Micah
  */
 public class SqlRecipeRepository implements IRecipeRepository {
+//	private final IMealRepository mealRepository;
 
-//	void main() {
-//		String sq1String = "SELECT * FORM SKDFKSDFLJSDF";
-//		ConnectDB.runStatement(sqlString, (resultSet) {
-//			while(resultSet.next()){
-//				
-//			}
-//		});
-//	}
-	List<RecipeModel> cachedRecipes = new ArrayList<>();
+	private List<RecipeModel> cachedRecipes = new ArrayList<>();
 
+	public SqlRecipeRepository(DependencyContainer dependencyContainer){
+//		this.mealRepository = dependencyContainer.getRepositoryFactory().getMealRepository();
+	}
+	
 	@Override
 	public List<RecipeModel> getAllRecipes() {
+		if (!cachedRecipes.isEmpty()) {
+			return cachedRecipes;
+		}
 
 		String queryString = "SELECT ITEM.ID \n"
 			+ "    as \"IngredientID\", ITEM.ITEMGROUP \n"
@@ -139,29 +142,8 @@ public class SqlRecipeRepository implements IRecipeRepository {
 
 	@Override
 	public List<RecipeModel> getRecipesForMealID(int mealID) {
-
-		// TODO: come back to this and see if we need it
-		List<MealRecipeModel> mealRecipes = new ArrayList<>();
-		mealRecipes.add(new MealRecipeModel(1, 1));
-
-		if (cachedRecipes == null) {
-			getAllRecipes();
-		}
-
-		List<Integer> mealIds = mealRecipes.stream()
-			.map(MealRecipeModel::getMealID)
-			.collect(Collectors.toList());
-
-		List<RecipeModel> recipesForMeal = new ArrayList<>();
-		for (int mealId : mealIds) {
-			cachedRecipes.stream().forEach(recipe -> {
-				if (recipe.getID() == mealId) {
-					recipesForMeal.add(recipe);
-				}
-			});
-		}
-
-		return recipesForMeal;
+//		return mealRepository.getMealForID(mealID).getRecipes();
+		return null;
 	}
 
 }

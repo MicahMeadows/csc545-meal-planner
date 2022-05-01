@@ -5,8 +5,10 @@
 package Repository.PlannedMeal;
 
 import MealPlanner.ConnectDB;
+import MealPlanner.DependencyContainer;
 import Model.MealModel;
 import Model.PlannedMealModel;
+import Repository.Meal.IMealRepository;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
@@ -23,7 +25,12 @@ import oracle.sql.TIMESTAMP;
  * @author Micah
  */
 public class SqlPlannedMealRepository implements IPlannedMealRepository {
-
+	private final IMealRepository mealRepository;
+	
+	public SqlPlannedMealRepository(DependencyContainer dependencyContainer){
+		this.mealRepository = dependencyContainer.getRepositoryFactory().getMealRepository();
+	}
+	
 	@Override
 	public List<PlannedMealModel> getPlannedMealsForDay(LocalDate date) {
 		// get all planned meals for a day
@@ -39,7 +46,7 @@ public class SqlPlannedMealRepository implements IPlannedMealRepository {
 					int mealId = results.getInt("MEALID");
 					String mealType = results.getString("MEALTYPE");
 
-					MealModel mealForPlan = null; // TODO: Add meal repository interactions
+					MealModel mealForPlan = mealRepository.getMealForID(mealId);
 
 					PlannedMealModel newPlannedMeal = new PlannedMealModel(
 						plannedMealId,

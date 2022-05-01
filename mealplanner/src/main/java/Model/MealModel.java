@@ -30,4 +30,13 @@ public class MealModel {
 		return name;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		MealModel other = (MealModel)obj;
+		return other.getName().equals(this.getName()) && 
+			other.getRecipes().equals(this.recipes);
+	}
+	
+	
+
 }
