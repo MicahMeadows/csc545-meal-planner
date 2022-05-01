@@ -25,43 +25,55 @@ import oracle.sql.TIMESTAMP;
  * @author Micah
  */
 public class SqlPlannedMealRepository implements IPlannedMealRepository {
+
 	private final IMealRepository mealRepository;
-	
-	public SqlPlannedMealRepository(DependencyContainer dependencyContainer){
+
+	public SqlPlannedMealRepository(DependencyContainer dependencyContainer) {
 		this.mealRepository = dependencyContainer.getRepositoryFactory().getMealRepository();
 	}
-	
+
 	@Override
 	public List<PlannedMealModel> getPlannedMealsForDay(LocalDate date) {
 		// get all planned meals for a day
-		final String sqlQuery = "SELECT * FROM PLANNEDMEAL";
+//		final String sqlQuery = "SELECT * FROM PLANNEDMEAL WHERE PLANNEDTIME = to_date('23/04/2022','DD/MM/YYYY')";
+		final String sqlQuery = "SELECT * FROM PLANNEDMEAL WHERE PLANNEDTIME = ?";
 
 		List<PlannedMealModel> plannedMeals = new ArrayList<>();
-		ConnectDB.runStatement(sqlQuery, (results) -> {
-			try {
-				while (results.next()) {
-					// get planned meals
-					int plannedMealId = results.getInt("ID");
-					TIMESTAMP plannedTime = results.getTIMESTAMP("PLANNEDTIME");
-					int mealId = results.getInt("MEALID");
-					String mealType = results.getString("MEALTYPE");
-
-					MealModel mealForPlan = mealRepository.getMealForID(mealId);
-
-					PlannedMealModel newPlannedMeal = new PlannedMealModel(
-						plannedMealId,
-						plannedTime.toLocalDateTime(), // convert from timestamp
-						mealId,
-						mealType,
-						mealForPlan // get from meal repo
-					);
-
-					plannedMeals.add(newPlannedMeal);
+		ConnectDB.runPreparedStatement(
+			sqlQuery,
+			statement -> {
+				try {
+					statement.setDate(1, Date.valueOf(date));
+				} catch (SQLException ex) {
+					Logger.getLogger(SqlPlannedMealRepository.class.getName()).log(Level.SEVERE, null, ex);
 				}
-			} catch (Exception e) {
+			},
+			(results) -> {
+				try {
+					while (results.next()) {
+						// get planned meals
+						int plannedMealId = results.getInt("ID");
+						TIMESTAMP plannedTime = results.getTIMESTAMP("PLANNEDTIME");
+						int mealId = results.getInt("MEALID");
+						String mealType = results.getString("MEALTYPE");
 
+						MealModel mealForPlan = mealRepository.getMealForID(mealId);
+
+						PlannedMealModel newPlannedMeal = new PlannedMealModel(
+							plannedMealId,
+							plannedTime.toLocalDateTime(), // convert from timestamp
+							mealId,
+							mealType,
+							mealForPlan // get from meal repo
+						);
+
+						plannedMeals.add(newPlannedMeal);
+					}
+				} catch (Exception e) {
+
+				}
 			}
-		});
+		);
 		return plannedMeals;
 		// then get meal for that planned meal
 		// get the recipes for that planned meal
@@ -82,17 +94,18 @@ public class SqlPlannedMealRepository implements IPlannedMealRepository {
 	@Override
 	public void removePlannedMeal(int ID) {
 		String sqlQuery = "DELETE FROM PLANNEDMEAL WHERE ID = ?";
-		
+
 		ConnectDB.runPreparedStatement(
 			sqlQuery,
 			(statement) -> {
 				try {
 					statement.setInt(1, ID);
-				} catch (Exception ex){
+				} catch (Exception ex) {
 					System.out.println("fail to remove");
 				}
 			},
-			result -> {}
+			result -> {
+			}
 		);
 	}
 
@@ -102,19 +115,20 @@ public class SqlPlannedMealRepository implements IPlannedMealRepository {
 
 		try {
 			ConnectDB.runPreparedStatement(
-			sqlQuery,
-			statement -> {
-				try {
-					statement.setTIMESTAMP(1, TIMESTAMP.of(plannedMeal.getPlannedTime()));
-					statement.setInt(2, 1);
-					statement.setString(3, plannedMeal.getMealType());
-				} catch (Exception ex) {
-					System.out.println("fail");
+				sqlQuery,
+				statement -> {
+					try {
+						statement.setTIMESTAMP(1, TIMESTAMP.of(plannedMeal.getPlannedTime()));
+						statement.setInt(2, 1);
+						statement.setString(3, plannedMeal.getMealType());
+					} catch (Exception ex) {
+						System.out.println("fail");
+					}
+				},
+				result -> {
 				}
-			},
-			result -> {}
-		);
-		} catch (Exception e){
+			);
+		} catch (Exception e) {
 			return false;
 		}
 		return true;

@@ -40,11 +40,11 @@ public class SqlMealRepository implements IMealRepository {
 
 		return cachedMeals;
 	}
-	
-	private void updateMeals(){
+
+	private void updateMeals() {
 		String sqlQuery = "SELECT * FROM MEALS";
 		List<MealModel> meals = getMealsFromSqlString(sqlQuery, null);
-		if (!meals.isEmpty()){
+		if (!meals.isEmpty()) {
 			cachedMeals = meals;
 		}
 	}
@@ -55,8 +55,8 @@ public class SqlMealRepository implements IMealRepository {
 		List<MealModel> meals = getMealsFromSqlString(sqlQuery, statement -> {
 			try {
 				statement.setInt(1, ID);
-			} catch (SQLException ex) {
-				Logger.getLogger(SqlMealRepository.class.getName()).log(Level.SEVERE, null, ex);
+			} catch (SQLException ex) {	
+				System.out.println("error with get meal id");
 			}
 		});
 		if (meals.isEmpty()) {
@@ -67,18 +67,23 @@ public class SqlMealRepository implements IMealRepository {
 
 	private List<MealModel> getMealsFromSqlString(String sqlString, Consumer<OraclePreparedStatement> statement) {
 		List<MealModel> meals = new ArrayList<>();
-		ConnectDB.runPreparedStatement(sqlString, statement, result -> {
-			try {
-				while (result.next()) {
-					int mealId = result.getInt("ID");
-					String mealName = result.getString("MEALNAME");
-					List<RecipeModel> mealRecipes = recipeRepository.getRecipesForMealID(mealId);
-					meals.add(new MealModel(mealId, mealName, mealRecipes));
+		try {
+			ConnectDB.runPreparedStatement(sqlString, statement, result -> {
+				try {
+					while (result.next()) {
+						int mealId = result.getInt("ID");
+						String mealName = result.getString("MEALNAME");
+						List<RecipeModel> mealRecipes = recipeRepository.getRecipesForMealID(mealId);
+						meals.add(new MealModel(mealId, mealName, mealRecipes));
+					}
+				} catch (SQLException ex) {
+					Logger.getLogger(SqlMealRepository.class.getName()).log(Level.SEVERE, null, ex);
 				}
-			} catch (SQLException ex) {
-				Logger.getLogger(SqlMealRepository.class.getName()).log(Level.SEVERE, null, ex);
-			}
-		});
+			});
+		} catch (Exception e) {
+			System.out.println("fail get meal from string");
+		}
+
 		return meals;
 	}
 
@@ -96,12 +101,13 @@ public class SqlMealRepository implements IMealRepository {
 					Logger.getLogger(SqlMealRepository.class.getName()).log(Level.SEVERE, null, ex);
 				}
 			},
-			result -> { }
+			result -> {
+			}
 		);
 		return getMealModelLike(meal);
 	}
-	
-	private MealModel getMealModelLike(MealModel mealModel){
+
+	private MealModel getMealModelLike(MealModel mealModel) {
 		updateMeals();
 		return cachedMeals.stream()
 			.filter(meal -> meal.equals(mealModel))
