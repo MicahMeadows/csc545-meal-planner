@@ -56,7 +56,7 @@ public class MealPlanViewModel {
 
 	public List<ItemModel> generateShoppingListItems(LocalDate startDate, LocalDate endDate){
 		// get fridge items
-		List<ItemModel> fridgeItems = itemRepository.getFridgeItems(0);
+		List<ItemModel> fridgeItems = itemRepository.getFridgeItems(1);
 
 		// get plannedMeals in range
 		List<PlannedMealModel> plannedMeals = plannedMealRepository.getPlannedMealsForRange(startDate, endDate);

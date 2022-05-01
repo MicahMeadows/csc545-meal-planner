@@ -49,6 +49,7 @@ public class ItemDetailsView extends javax.swing.JDialog {
 		if (item == null){
 			displayErrorPopup("No nutrition data loaded.");
 			this.close();
+			return;
 		}
 		int calories = item.getNutrition().getCalories();
 		int fat = item.getNutrition().getFat();

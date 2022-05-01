@@ -94,17 +94,18 @@ public class SqlItemRepository implements IItemRepository {
 				while (result.next()) {
 					int fridgeId = result.getInt("FRIDGEID");
 					int itemId = result.getInt("ITEMID");
-					FridgeItemModel newItem = new FridgeItemModel(fridgeId, fridgeId);
+					FridgeItemModel newItem = new FridgeItemModel(fridgeId, itemId);
 					fridgeItems.add(newItem);
 				}
 			} catch (SQLException e) {
-
+				System.out.println("err");
 			}
 		});
 		List<ItemModel> items = new ArrayList<>();
 		List<Integer> ids = fridgeItems.stream().map(FridgeItemModel::getItemID).collect(Collectors.toList());
 		for (int id : ids){
-			List<ItemModel> itemsWithId = cachedItems.stream().filter(item -> item.getID() == id).collect(Collectors.toList());
+			
+			List<ItemModel> itemsWithId = getAllItems().stream().filter(item -> item.getID() == id).collect(Collectors.toList());
 			items.addAll(itemsWithId);
 		}
 		return items;
@@ -166,16 +167,16 @@ public class SqlItemRepository implements IItemRepository {
 				
 			},
 			result -> {
-			try {
-				while (result.next()){
-					ItemModel itemLike = getItemLike(item);					
-					NutritionModel newNutrition = item.getNutrition().copyWithNewId(itemLike.getID());
-					nutritionRepository.createNutrition(newNutrition);
+				try {
+					while (result.next()) {
+						ItemModel itemLike = getItemLike(item);
+						NutritionModel newNutrition = item.getNutrition().copyWithNewId(itemLike.getID());
+						nutritionRepository.createNutrition(newNutrition);
 
+					}
+				} catch (SQLException ex) {
+					Logger.getLogger(SqlItemRepository.class.getName()).log(Level.SEVERE, null, ex);
 				}
-			} catch (SQLException ex) {
-				Logger.getLogger(SqlItemRepository.class.getName()).log(Level.SEVERE, null, ex);
-			}
 			}
 		);
 		if (items.isEmpty()) return null;
