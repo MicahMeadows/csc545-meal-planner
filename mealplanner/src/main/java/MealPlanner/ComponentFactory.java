@@ -35,7 +35,7 @@ public class ComponentFactory {
 	}
 
 	public void showEditPlannedMealDialog(JFrame frame, LocalDate date, Consumer<PlannedMealModel> onSubmit){
-		final EditPlannedMealViewModel model = new EditPlannedMealViewModel(date);
+		final EditPlannedMealViewModel model = new EditPlannedMealViewModel(dependencyContainer, date);
 		final EditPlannedMealView view = new EditPlannedMealView(frame, true);
 		final EditPlannedMealController controller = new EditPlannedMealController(dependencyContainer, frame, date, onSubmit, view, model);
 		controller.show();

@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import oracle.sql.TIMESTAMP;
 
 /**
@@ -36,45 +37,59 @@ public class SqlPlannedMealRepository implements IPlannedMealRepository {
 	public List<PlannedMealModel> getPlannedMealsForDay(LocalDate date) {
 		// get all planned meals for a day
 //		final String sqlQuery = "SELECT * FROM PLANNEDMEAL WHERE PLANNEDTIME = to_date('23/04/2022','DD/MM/YYYY')";
-		final String sqlQuery = "SELECT * FROM PLANNEDMEAL WHERE PLANNEDTIME = ?";
+		final String sqlQuery = "SELECT * FROM PLANNEDMEAL"; // WHERE PLANNEDTIME = to_date('" + date.toString() + "','DD/MM/YYYY')";
+//		final String sqlQuery = "SELECT * FROM PLANNEDMEAL WHERE PLANNEDTIME = ?";
 
+//		String dateString = date.toString();
+//		System.out.println(dateString);
+		
 		List<PlannedMealModel> plannedMeals = new ArrayList<>();
-		ConnectDB.runPreparedStatement(
-			sqlQuery,
-			statement -> {
-				try {
-					statement.setDate(1, Date.valueOf(date));
-				} catch (SQLException ex) {
-					Logger.getLogger(SqlPlannedMealRepository.class.getName()).log(Level.SEVERE, null, ex);
-				}
-			},
-			(results) -> {
-				try {
-					while (results.next()) {
-						// get planned meals
-						int plannedMealId = results.getInt("ID");
-						TIMESTAMP plannedTime = results.getTIMESTAMP("PLANNEDTIME");
-						int mealId = results.getInt("MEALID");
-						String mealType = results.getString("MEALTYPE");
+		try {
+			ConnectDB.runPreparedStatement(
+				sqlQuery,
+				statement -> {
+//					try {
+//						statement.setDate(1, Date.valueOf(date));
+//					} catch (SQLException ex) {
+//						Logger.getLogger(SqlPlannedMealRepository.class.getName()).log(Level.SEVERE, null, ex);
+//					}
+				},
+				results -> {
+					try {
+						while (results.next()) {
+							// get planned meals
+							int plannedMealId = Integer.parseInt(results.getString("ID")) ;
+							
+							TIMESTAMP plannedTime = results.getTIMESTAMP("PLANNEDTIME");
 
-						MealModel mealForPlan = mealRepository.getMealForID(mealId);
 
-						PlannedMealModel newPlannedMeal = new PlannedMealModel(
-							plannedMealId,
-							plannedTime.toLocalDateTime(), // convert from timestamp
-							mealId,
-							mealType,
-							mealForPlan // get from meal repo
-						);
+							int mealId = Integer.parseInt(results.getString("MEALID")) ;
+							String mealType = results.getString("MEALTYPE");
 
-						plannedMeals.add(newPlannedMeal);
+							MealModel mealForPlan = mealRepository.getMealForID(mealId);
+
+							PlannedMealModel newPlannedMeal = new PlannedMealModel(
+								plannedMealId,
+								plannedTime.toLocalDateTime(), // convert from timestamp
+								mealId,
+								mealType,
+								mealForPlan // get from meal repo
+							);
+
+							plannedMeals.add(newPlannedMeal);
+						}
+					} catch (Exception e) {
+						System.out.println(e.toString());
 					}
-				} catch (Exception e) {
-
 				}
-			}
-		);
-		return plannedMeals;
+			);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return plannedMeals.stream()
+			.filter(meal -> meal.getPlannedTime().toLocalDate().equals(date))
+			.collect(Collectors.toList());
 		// then get meal for that planned meal
 		// get the recipes for that planned meal
 		// build the planned meal and return it
@@ -119,7 +134,7 @@ public class SqlPlannedMealRepository implements IPlannedMealRepository {
 				statement -> {
 					try {
 						statement.setTIMESTAMP(1, TIMESTAMP.of(plannedMeal.getPlannedTime()));
-						statement.setInt(2, 1);
+						statement.setInt(2, plannedMeal.getMeal().getID());
 						statement.setString(3, plannedMeal.getMealType());
 					} catch (Exception ex) {
 						System.out.println("fail");

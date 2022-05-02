@@ -13,7 +13,7 @@ import java.util.List;
 public class MealModel {
 	private int ID;
 	private final String name;
-	private final List<RecipeModel> recipes;
+	private List<RecipeModel> recipes;
 
 	public MealModel(int ID, String name, List<RecipeModel> recipes){
 		this.ID = ID;
@@ -23,6 +23,10 @@ public class MealModel {
 
 	public void setID(int newID){
 		this.ID = newID;
+	}
+	
+	public void setRecipes(List<RecipeModel> recipes){
+		this.recipes = recipes;
 	}
 	
 	public String getName() { return this.name; }

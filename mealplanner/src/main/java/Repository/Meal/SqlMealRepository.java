@@ -34,9 +34,9 @@ public class SqlMealRepository implements IMealRepository {
 	
 	@Override
 	public List<MealModel> getAllMeals() {
-		if (!cachedMeals.isEmpty()) {
-			return cachedMeals;
-		}
+//		if (!cachedMeals.isEmpty()) {
+//			return cachedMeals;
+//		}
 		updateMeals();
 		
 		return cachedMeals;
@@ -65,7 +65,12 @@ public class SqlMealRepository implements IMealRepository {
 		if (meals.isEmpty()) {
 			return null;
 		}
-		return meals.get(0);
+		MealModel mealWithId = meals.get(0);
+		
+		List<RecipeModel> recipesForMeal = recipeRepository.getRecipesForMealID(mealWithId.getID());
+		
+		mealWithId.setRecipes(recipesForMeal);
+		return mealWithId;
 	}
 	
 	private List<MealModel> getMealsFromSqlString(String sqlString, Consumer<OraclePreparedStatement> statement) {
