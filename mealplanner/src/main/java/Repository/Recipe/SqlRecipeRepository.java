@@ -11,11 +11,15 @@ import Model.MealModel;
 import Model.MealRecipeModel;
 import Model.NutritionModel;
 import Model.RecipeModel;
+import Repository.Item.IItemRepository;
 import Repository.Meal.IMealRepository;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import oracle.jdbc.OraclePreparedStatement;
 import oracle.jdbc.OracleResultSet;
@@ -27,12 +31,15 @@ import oracle.jdbc.OracleResultSet;
 public class SqlRecipeRepository implements IRecipeRepository {
 //	private final IMealRepository mealRepository;
 
+	private final IItemRepository itemRepository;
+
 	private List<RecipeModel> cachedRecipes = new ArrayList<>();
 
-	public SqlRecipeRepository(DependencyContainer dependencyContainer){
+	public SqlRecipeRepository(DependencyContainer dependencyContainer) {
+		this.itemRepository = dependencyContainer.getRepositoryFactory().getItemRepository();
 //		this.mealRepository = dependencyContainer.getRepositoryFactory().getMealRepository();
 	}
-	
+
 	@Override
 	public List<RecipeModel> getAllRecipes() {
 		if (!cachedRecipes.isEmpty()) {
@@ -140,10 +147,64 @@ public class SqlRecipeRepository implements IRecipeRepository {
 		return false;
 	}
 
+//	private List<Integer> getRecipeIdsForMealId(int mealID) {
+//		String sqlQuery = "SELECT * FROM MEALRECIPE WHERE MEALID = ?";
+//
+//		List<Integer> recipeIds = new ArrayList<>();
+//		ConnectDB.runPreparedStatement(sqlQuery,
+//			statement -> {
+//				try {
+//					statement.setInt(1, mealID);
+//				} catch (SQLException ex) {
+//					Logger.getLogger(SqlRecipeRepository.class.getName()).log(Level.SEVERE, null, ex);
+//				}
+//			},
+//			result -> {
+//				try {
+//					while (result.next()) {
+//						int id = Integer.parseInt(result.getString("RECIPEID"));
+//						recipeIds.add(id);
+//					}
+//				} catch (Exception e) {
+//
+//				}
+//			}
+//		);
+//		return recipeIds;
+//	}
 	@Override
 	public List<RecipeModel> getRecipesForMealID(int mealID) {
-//		return mealRepository.getMealForID(mealID).getRecipes();
-		return null;
+		String sqlQuery = "SELECT MEALID, RECIPE.ID as \"RECIPEID\", RECIPENAME, INSTRUCTIONS, RECIPECATEGORY\n"
+			+ "FROM MEALRECIPE INNER JOIN RECIPE ON RECIPEID = RECIPE.ID\n"
+			+ "WHERE MEALID = ?";
+
+		List<RecipeModel> recipes = new ArrayList<>();
+		ConnectDB.runPreparedStatement(sqlQuery,
+			statement -> {
+				try {
+					statement.setInt(1, mealID);
+				} catch (SQLException ex) {
+					Logger.getLogger(SqlRecipeRepository.class.getName()).log(Level.SEVERE, null, ex);
+				}
+			},
+			result -> {
+				try {
+					while (result.next()) {
+						int recipeId = Integer.parseInt(result.getString("RECIPEID"));
+						String recipeName = result.getString("RECIPENAME");
+						String instructions = result.getString("INSTRUCTIONS");
+						String category = result.getString("RECIPECATEGORY");
+						List<ItemModel> ingredients = itemRepository.getItemsForRecipeID(recipeId);
+
+						recipes.add(new RecipeModel(recipeId, recipeName, instructions, category, ingredients));
+					}
+				} catch (SQLException e) {
+					System.out.println(e.toString());
+				}
+
+			}
+		);
+		return recipes;
 	}
 
 }

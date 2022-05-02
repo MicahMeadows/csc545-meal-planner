@@ -23,6 +23,7 @@ public class MealPlanView extends javax.swing.JPanel {
 	 */
 	public MealPlanView() {
 		initComponents();
+		hideViews();
 	}
 
 	/**
@@ -44,7 +45,7 @@ public class MealPlanView extends javax.swing.JPanel {
                 dayPlanThursday = new View.Page.MealPlan.DayPlanView();
                 dayPlanFriday = new View.Page.MealPlan.DayPlanView();
                 dayPlanSaturday = new View.Page.MealPlan.DayPlanView();
-                jPanel1 = new javax.swing.JPanel();
+                panelSelectedItem = new javax.swing.JPanel();
                 sPaneRecipes = new javax.swing.JScrollPane();
                 lstRecipes = new javax.swing.JList<>();
                 lstRequiredRecipes = new javax.swing.JLabel();
@@ -85,37 +86,37 @@ public class MealPlanView extends javax.swing.JPanel {
                 lblMealType.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
                 lblMealType.setText("Dinner");
 
-                javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-                jPanel1.setLayout(jPanel1Layout);
-                jPanel1Layout.setHorizontalGroup(
-                        jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
+                javax.swing.GroupLayout panelSelectedItemLayout = new javax.swing.GroupLayout(panelSelectedItem);
+                panelSelectedItem.setLayout(panelSelectedItemLayout);
+                panelSelectedItemLayout.setHorizontalGroup(
+                        panelSelectedItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelSelectedItemLayout.createSequentialGroup()
                                 .addGap(103, 103, 103)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(panelSelectedItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(btnDeletePlannedMeal)
                                         .addComponent(lblMealTitle)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(panelSelectedItemLayout.createSequentialGroup()
                                                 .addComponent(lblMealType)
                                                 .addGap(18, 18, 18)
                                                 .addComponent(lblMealTime)))
                                 .addGap(34, 34, 34)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(panelSelectedItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(lstRequiredRecipes)
                                         .addComponent(sPaneRecipes, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 );
-                jPanel1Layout.setVerticalGroup(
-                        jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                panelSelectedItemLayout.setVerticalGroup(
+                        panelSelectedItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelSelectedItemLayout.createSequentialGroup()
+                                .addGroup(panelSelectedItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(panelSelectedItemLayout.createSequentialGroup()
                                                 .addContainerGap()
                                                 .addComponent(lstRequiredRecipes)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(sPaneRecipes, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(panelSelectedItemLayout.createSequentialGroup()
                                                 .addGap(38, 38, 38)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addGroup(panelSelectedItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                         .addComponent(lblMealType)
                                                         .addComponent(lblMealTime, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -186,7 +187,7 @@ public class MealPlanView extends javax.swing.JPanel {
                                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(pnlWeekPlans, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(panelSelectedItem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jSeparator2))
                                 .addContainerGap())
                 );
@@ -202,7 +203,7 @@ public class MealPlanView extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(panelSelectedItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
                 );
         }// </editor-fold>//GEN-END:initComponents
@@ -213,10 +214,21 @@ public class MealPlanView extends javax.swing.JPanel {
 		revalidate();
 		repaint();
 	}
+	
+	public void hideViews(){
+		panelSelectedItem.setVisible(false);
+	}
+	
+	public void showViews(){
+		panelSelectedItem.setVisible(true);
+	}
 
 	public void setSelectedPlannedMeal(PlannedMealModel plannedMeal){
-		if (plannedMeal == null) return;
-
+		if (plannedMeal == null){
+			hideViews();
+			return;
+		}
+		showViews();
 		try {
 			lblMealType.setText(plannedMeal.getMealType());
 			lblMealTime.setText(plannedMeal.getPlannedTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
@@ -260,7 +272,6 @@ public class MealPlanView extends javax.swing.JPanel {
         private View.Page.MealPlan.DayPlanView dayPlanThursday;
         private View.Page.MealPlan.DayPlanView dayPlanTuesday;
         private View.Page.MealPlan.DayPlanView dayPlanWednesday;
-        private javax.swing.JPanel jPanel1;
         private javax.swing.JPanel jPanel2;
         private javax.swing.JPanel jPanel3;
         private javax.swing.JProgressBar jProgressBar1;
@@ -272,6 +283,7 @@ public class MealPlanView extends javax.swing.JPanel {
         private javax.swing.JLabel lblTitle;
         private javax.swing.JList<RecipeModel> lstRecipes;
         private javax.swing.JLabel lstRequiredRecipes;
+        private javax.swing.JPanel panelSelectedItem;
         private javax.swing.JPanel pnlWeekPlans;
         private javax.swing.JScrollPane sPaneRecipes;
         // End of variables declaration//GEN-END:variables

@@ -133,6 +133,7 @@ public class MealPlanController {
 			if (plannedMeal != null) {
 				model.deletePlannedMeal(plannedMeal);
 				setupDayPlans();
+				view.hideViews();
 			}
 		}
 

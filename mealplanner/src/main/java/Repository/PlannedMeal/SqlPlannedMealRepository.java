@@ -8,7 +8,9 @@ import MealPlanner.ConnectDB;
 import MealPlanner.DependencyContainer;
 import Model.MealModel;
 import Model.PlannedMealModel;
+import Model.RecipeModel;
 import Repository.Meal.IMealRepository;
+import Repository.Recipe.IRecipeRepository;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
@@ -28,20 +30,29 @@ import oracle.sql.TIMESTAMP;
 public class SqlPlannedMealRepository implements IPlannedMealRepository {
 
 	private final IMealRepository mealRepository;
+	private final IRecipeRepository recipeRepository;
 
 	public SqlPlannedMealRepository(DependencyContainer dependencyContainer) {
+		this.recipeRepository = dependencyContainer.getRepositoryFactory().getRecipeRepository();
 		this.mealRepository = dependencyContainer.getRepositoryFactory().getMealRepository();
 	}
 
 	@Override
 	public List<PlannedMealModel> getPlannedMealsForDay(LocalDate date) {
-		// get all planned meals for a day
-//		final String sqlQuery = "SELECT * FROM PLANNEDMEAL WHERE PLANNEDTIME = to_date('23/04/2022','DD/MM/YYYY')";
-		final String sqlQuery = "SELECT * FROM PLANNEDMEAL"; // WHERE PLANNEDTIME = to_date('" + date.toString() + "','DD/MM/YYYY')";
-//		final String sqlQuery = "SELECT * FROM PLANNEDMEAL WHERE PLANNEDTIME = ?";
+		return getPlannedMealsForRange(date, date);
+	}
+	
 
-//		String dateString = date.toString();
-//		System.out.println(dateString);
+	@Override
+	public List<PlannedMealModel> getPlannedMealsForRange(LocalDate startDate, LocalDate endDate) {
+		// get all planned meals for a day
+		System.out.println(startDate.toString());
+		System.out.println(endDate.toString());
+		System.out.println("-------");
+		final String sqlQuery = "SELECT * FROM PLANNEDMEAL "
+			+ "WHERE PLANNEDTIME "
+			+ "BETWEEN TO_DATE('" + startDate.toString() + "', 'YYYY-MM-DD') AND TO_DATE('" + endDate.plusDays(1).toString() + "', 'YYYY-MM-DD')";
+
 		
 		List<PlannedMealModel> plannedMeals = new ArrayList<>();
 		try {
@@ -59,10 +70,7 @@ public class SqlPlannedMealRepository implements IPlannedMealRepository {
 						while (results.next()) {
 							// get planned meals
 							int plannedMealId = Integer.parseInt(results.getString("ID")) ;
-							
 							TIMESTAMP plannedTime = results.getTIMESTAMP("PLANNEDTIME");
-
-
 							int mealId = Integer.parseInt(results.getString("MEALID")) ;
 							String mealType = results.getString("MEALTYPE");
 
@@ -87,24 +95,9 @@ public class SqlPlannedMealRepository implements IPlannedMealRepository {
 			System.out.println(e);
 		}
 
-		return plannedMeals.stream()
-			.filter(meal -> meal.getPlannedTime().toLocalDate().equals(date))
-			.collect(Collectors.toList());
-		// then get meal for that planned meal
-		// get the recipes for that planned meal
-		// build the planned meal and return it
-	}
-
-	@Override
-	public List<PlannedMealModel> getPlannedMealsForRange(LocalDate startDate, LocalDate endDate) {
-		LocalDate movingDate = startDate;
-		List<PlannedMealModel> plannedMeals = new ArrayList<>();
-		while (!movingDate.isAfter(endDate)) {
-			plannedMeals.addAll(getPlannedMealsForDay(movingDate));
-			movingDate.plusDays(1);
-		}
 		return plannedMeals;
 	}
+
 
 	@Override
 	public void removePlannedMeal(int ID) {

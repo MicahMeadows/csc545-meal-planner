@@ -81,7 +81,28 @@ public class SqlItemRepository implements IItemRepository {
 
 	@Override
 	public List<ItemModel> getItemsForRecipeID(int recipeID) {
-		throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+		String sqlQuery = "SELECT ITEMID FROM ITEM INNER JOIN RECIPEITEM ON ITEM.ID = RECIPEITEM.ITEMID WHERE RECIPEID = ?";
+
+		List<Integer> itemIds = new ArrayList<>();
+		ConnectDB.runPreparedStatement(sqlQuery, statement -> {
+			try {
+				statement.setInt(1, recipeID);
+			} catch (SQLException ex) {
+				Logger.getLogger(SqlItemRepository.class.getName()).log(Level.SEVERE, null, ex);
+			}
+		}, result -> {
+			try {
+				while (result.next()) {
+					int itemId = Integer.parseInt(result.getString("ITEMID"));
+					itemIds.add(itemId);
+				}
+			} catch (Exception e) {
+
+			}
+
+		});
+
+		return itemIds.stream().map(itemid -> getItemWithId(itemid)).collect(Collectors.toList());
 	}
 
 	@Override
@@ -153,8 +174,32 @@ public class SqlItemRepository implements IItemRepository {
 		return new FridgeItemModel(fridgeID, itemID);
 	}
 
+	private int getExistingItemId(String itemName, String itemGroup){
+		String sqlQuery = "SELECT * FROM ITEM WHERE ITEMGROUP = '"+itemGroup+"' AND ITEMNAME = '"+itemName+"'";
+		String[] resultId = { null };
+		ConnectDB.runStatement(sqlQuery, result -> {
+			try {
+				while(result.next()){
+					String id = result.getString("ID");
+					resultId[0] = id;
+				}
+			} catch (SQLException ex) {
+				Logger.getLogger(SqlItemRepository.class.getName()).log(Level.SEVERE, null, ex);
+			}
+		});
+		return Integer.parseInt(resultId[0]);
+	}
+	
 	@Override
 	public ItemModel createItem(ItemModel item) {
+		try {
+			int existingId = getExistingItemId(item.getName(), item.getGroup());
+			ItemModel existingItem = getItemWithId(existingId);
+			return existingItem;
+		} catch (Exception e){
+			
+		}
+		
 		String sqlQuery = "INSERT INTO ITEM (ITEMGROUP, ITEMNAME) VALUES(?, ?)";
 
 		List<ItemModel> items = new ArrayList<>();

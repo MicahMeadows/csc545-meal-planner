@@ -8,6 +8,7 @@ import Model.ItemModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -110,6 +111,8 @@ public class FridgePageView extends javax.swing.JPanel {
 
 	public void setFridgeItemsList(List<ItemModel> items){
 		if (items == null) return;
+				
+		items = items.stream().distinct().collect(Collectors.toList());
 		
 		DefaultListModel<ItemModel> listModel = new DefaultListModel<>();
 		items.stream().forEach(i -> listModel.addElement(i));

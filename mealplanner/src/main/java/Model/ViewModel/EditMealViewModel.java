@@ -32,7 +32,10 @@ public class EditMealViewModel {
 	public MealModel getNewMealModel(){
 		try {
 			if (mealName.trim().isEmpty()) throw new Exception("Cant have empty name");
-			return mealRepository.createMeal(new MealModel(-1, mealName, mealRecipes));
+			
+			MealModel createdMeal = mealRepository.createMeal(new MealModel(-1, mealName, mealRecipes));
+			mealRecipes.stream().forEach(recipe -> mealRepository.createMealRecipe(createdMeal.getID(), recipe.getID()));
+			return createdMeal; 
 		} catch (Exception e){
 			return null;
 		}

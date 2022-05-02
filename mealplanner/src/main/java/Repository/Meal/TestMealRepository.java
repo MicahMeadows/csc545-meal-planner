@@ -5,6 +5,7 @@
 package Repository.Meal;
 
 import Model.MealModel;
+import Model.MealRecipeModel;
 import Model.RecipeModel;
 import Repository.Recipe.IRecipeRepository;
 import java.util.ArrayList;
@@ -57,6 +58,11 @@ public class TestMealRepository implements IMealRepository {
 		} catch (Exception e) {
 			return null;
 		}
+	}
+
+	@Override
+	public MealRecipeModel createMealRecipe(int mealId, int recipeId) {
+		throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
 	}
 	
 }
