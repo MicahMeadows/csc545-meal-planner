@@ -6,11 +6,13 @@ package Model.ViewModel;
 
 import Controller.DayPlanController;
 import MealPlanner.DependencyContainer;
+import Model.FridgeItemModel;
 import Model.ItemModel;
 import Model.PlannedMealModel;
 import Model.RecipeModel;
 import Repository.Item.IItemRepository;
 import Repository.PlannedMeal.IPlannedMealRepository;
+import Repository.Recipe.IRecipeRepository;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
@@ -18,6 +20,7 @@ import java.time.temporal.WeekFields;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -28,6 +31,7 @@ public class MealPlanViewModel {
 	private final DayOfWeek firstDayOfWeek;
 	private final IPlannedMealRepository plannedMealRepository;
 	private final IItemRepository itemRepository;
+	private final IRecipeRepository recipeRepository;
 
 	private int weekOffset = 0;
 	private PlannedMealModel selectedPlannedMeal;
@@ -37,6 +41,7 @@ public class MealPlanViewModel {
 	public MealPlanViewModel(DependencyContainer dependencyContainer){
 		this.plannedMealRepository = dependencyContainer.getRepositoryFactory().getPlannedMealRepository();
 		this.itemRepository = dependencyContainer.getRepositoryFactory().getItemRepository();
+		this.recipeRepository = dependencyContainer.getRepositoryFactory().getRecipeRepository();
 
 		this.firstDayOfWeek = WeekFields.of(Locale.US).getFirstDayOfWeek();
 		this.todaysDate = LocalDate.now();
@@ -56,7 +61,7 @@ public class MealPlanViewModel {
 
 	public List<ItemModel> generateShoppingListItems(LocalDate startDate, LocalDate endDate){
 		// get fridge items
-		List<ItemModel> fridgeItems = itemRepository.getFridgeItems(0);
+		List<ItemModel> fridgeItems = itemRepository.getFridgeItems(1);
 
 		// get plannedMeals in range
 		List<PlannedMealModel> plannedMeals = plannedMealRepository.getPlannedMealsForRange(startDate, endDate);
@@ -68,10 +73,11 @@ public class MealPlanViewModel {
 		// get recipe items
 		List<ItemModel> itemsForRecipes = new ArrayList<>();
 		recipes.forEach(recipe -> itemsForRecipes.addAll(recipe.getIngredients()));
+		
 
 		itemsForRecipes.removeAll(fridgeItems);
 
-		return itemsForRecipes;
+		return itemsForRecipes.stream().distinct().collect(Collectors.toList());
 	}
 
 	public List<PlannedMealModel> getPlannedMealsForDay(LocalDate date){
@@ -83,6 +89,9 @@ public class MealPlanViewModel {
 	}
 
 	public PlannedMealModel getSelectedPlannedMeal(){
+		if (this.selectedPlannedMeal.getRecipes() == null || this.selectedPlannedMeal.getRecipes().isEmpty()){
+			this.selectedPlannedMeal.getMeal().setRecipes(recipeRepository.getRecipesForMealID(selectedPlannedMeal.getMeal().getID()));
+		}
 		return this.selectedPlannedMeal;
 	}
 

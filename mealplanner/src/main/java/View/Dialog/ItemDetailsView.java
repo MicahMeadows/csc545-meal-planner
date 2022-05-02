@@ -7,6 +7,7 @@ package View.Dialog;
 import Model.ItemModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,12 +31,26 @@ public class ItemDetailsView extends javax.swing.JDialog {
 //		});
 		setupDialog(item);
 	}
+	
+	public void close(){
+		this.dispose();
+		this.setVisible(false);
+	}
 
 	public void setCloseDetailDialogListener(ActionListener listener){
 		btnClose.addActionListener(listener);
 	}
 
+	public void displayErrorPopup(String message){
+		JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+	}
+	
 	private void setupDialog(ItemModel item) {
+		if (item == null){
+			displayErrorPopup("No nutrition data loaded.");
+			this.close();
+			return;
+		}
 		int calories = item.getNutrition().getCalories();
 		int fat = item.getNutrition().getFat();
 		int sugar = item.getNutrition().getSugar();

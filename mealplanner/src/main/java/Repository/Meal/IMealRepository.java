@@ -5,6 +5,7 @@
 package Repository.Meal;
 
 import Model.MealModel;
+import Model.MealRecipeModel;
 import Model.RecipeModel;
 import java.util.List;
 
@@ -16,4 +17,5 @@ public interface IMealRepository {
 	List<MealModel> getAllMeals();
 	MealModel getMealForID(int ID);
 	MealModel createMeal(MealModel meal);
+	MealRecipeModel createMealRecipe(int mealId, int recipeId);
 }

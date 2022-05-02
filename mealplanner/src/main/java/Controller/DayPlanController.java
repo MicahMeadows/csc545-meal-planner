@@ -69,6 +69,7 @@ public class DayPlanController {
 				model.addPlannedMeal(newPlan);
 				updatePlannedMealsList();
 			});
+			updateDayPlanContent();
 		}
 	}
 

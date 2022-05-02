@@ -72,6 +72,7 @@ public class EditPlannedMealController {
 		@Override
 		public void actionPerformed(ActionEvent ae) {
 			view.setVisible(false);
+			model.updateMealList();
 			new SelectMealController(dependencyContainer, frame, (meal) -> {
 				if (meal != null) {
 					model.setSelectedMeal(meal);

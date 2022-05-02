@@ -9,6 +9,7 @@ import Model.ItemModel;
 import Model.NutritionModel;
 import Model.RecipeItemModel;
 import Repository.Nutrition.INutritionRepository;
+//import Repository.Nutrition.INutritionRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -72,10 +73,6 @@ public class TestItemRepository implements IItemRepository {
 		return items;
 	}
 
-	@Override
-	public ItemModel getItemWithId(int ID) {
-		return items.stream().filter(i -> ID == ID).findFirst().orElse(null);
-	}
 
 	@Override
 	public List<ItemModel> getItemsForRecipeID(int recipeID) {
@@ -156,6 +153,11 @@ public class TestItemRepository implements IItemRepository {
 		}
 
 
+	}
+
+	@Override
+	public ItemModel getItemWithId(int ID) {
+		return items.stream().filter(item -> item.getID() == ID).findFirst().orElse(null);
 	}
 	
 }

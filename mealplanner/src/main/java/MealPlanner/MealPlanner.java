@@ -15,20 +15,19 @@ import View.Page.RecipePageView;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 /**
  *
  * @author micah
  */
 public class MealPlanner {
 
-	public static void main(String[] args){
+	public static void main(String[] args) {
 
 		DependencyContainer dependencyContainer = new DependencyContainer();
-		
+
 		// Models
 		RecipeViewModel recipePageModel = new RecipeViewModel(dependencyContainer);
-		FridgeViewModel fridgePageModel = new FridgeViewModel(dependencyContainer, 0); // default 0 fridge value for testing
+		FridgeViewModel fridgePageModel = new FridgeViewModel(dependencyContainer, 1); // default 0 fridge value for testing
 		MealPlanViewModel mealPlanPageModel = new MealPlanViewModel(dependencyContainer);
 
 		// Views
@@ -50,5 +49,5 @@ public class MealPlanner {
 		navigation.setVisible(true);
 
 	}
-	
+
 }

@@ -4,8 +4,10 @@
  */
 package Model.ViewModel;
 
+import MealPlanner.DependencyContainer;
 import Model.MealModel;
 import Model.PlannedMealModel;
+import Repository.Meal.IMealRepository;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -15,12 +17,14 @@ import java.time.LocalTime;
  * @author micah
  */
 public class EditPlannedMealViewModel {
+	private final IMealRepository mealRepository;
 	private String type;
 	private LocalTime plannedTime;
 	private MealModel selectedMeal;
-	private LocalDate plannedDate;
+	private final LocalDate plannedDate;
 
-	public EditPlannedMealViewModel(LocalDate plannedDate){
+	public EditPlannedMealViewModel(DependencyContainer dependencyContainer, LocalDate plannedDate){
+		mealRepository = dependencyContainer.getRepositoryFactory().getMealRepository();
 		this.plannedDate = plannedDate;
 	}
 
@@ -28,6 +32,10 @@ public class EditPlannedMealViewModel {
 	public LocalTime getPlannedTime() { return this.plannedTime; }
 	public MealModel getSelectedMeal() { return this.selectedMeal; }
 
+	public void updateMealList(){
+		mealRepository.getAllMeals();
+	}
+	
 	public void setType(String newType) {
 		this.type = newType;
 	}

@@ -32,4 +32,16 @@ public class RecipeModel {
 	public String toString() {
 		return this.name;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		RecipeModel other = (RecipeModel)obj;
+		return other.getCategory().equals(this.getCategory()) &&
+			other.getIngredients().equals(this.getIngredients()) &&
+			other.getInstructions().equals(this.getInstructions()) &&
+			other.getName().equals(this.getName()
+		);
+	}
+	
+	
 }

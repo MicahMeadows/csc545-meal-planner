@@ -11,9 +11,9 @@ import java.util.List;
  * @author micah
  */
 public class MealModel {
-	private final int ID;
+	private int ID;
 	private final String name;
-	private final List<RecipeModel> recipes;
+	private List<RecipeModel> recipes;
 
 	public MealModel(int ID, String name, List<RecipeModel> recipes){
 		this.ID = ID;
@@ -21,6 +21,14 @@ public class MealModel {
 		this.recipes = recipes;
 	}
 
+	public void setID(int newID){
+		this.ID = newID;
+	}
+	
+	public void setRecipes(List<RecipeModel> recipes){
+		this.recipes = recipes;
+	}
+	
 	public String getName() { return this.name; }
 	public int getID() { return this.ID; }
 	public List<RecipeModel> getRecipes() { return this.recipes; }
@@ -29,5 +37,13 @@ public class MealModel {
 	public String toString() {
 		return name;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		MealModel other = (MealModel)obj;
+		return other.getName().equals(this.getName()) && 
+			other.getRecipes().equals(this.recipes);
+	}
+	
 
 }
