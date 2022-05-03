@@ -175,7 +175,9 @@ public class SqlItemRepository implements IItemRepository {
 	}
 
 	private int getExistingItemId(String itemName, String itemGroup){
-		String sqlQuery = "SELECT * FROM ITEM WHERE ITEMGROUP = '"+itemGroup+"' AND ITEMNAME = '"+itemName+"'";
+//		String sqlQuery = "SELECT * FROM ITEM WHERE ITEMGROUP = '"+itemGroup+"' AND ITEMNAME = '"+itemName+"'";
+		String sqlQuery = "SELECT * FROM ITEM WHERE ITEMNAME = '"+itemName+"'";
+
 		String[] resultId = { null };
 		ConnectDB.runStatement(sqlQuery, result -> {
 			try {
