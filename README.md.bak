@@ -30,11 +30,8 @@ recipe category.
 
 This project uses an Oracle SQL database that needs to be set up outside of this java program, and connects using ojdbc8.jar
 
-Compile the program by running 
-```mvn clean compile assembly:single```
-
-Execute the program by running 
-```java -jar target/mealplanner-1.0-SNAPSHOT-jar-with-dependencies.jar```
+Compile the program by running ```mvn clean compile assembly:single```
+Execute the program by running ```java -jar target/mealplanner-1.0-SNAPSHOT-jar-with-dependencies.jar```
 
 
 ---
