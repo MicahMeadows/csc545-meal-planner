@@ -51,6 +51,7 @@ public class FridgePageView extends javax.swing.JPanel {
 
                 lblItemsInFridge.setText("Items in your fridge");
 
+                lstFridgeItems.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
                 paneFridgeItems.setViewportView(lstFridgeItems);
 
                 cbGroups.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Any", "Item 1", "Item 2", "Item 3", "Item 4" }));

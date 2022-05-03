@@ -75,10 +75,10 @@ public class ItemDetailsView extends javax.swing.JDialog {
         // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
         private void initComponents() {
 
+                jPanel1 = new javax.swing.JPanel();
                 lblItemName = new javax.swing.JLabel();
                 lblItemCategory = new javax.swing.JLabel();
                 panelNutrition = new javax.swing.JPanel();
-                lblNutritionFacts = new javax.swing.JLabel();
                 lblCalories = new javax.swing.JLabel();
                 lblSugar = new javax.swing.JLabel();
                 lblProtein = new javax.swing.JLabel();
@@ -93,14 +93,18 @@ public class ItemDetailsView extends javax.swing.JDialog {
                 btnClose = new javax.swing.JButton();
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+                setUndecorated(true);
+                setResizable(false);
 
-                lblItemName.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+                jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+                lblItemName.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+                lblItemName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                 lblItemName.setText("Test Name");
 
                 lblItemCategory.setFont(new java.awt.Font("sansserif", 2, 14)); // NOI18N
+                lblItemCategory.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                 lblItemCategory.setText("Test Category");
-
-                lblNutritionFacts.setText("Nutrition Facts:");
 
                 lblCalories.setText("Calories");
 
@@ -127,93 +131,97 @@ public class ItemDetailsView extends javax.swing.JDialog {
                 panelNutritionLayout.setHorizontalGroup(
                         panelNutritionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(panelNutritionLayout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addGroup(panelNutritionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(lblCalories)
+                                        .addComponent(lblSugar)
+                                        .addComponent(lblProtein)
+                                        .addComponent(lblFat)
+                                        .addComponent(lblSodium))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(panelNutritionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(panelNutritionLayout.createSequentialGroup()
-                                                .addGap(17, 17, 17)
-                                                .addGroup(panelNutritionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                        .addComponent(lblCalories)
-                                                        .addComponent(lblSugar)
-                                                        .addComponent(lblProtein)
-                                                        .addComponent(lblFat)
-                                                        .addComponent(lblSodium))
-                                                .addGap(46, 46, 46)
-                                                .addGroup(panelNutritionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                        .addComponent(lblFatVal)
-                                                        .addComponent(lblProteinVal)
-                                                        .addComponent(lblSugarVal)
-                                                        .addComponent(lblCaloriesVal)
-                                                        .addComponent(lblSodiumVal)))
-                                        .addGroup(panelNutritionLayout.createSequentialGroup()
-                                                .addGap(35, 35, 35)
-                                                .addComponent(lblNutritionFacts)))
-                                .addContainerGap(27, Short.MAX_VALUE))
+                                        .addComponent(lblSugarVal)
+                                        .addComponent(lblCaloriesVal)
+                                        .addComponent(lblProteinVal)
+                                        .addComponent(lblFatVal)
+                                        .addComponent(lblSodiumVal))
+                                .addContainerGap(19, Short.MAX_VALUE))
                 );
                 panelNutritionLayout.setVerticalGroup(
                         panelNutritionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(panelNutritionLayout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addComponent(lblNutritionFacts)
-                                .addGap(18, 18, 18)
+                                .addContainerGap()
                                 .addGroup(panelNutritionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(lblCalories)
                                         .addComponent(lblCaloriesVal))
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(panelNutritionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(lblSugar)
                                         .addComponent(lblSugarVal))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(panelNutritionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panelNutritionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(lblProtein)
                                         .addComponent(lblProteinVal))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(panelNutritionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panelNutritionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(lblFat)
                                         .addComponent(lblFatVal))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(panelNutritionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(lblSodium)
                                         .addComponent(lblSodiumVal))
-                                .addContainerGap(14, Short.MAX_VALUE))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 );
 
                 btnClose.setText("Close");
+
+                javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+                jPanel1.setLayout(jPanel1Layout);
+                jPanel1Layout.setHorizontalGroup(
+                        jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                                .addGap(0, 29, Short.MAX_VALUE)
+                                                .addComponent(panelNutrition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(33, 33, 33))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(lblItemName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(lblItemCategory, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(jSeparator1))
+                                                .addContainerGap())))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnClose)
+                                .addGap(60, 60, 60))
+                );
+                jPanel1Layout.setVerticalGroup(
+                        jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(lblItemName)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblItemCategory)
+                                .addGap(12, 12, 12)
+                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(panelNutrition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnClose)
+                                .addContainerGap(24, Short.MAX_VALUE))
+                );
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                 getContentPane().setLayout(layout);
                 layout.setHorizontalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(28, 28, 28)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(panelNutrition, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(jSeparator1)))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(48, 48, 48)
-                                                .addComponent(lblItemName))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(71, 71, 71)
-                                                .addComponent(btnClose))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(62, 62, 62)
-                                                .addComponent(lblItemCategory)))
-                                .addContainerGap(14, Short.MAX_VALUE))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 );
                 layout.setVerticalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblItemName)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblItemCategory)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(panelNutrition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnClose)
-                                .addGap(32, 32, 32))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 );
 
                 pack();
@@ -222,6 +230,7 @@ public class ItemDetailsView extends javax.swing.JDialog {
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
         private javax.swing.JButton btnClose;
+        private javax.swing.JPanel jPanel1;
         private javax.swing.JSeparator jSeparator1;
         private javax.swing.JLabel lblCalories;
         private javax.swing.JLabel lblCaloriesVal;
@@ -229,7 +238,6 @@ public class ItemDetailsView extends javax.swing.JDialog {
         private javax.swing.JLabel lblFatVal;
         private javax.swing.JLabel lblItemCategory;
         private javax.swing.JLabel lblItemName;
-        private javax.swing.JLabel lblNutritionFacts;
         private javax.swing.JLabel lblProtein;
         private javax.swing.JLabel lblProteinVal;
         private javax.swing.JLabel lblSodium;
